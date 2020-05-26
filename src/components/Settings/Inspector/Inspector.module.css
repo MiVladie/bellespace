@@ -1,0 +1,140 @@
+.Inspector {
+  width: 20em;
+  height: 100vh;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 500;
+  background-color: #F7F7F7;
+  -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.06);
+          box-shadow: 0 0 6px rgba(0, 0, 0, 0.06);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.Inspector .Button {
+  position: absolute;
+  top: 50%;
+  left: -1em;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  width: 1em;
+  height: 3.5em;
+  border: none;
+  border-radius: 12px 0 0 12px;
+  background-color: #F7F7F7;
+}
+
+.Inspector .Button .Icon {
+  position: absolute;
+  top: 50%;
+  left: 0.25em;
+  -webkit-transform: translateY(-50%) rotateZ(90deg);
+          transform: translateY(-50%) rotateZ(90deg);
+  width: 0.75em;
+  height: 0.75em;
+  background-image: url("../../../assets/icons/expand.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.75;
+}
+
+.Inspector .Main {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.Inspector .Main .Category {
+  width: 92%;
+  margin: 1.5em auto;
+}
+
+.Inspector .Main .Category .Name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  color: #A2A2A2;
+}
+
+.Inspector .Main .Category .Wrapper {
+  width: 100%;
+}
+
+.Inspector .Main .Category .Wrapper .Type {
+  width: 100%;
+  margin-top: 1em;
+}
+
+.Inspector .Main .Category .Wrapper .Type .FieldName {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 0.8em;
+  text-transform: capitalize;
+  color: #3B3B3B;
+  margin: 0 0 0.25em 0.1em;
+}
+
+.Inspector .Main .Category .Wrapper .Type .Input, .Inspector .Main .Category .Wrapper .Type .Textarea {
+  width: 94%;
+  min-height: 2.5em;
+  max-height: 8em;
+  padding: 0 3%;
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 0 4px rgba(0, 0, 0, 0.04);
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9em;
+  color: #3B3B3B;
+}
+
+.Inspector .Main .Category .Wrapper .Type .Input::-webkit-input-placeholder, .Inspector .Main .Category .Wrapper .Type .Textarea::-webkit-input-placeholder {
+  color: #d1d1d1;
+}
+
+.Inspector .Main .Category .Wrapper .Type .Input:-ms-input-placeholder, .Inspector .Main .Category .Wrapper .Type .Textarea:-ms-input-placeholder {
+  color: #d1d1d1;
+}
+
+.Inspector .Main .Category .Wrapper .Type .Input::-ms-input-placeholder, .Inspector .Main .Category .Wrapper .Type .Textarea::-ms-input-placeholder {
+  color: #d1d1d1;
+}
+
+.Inspector .Main .Category .Wrapper .Type .Input::placeholder, .Inspector .Main .Category .Wrapper .Type .Textarea::placeholder {
+  color: #d1d1d1;
+}
+
+.Inspector .Main .Category .Wrapper .Type .Textarea {
+  padding: 0.5em 3%;
+  height: 8em;
+  resize: none;
+}
+
+.Inspector .Main .Category .Wrapper .Type .Dropdown {
+  width: 100%;
+  height: 2.5em;
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 0 4px rgba(0, 0, 0, 0.04);
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9em;
+  text-transform: capitalize;
+  text-align-last: center;
+  color: #3B3B3B;
+  margin: 0 auto;
+}
+
+.Reveal {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+
+.Reveal .Button .Icon {
+  -webkit-transform: translateY(-50%) rotateZ(-90deg);
+          transform: translateY(-50%) rotateZ(-90deg);
+}
+/*# sourceMappingURL=Inspector.module.css.map */

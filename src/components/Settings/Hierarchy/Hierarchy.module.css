@@ -1,0 +1,238 @@
+.Hierarchy {
+  width: 20em;
+  height: 100vh;
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 500;
+  background-color: #F7F7F7;
+  -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.06);
+          box-shadow: 0 0 6px rgba(0, 0, 0, 0.06);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.Hierarchy .Button {
+  position: absolute;
+  top: 50%;
+  right: -1em;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  width: 1em;
+  height: 3.5em;
+  border: none;
+  border-radius: 0 12px 12px 0;
+  background-color: #F7F7F7;
+}
+
+.Hierarchy .Button .Icon {
+  position: absolute;
+  top: 50%;
+  right: 0.25em;
+  -webkit-transform: translateY(-50%) rotateZ(-90deg);
+          transform: translateY(-50%) rotateZ(-90deg);
+  width: 0.75em;
+  height: 0.75em;
+  background-image: url("../../../assets/icons/expand.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.75;
+}
+
+.Hierarchy .Main {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  direction: rtl;
+}
+
+.Hierarchy .Main .Page {
+  direction: ltr;
+  width: 100%;
+  min-height: 4em;
+  background-color: white;
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 0 4px rgba(0, 0, 0, 0.04);
+}
+
+.Hierarchy .Main .Page .Wrapper {
+  width: 80%;
+  height: 4em;
+  margin: 0 auto;
+  padding: 0 10%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: white;
+  -webkit-transition: all 0.15s;
+  transition: all 0.15s;
+  cursor: pointer;
+}
+
+.Hierarchy .Main .Page .Wrapper:hover {
+  background-color: #f7f7f7;
+}
+
+.Hierarchy .Main .Page .Wrapper .Name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95em;
+  color: #3B3B3B;
+}
+
+.Hierarchy .Main .Page .Wrapper .Remove, .Hierarchy .Main .Page .Wrapper .Expand {
+  width: 1em;
+  height: 1em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 0 4px rgba(0, 0, 0, 0.04);
+  border: none;
+  -webkit-transition: all 0.15s;
+  transition: all 0.15s;
+}
+
+.Hierarchy .Main .Page .Wrapper .Remove {
+  background-image: url("../../../assets/icons/remove.png");
+}
+
+.Hierarchy .Main .Page .Wrapper .Expand {
+  margin-left: 1em;
+  background-image: url("../../../assets/icons/expand.png");
+}
+
+.Hierarchy .Main .Page .Components {
+  display: none;
+  width: 100%;
+}
+
+.Hierarchy .Main .Page .Components .Component {
+  width: 100%;
+  height: 3em;
+  background-color: #F7F7F7;
+  border-top: 1px solid #F0F0F0;
+  border-bottom: 1px solid #F0F0F0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: all 0.15s;
+  transition: all 0.15s;
+  cursor: pointer;
+}
+
+.Hierarchy .Main .Page .Components .Component:hover {
+  background-color: #efefef;
+}
+
+.Hierarchy .Main .Page .Components .Component .Type {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: #3B3B3B;
+}
+
+.Hierarchy .Main .Page .Components .ActiveComponent {
+  background-color: white;
+}
+
+.Hierarchy .Main .Page .Components .ActiveComponent:hover {
+  background-color: white;
+}
+
+.Hierarchy .Main .Page .Components .Options {
+  width: 100%;
+  height: 3em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 0.75em;
+}
+
+.Hierarchy .Main .Page .Components .Options .Add, .Hierarchy .Main .Page .Components .Options .Remove {
+  border: none;
+  border-top: 1px solid #F0F0F0;
+  border-bottom: 1px solid #F0F0F0;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.9em;
+  color: #3B3B3B;
+  -webkit-transition: all 0.15s;
+  transition: all 0.15s;
+}
+
+.Hierarchy .Main .Page .Components .Options .Add {
+  width: 100%;
+  background-color: lightblue;
+}
+
+.Hierarchy .Main .Page .Components .Options .Add:hover {
+  background-color: #86c5da;
+}
+
+.Hierarchy .Main .Page .Components .Options .Remove {
+  min-width: 50%;
+  background-color: lightcoral;
+}
+
+.Hierarchy .Main .Page .Components .Options .Remove:hover {
+  background-color: #eb5252;
+}
+
+.Hierarchy .Main .ActivePage .Wrapper:hover {
+  background-color: white;
+}
+
+.Hierarchy .Main .ActivePage .Wrapper .Expand {
+  -webkit-transform: rotateX(180deg);
+          transform: rotateX(180deg);
+}
+
+.Hierarchy .Main .ActivePage .Components {
+  display: block;
+}
+
+.Hierarchy .Main .AddPage {
+  width: 100%;
+  height: 3em;
+  margin-top: 0.75em;
+  background-color: white;
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 0 4px rgba(0, 0, 0, 0.04);
+  border: none;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.9em;
+  color: #3B3B3B;
+  -webkit-transition: all 0.15s;
+  transition: all 0.15s;
+}
+
+.Hierarchy .Main .AddPage:hover {
+  background-color: #f7f7f7;
+}
+
+.Reveal {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+
+.Reveal .Button .Icon {
+  -webkit-transform: translateY(-50%) rotateZ(90deg);
+          transform: translateY(-50%) rotateZ(90deg);
+}
+/*# sourceMappingURL=Hierarchy.module.css.map */

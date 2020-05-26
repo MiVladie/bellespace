@@ -1,0 +1,149 @@
+$leftSpacing: 5%;
+$mainWidth: 95%;
+    
+.Interstitial {
+    padding: 3em 0;
+
+    // Non-styling
+
+    width: 100%;
+
+    display: flex;
+    align-items: flex-start;
+    flex-flow: column;
+
+    position: relative;
+
+    .Image {
+        filter: brightness(0.5);
+        background-attachment: fixed;
+
+        // Non-styling
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .Wrapper {
+        width: calc(#{ $mainWidth } - #{ $leftSpacing });
+        
+        margin-left: $leftSpacing;
+                
+        z-index: 100;
+        
+        .Meta {
+            text-transform: uppercase;
+            color: white;
+            
+            // Non-styling
+            
+            font-size: 1em;
+            margin-bottom: 0.5em;
+        }
+
+        .Main {
+            text-transform: uppercase;
+            color: white;
+            
+            // Non-styling
+            
+            font-size: 2em;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .Line {
+            width: 3em;
+            background-color: white;
+            
+            // Non-styling
+            
+            height: 2px;
+        }
+
+        .Description {
+            color: white;
+
+            // Non-styling
+            
+            font-weight: 400;
+            line-height: 1.5em;
+            margin-top: 20px;
+        }
+    }
+
+    .Link {
+        width: 8.5em;
+        line-height: 3em;
+
+        border: 1.5px solid white;
+        color: white;
+        
+        // Non-styling
+
+        display: block;
+
+        text-decoration: none;
+        text-align: center;
+
+        margin: 2em 0 0 $leftSpacing;
+
+        z-index: 100;
+        transition: all 0.15s;
+        outline: none;
+
+        &:hover {
+            color: black;
+            background-color: white;
+        }
+    }
+}
+
+@media (min-width: 720px) {
+    $leftSpacing: 5%;
+    $mainWidth: 80%;
+
+    .Interstitial {
+        padding: 3.5em 0;
+        
+        .Wrapper {
+            // Non-styling
+
+            width: calc(#{ $mainWidth } - #{ $leftSpacing });  
+            margin-left: $leftSpacing;                    
+        }
+
+        .Link {
+            margin-left: $leftSpacing;
+        }
+    }
+}
+
+@media (min-width: 1025px) {
+    $leftSpacing: 3.5%;
+    $mainWidth: 65%;
+
+    .Interstitial {
+        padding: 4em 0;
+
+        .Wrapper {
+            // Non-styling
+
+            width: calc(#{ $mainWidth } - #{ $leftSpacing });
+            margin-left: $leftSpacing;                    
+        }
+        
+        .Link {
+            margin-left: $leftSpacing;
+        }
+    }
+}
+

@@ -1,0 +1,110 @@
+.Interstitial {
+  padding: 3em 0;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  position: relative;
+}
+
+.Interstitial .Image {
+  -webkit-filter: brightness(0.5);
+          filter: brightness(0.5);
+  background-attachment: fixed;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.Interstitial .Wrapper {
+  width: calc(95% - 5%);
+  margin-left: 5%;
+  z-index: 100;
+}
+
+.Interstitial .Wrapper .Meta {
+  text-transform: uppercase;
+  color: white;
+  font-size: 1em;
+  margin-bottom: 0.5em;
+}
+
+.Interstitial .Wrapper .Main {
+  text-transform: uppercase;
+  color: white;
+  font-size: 2em;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.Interstitial .Wrapper .Line {
+  width: 3em;
+  background-color: white;
+  height: 2px;
+}
+
+.Interstitial .Wrapper .Description {
+  color: white;
+  font-weight: 400;
+  line-height: 1.5em;
+  margin-top: 20px;
+}
+
+.Interstitial .Link {
+  width: 8.5em;
+  line-height: 3em;
+  border: 1.5px solid white;
+  color: white;
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  margin: 2em 0 0 5%;
+  z-index: 100;
+  -webkit-transition: all 0.15s;
+  transition: all 0.15s;
+  outline: none;
+}
+
+.Interstitial .Link:hover {
+  color: black;
+  background-color: white;
+}
+
+@media (min-width: 720px) {
+  .Interstitial {
+    padding: 3.5em 0;
+  }
+  .Interstitial .Wrapper {
+    width: calc(80% - 5%);
+    margin-left: 5%;
+  }
+  .Interstitial .Link {
+    margin-left: 5%;
+  }
+}
+
+@media (min-width: 1025px) {
+  .Interstitial {
+    padding: 4em 0;
+  }
+  .Interstitial .Wrapper {
+    width: calc(65% - 3.5%);
+    margin-left: 3.5%;
+  }
+  .Interstitial .Link {
+    margin-left: 3.5%;
+  }
+}
+/*# sourceMappingURL=Interstitial.module.css.map */

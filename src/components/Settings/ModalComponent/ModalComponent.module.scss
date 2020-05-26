@@ -1,0 +1,103 @@
+$dark: #3B3B3B;
+$grey: #F7F7F7;
+
+.ModalComponent {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 500;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .Wrapper {
+        width: 27em;
+
+        background-color: $grey;
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.08);
+        
+        animation: expand 0.25s 0s ease-out forwards;
+
+        @keyframes expand {
+            from {
+                transform: translateY(-6em);
+                opacity: 0.25;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .Section {
+            width: 90%;
+            margin: 2.5em auto;
+
+            .Name {
+                font-family: 'Montserrat', sans-serif;
+                text-align: center;
+                color: $dark;
+
+                margin-bottom: 1em;
+            }
+
+            .Icon {
+                width: 100%;
+                height: 10em;
+
+                background-color: white;
+            }
+            .Dropdown {
+                width: 100%;
+                height: 3em;
+
+                margin: 0 auto;
+
+                box-shadow: 0 0 4px rgba(0, 0, 0, 0.04);
+                border: none;
+
+                font-family: 'Montserrat', sans-serif;
+                text-transform: capitalize;
+                text-align-last: center;
+                color: $dark;
+
+                transition: all 0.15s;
+                
+                &:hover {
+                    background-color: darken(white, 3);
+                }
+            }
+
+            .Option {
+                display: inline-block;
+
+                width: 48.5%;
+                height: 3em;
+
+                border: none;
+                background-color: white;
+                box-shadow: 0 0 4px rgba(0, 0, 0, 0.04);
+
+                font-family: 'Montserrat', sans-serif;
+                color: $dark;
+
+                transition: all 0.15s;
+
+                &:last-of-type {
+                    margin-left: 3%;
+                }
+
+                &:hover {
+                    background-color: darken(white, 3);
+                }
+            }
+        }
+    }
+}

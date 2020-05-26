@@ -1,0 +1,252 @@
+$dark: #3B3B3B;
+$grey: #F7F7F7;
+$blue: #EAE9FF;
+
+.Hierarchy {
+    width: 20em;
+    height: 100vh;
+    
+    transform: translateX(-100%);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 500;
+
+    background-color: $grey;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.06);
+
+    transition: all 0.3s;
+
+    .Button {
+        position: absolute;
+        top: 50%;
+        right: -1em;
+        transform: translateY(-50%);
+
+        width: 1em;
+        height: 3.5em;
+
+        border: none;
+        border-radius: 0 12px 12px 0;
+        background-color: #F7F7F7;
+        
+        .Icon {
+            position: absolute;
+            top: 50%;
+            right: 0.25em;
+            transform: translateY(-50%) rotateZ(-90deg);
+
+            width: 0.75em;
+            height: 0.75em;
+
+            background-image: url('../../../assets/icons/expand.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            
+            opacity: 0.75;
+        }
+    }
+
+    .Main {
+        width: 100%;
+        height: 100%;
+
+        overflow-y: auto;
+        direction:rtl; 
+
+        .Page {
+            direction: ltr; 
+            width: 100%;
+            min-height: 4em;
+            
+            background-color: white;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.04);
+
+            .Wrapper {
+                width: 80%;
+                height: 4em;
+
+                margin: 0 auto;
+                padding: 0 10%;
+
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                
+                background-color: white;
+                
+                transition: all 0.15s;
+                cursor: pointer;
+                
+                &:hover {
+                    background-color: darken(white, 3);
+                }
+
+                .Name {
+                    font-family: 'Montserrat', sans-serif;
+                    font-size: 0.95em;
+                    color: $dark;
+                }
+
+                .Remove, .Expand {
+                    width: 1em;
+                    height: 1em;
+
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-color: transparent;
+
+                    box-shadow: 0 0 4px rgba(0, 0, 0, 0.04);
+
+                    border: none;
+                    transition: all 0.15s;
+                }
+
+                .Remove {
+                    background-image: url('../../../assets/icons/remove.png');
+                }
+
+                .Expand {
+                    margin-left: 1em;
+                    background-image: url('../../../assets/icons/expand.png');
+                }
+            }
+
+            .Components {
+                display: none;
+
+                width: 100%;
+
+                .Component {
+                    width: 100%;
+                    height: 3em;
+
+                    background-color: $grey;
+
+                    border-top: 1px solid #F0F0F0;
+                    border-bottom: 1px solid #F0F0F0;
+
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    transition: all 0.15s;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: darken($grey, 3);
+                    }
+
+                    .Type {
+                        font-family: 'Montserrat', sans-serif;
+                        font-size: 14px;
+                        font-weight: 300;
+                        color: $dark;
+                    }
+                }
+
+                .ActiveComponent {
+                    background-color: white;                
+
+                    &:hover {
+                        background-color: white;
+                    }
+                }
+
+                .Options {
+                    width: 100%;
+                    height: 3em;
+
+                    display: flex;
+                    
+                    margin-top: 0.75em;
+
+                    .Add, .Remove {
+                        border: none;
+
+                        border-top: 1px solid #F0F0F0;
+                        border-bottom: 1px solid #F0F0F0;
+    
+                        font-family: 'Open Sans', sans-serif;
+                        font-weight: 300;
+                        font-size: 0.9em;
+    
+                        color: $dark;
+    
+                        transition: all 0.15s;
+                    }
+
+                    .Add {
+                        width: 100%;
+                        background-color: lightblue;                        
+                        
+                        &:hover {
+                            background-color: darken(lightblue, 10);
+                        }
+                    }
+
+                    .Remove {
+                        min-width: 50%;
+                        background-color: lightcoral;
+                        
+                        &:hover {
+                            background-color: darken(lightcoral, 10);
+                        }
+                    }
+                }
+            }
+        }
+
+        .ActivePage {
+            .Wrapper {
+                &:hover {
+                    background-color: white;
+                }
+
+                .Expand {
+                    transform: rotateX(180deg);
+                }
+            }
+
+            .Components {
+                display: block;
+            }
+        }
+        
+        .AddPage {
+            width: 100%;
+            height: 3em;
+
+            margin-top: 0.75em;
+
+            background-color: white;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.04);
+
+            border: none;
+
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 300;
+            font-size: 0.9em;
+
+            color: $dark;
+
+            transition: all 0.15s;
+            
+            &:hover {
+                background-color: darken(white, 3);
+            }
+        }
+    }
+}
+
+.Reveal {
+    transform: translateX(0);
+    
+    .Button {
+        .Icon {
+            transform: translateY(-50%) rotateZ(90deg);
+        }
+    }
+}

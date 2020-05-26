@@ -1,0 +1,113 @@
+.ModalComponent {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 500;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.25);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.ModalComponent .Wrapper {
+  width: 27em;
+  background-color: #F7F7F7;
+  -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.08);
+          box-shadow: 0 0 6px rgba(0, 0, 0, 0.08);
+  -webkit-animation: expand 0.25s 0s ease-out forwards;
+          animation: expand 0.25s 0s ease-out forwards;
+}
+
+@-webkit-keyframes expand {
+  from {
+    -webkit-transform: translateY(-6em);
+            transform: translateY(-6em);
+    opacity: 0.25;
+  }
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes expand {
+  from {
+    -webkit-transform: translateY(-6em);
+            transform: translateY(-6em);
+    opacity: 0.25;
+  }
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.ModalComponent .Wrapper .Section {
+  width: 90%;
+  margin: 2.5em auto;
+}
+
+.ModalComponent .Wrapper .Section .Name {
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  color: #3B3B3B;
+  margin-bottom: 1em;
+}
+
+.ModalComponent .Wrapper .Section .Icon {
+  width: 100%;
+  height: 10em;
+  background-color: white;
+}
+
+.ModalComponent .Wrapper .Section .Dropdown {
+  width: 100%;
+  height: 3em;
+  margin: 0 auto;
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 0 4px rgba(0, 0, 0, 0.04);
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: capitalize;
+  text-align-last: center;
+  color: #3B3B3B;
+  -webkit-transition: all 0.15s;
+  transition: all 0.15s;
+}
+
+.ModalComponent .Wrapper .Section .Dropdown:hover {
+  background-color: #f7f7f7;
+}
+
+.ModalComponent .Wrapper .Section .Option {
+  display: inline-block;
+  width: 48.5%;
+  height: 3em;
+  border: none;
+  background-color: white;
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 0 4px rgba(0, 0, 0, 0.04);
+  font-family: 'Montserrat', sans-serif;
+  color: #3B3B3B;
+  -webkit-transition: all 0.15s;
+  transition: all 0.15s;
+}
+
+.ModalComponent .Wrapper .Section .Option:last-of-type {
+  margin-left: 3%;
+}
+
+.ModalComponent .Wrapper .Section .Option:hover {
+  background-color: #f7f7f7;
+}
+/*# sourceMappingURL=ModalComponent.module.css.map */

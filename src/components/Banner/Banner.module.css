@@ -1,0 +1,245 @@
+.Banner {
+  width: 100%;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.Banner .Image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.Banner .Image img {
+  opacity: 0.9;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.Banner .Wrapper {
+  text-align: center;
+  position: relative;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.Banner .Wrapper .Main {
+  font-size: 8vh;
+  color: white;
+  -webkit-animation: fadeIn 0.75s 0s ease-out forwards;
+          animation: fadeIn 0.75s 0s ease-out forwards;
+  line-height: 1.125em;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.16);
+}
+
+.Banner .Wrapper .Line {
+  width: 5em;
+  height: 2.5px;
+  background-color: white;
+  opacity: 0;
+  -webkit-animation: fadeIn 0.75s 0s ease-out forwards;
+          animation: fadeIn 0.75s 0s ease-out forwards;
+  margin: 1em auto 2em;
+}
+
+.Banner .Wrapper .Description {
+  opacity: 0;
+  -webkit-animation: fadeIn 0.75s 0.25s ease-out forwards;
+          animation: fadeIn 0.75s 0.25s ease-out forwards;
+  display: none;
+}
+
+.Banner .Links {
+  position: relative;
+}
+
+.Banner .Links .Left, .Banner .Links .Right {
+  width: 11em;
+  height: 3.25em;
+  line-height: 3.25em;
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.16);
+  text-transform: uppercase;
+  opacity: 0;
+  -webkit-animation: fadeIn 0.75s 0.5s ease-out forwards;
+          animation: fadeIn 0.75s 0.5s ease-out forwards;
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  -webkit-transition: all 0.15s;
+  transition: all 0.15s;
+}
+
+.Banner .Links .Left {
+  color: white;
+  border: 2px solid white;
+  margin-bottom: 1em;
+}
+
+.Banner .Links .Left:hover {
+  background-color: white;
+  color: #444444;
+}
+
+.Banner .Links .Right {
+  color: #444444;
+  border: 2px solid white;
+  margin-bottom: 1em;
+  background-color: white;
+}
+
+.Banner .Links .Right:hover {
+  background-color: transparent;
+  color: white;
+}
+
+.Banner .Scroll {
+  position: absolute;
+  bottom: -0.5em;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-transition: all 0.15s ease-out;
+  transition: all 0.15s ease-out;
+  cursor: pointer;
+  border: none;
+  background: none;
+  overflow: hidden;
+}
+
+.Banner .Scroll:hover {
+  bottom: 0;
+}
+
+.Banner .Scroll .Circle {
+  width: 1.5em;
+  height: 1.5em;
+  border: 2.5px solid white;
+  border-radius: 2em;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  opacity: 0;
+  -webkit-animation: fadeIn 0.75s 0.75s ease-out forwards;
+          animation: fadeIn 0.75s 0.75s ease-out forwards;
+  display: block;
+}
+
+.Banner .Scroll .Knob {
+  width: 2.5px;
+  height: 1.75em;
+  background-color: white;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  opacity: 0;
+  -webkit-animation: fadeIn 0.75s 0.75s ease-out forwards;
+          animation: fadeIn 0.75s 0.75s ease-out forwards;
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    -webkit-transform: translateY(0.5em);
+            transform: translateY(0.5em);
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    -webkit-transform: translateY(0.5em);
+            transform: translateY(0.5em);
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (min-width: 720px) {
+  .Banner .Wrapper {
+    width: 90%;
+    margin-bottom: 2em;
+  }
+  .Banner .Wrapper .Main {
+    font-size: 7.5vh;
+  }
+  .Banner .Wrapper .Line {
+    margin-bottom: 2em;
+  }
+  .Banner .Wrapper .Description {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    font-size: 1.25em;
+    font-weight: 300;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.16);
+    line-height: 1.5em;
+    color: white;
+  }
+  .Banner .Links .Left, .Banner .Links .Right {
+    display: inline-block;
+    margin: 0 0.75em;
+  }
+}
+
+@media (min-width: 1025px) {
+  .Banner {
+    width: 100%;
+    margin: 0;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+  .Banner .Wrapper {
+    width: 70%;
+  }
+  .Banner .Wrapper .Main {
+    font-size: 4.5em;
+  }
+  .Banner .Wrapper .Description {
+    width: 70%;
+  }
+  .Banner .Links .Left, .Banner .Links .Right {
+    font-size: 0.9em;
+  }
+}
+/*# sourceMappingURL=Banner.module.css.map */
