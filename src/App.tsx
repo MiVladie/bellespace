@@ -1,7 +1,9 @@
 import React from 'react';
 
+import Layout from 'hoc/Layout/Layout';
+
 const App: React.FC = () => {
-	return <div>Bellespace!</div>;
+	return <Layout>Bellespace!</Layout>;
 };
 
 export default App;
