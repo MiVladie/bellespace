@@ -1,8 +1,8 @@
 {
-  "short_name": "UI Components",
-  "name": "Letscomit ReactJS UI components",
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+	"short_name": "Bellespace",
+	"name": "Bellespace",
+	"start_url": ".",
+	"display": "standalone",
+	"theme_color": "#2c3e50",
+	"background_color": "#ecf0f1"
 }
