@@ -6,14 +6,17 @@ import Container from 'hoc/Container/Container';
 import Input from 'components/ui/Input/Input';
 import Button from 'components/ui/Button/Button';
 
-import classes from './SignIn.module.scss';
+import classes from './SignUp.module.scss';
+import Checkbox from 'components/ui/Checkbox/Checkbox';
 
-const SignIn: React.FC = () => {
+const SignUp: React.FC = () => {
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
+	const [confirmPassword, setConfirmPassword] = useState<string>('');
+	const [agree, setAgree] = useState<boolean>(false);
 
 	const onSubmitHandler = async () => {
-		console.log({ email, password });
+		console.log({ email, password, confirmPassword, agree });
 
 		return;
 	};
@@ -23,7 +26,7 @@ const SignIn: React.FC = () => {
 			<Container className={classes.Actions}>
 				<div className={classes.Wrapper}>
 					<div className={classes.Title}>
-						<h1 className={classes.Heading}>Sign In</h1>
+						<h1 className={classes.Heading}>Sign Up</h1>
 
 						<div className={classes.Line} />
 					</div>
@@ -37,14 +40,34 @@ const SignIn: React.FC = () => {
 							onChange={setPassword}
 							value={password}
 						/>
+						<Input
+							name='confirmPassword'
+							type='password'
+							placeholder='Confirm password..'
+							onChange={setConfirmPassword}
+							value={confirmPassword}
+						/>
 					</form>
 
+					<Checkbox
+						className={classes.Legal}
+						name='agree'
+						onChange={setAgree}
+						value={agree}
+						label={
+							<span>
+								I agree to the <Link to='/terms-and-conditions'>Terms & Conditions</Link> and{' '}
+								<Link to='/privacy-policy'>Privacy Policy</Link>
+							</span>
+						}
+					/>
+
 					<Button className={classes.Submit} onClick={onSubmitHandler}>
-						Login
+						Register
 					</Button>
 
-					<Link className={classes.Redirect} to='/sign-up'>
-						I am a new user
+					<Link className={classes.Redirect} to='/sign-in'>
+						I already have an account
 					</Link>
 				</div>
 			</Container>
@@ -80,4 +103,4 @@ const SignIn: React.FC = () => {
 	);
 };
 
-export default SignIn;
+export default SignUp;
