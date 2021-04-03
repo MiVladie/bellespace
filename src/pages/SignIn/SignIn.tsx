@@ -45,7 +45,7 @@ const SignIn: React.FC = () => {
 					</p>
 
 					<Button className={classes.Submit} onClick={onSubmitHandler}>
-						Register
+						Login
 					</Button>
 
 					<Link className={classes.Redirect} to='/sign-up'>
@@ -64,9 +64,10 @@ const SignIn: React.FC = () => {
 						</div>
 
 						<p className={classes.Text}>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer blandit ornare sem, in
-							vulputate odio venenatis at. Phasellus viverra vitae nisi sed auctor. Proin et odio massa.
-							Suspendisse iaculis fringilla dolor, vel fermentum eros facilisis eu.
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam feugiat lorem auctor,
+							pretium dolor eu, convallis tortor. Vestibulum mattis condimentum lectus vel pretium. Morbi
+							eget accumsan ante. Nullam ut varius risus. Phasellus quam nisl, sollicitudin sit amet
+							scelerisque at, facilisis nec dolor. Integer porttitor venenatis dolor id malesuada.
 						</p>
 
 						<p className={classes.Extra}>
@@ -77,6 +78,8 @@ const SignIn: React.FC = () => {
 						</p>
 					</div>
 				</Container>
+
+				<div className={classes.Circle} />
 			</div>
 		</div>
 	);

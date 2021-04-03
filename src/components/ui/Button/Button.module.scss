@@ -26,7 +26,11 @@
 		background-color: $secondary-color;
 	}
 
-	&:hover:not([disabled]) {
+	&:hover {
 		background-color: darken($fifth-color, 5);
+	}
+
+	&:active {
+		background-color: darken($fifth-color, 10);
 	}
 }

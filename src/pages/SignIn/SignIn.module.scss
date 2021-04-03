@@ -183,14 +183,27 @@
 			height: 100vh;
 
 			padding: 0;
+		}
 
+		.Actions {
 			.Wrapper {
-				width: 75%;
+				width: 65%;
+
+				.Submit {
+					width: 50%;
+				}
 			}
 		}
 
 		.Info {
+			position: relative;
+
 			.Wrapper {
+				width: 80%;
+				height: 100vh;
+
+				position: relative;
+
 				.Title {
 					margin: 0;
 					text-align: left;
@@ -205,8 +218,25 @@
 				}
 
 				.Extra {
-					text-align: left;
+					position: absolute;
+					left: 0;
+					bottom: $space-xl;
 				}
+			}
+
+			.Circle {
+				position: absolute;
+
+				right: -$space-xl * 1.75;
+				bottom: $space-xl;
+
+				width: $space-xl * 2.5;
+				height: $space-xl * 2.5;
+
+				border-radius: 50%;
+
+				background-color: transparent;
+				border: $size-xl solid $primary-color;
 			}
 		}
 	}
