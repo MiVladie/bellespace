@@ -12,7 +12,9 @@
 
 	background-color: $fifth-color;
 
-	justify-content: space-between;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
 	position: relative;
 
@@ -22,15 +24,15 @@
 
 	border: none;
 
-	&:disabled {
-		background-color: $secondary-color;
-	}
-
 	&:hover {
 		background-color: darken($fifth-color, 5);
 	}
 
 	&:active {
-		background-color: darken($fifth-color, 10);
+		background-color: darken($fifth-color, 8);
+	}
+
+	&:disabled {
+		background-color: darken($fifth-color, 8);
 	}
 }

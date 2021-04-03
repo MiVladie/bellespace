@@ -15,7 +15,7 @@ interface Props {
 const Button: React.FC<Props> = ({ className, loading, disabled, children, onClick }) => {
 	return (
 		<button className={[className, classes.Button].join(' ')} onClick={onClick} disabled={disabled || loading}>
-			{loading ? <Spinner /> : children}
+			{loading ? <Spinner size={14} /> : children}
 		</button>
 	);
 };
