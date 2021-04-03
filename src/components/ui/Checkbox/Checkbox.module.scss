@@ -38,6 +38,7 @@
 			width: 20px;
 			height: 20px;
 
+			transition: all 0.15s;
 			background: $fifth-color;
 			border-radius: 4px;
 			box-shadow: 0 0 8px rgba($fifth-color, 0.25);
@@ -71,7 +72,7 @@
 
 		// Box hover
 		&:hover + label:before {
-			box-shadow: 0 0 8px rgba($fifth-color, 0.5);
+			box-shadow: 0 0 8px rgba($fifth-color, 0.35);
 		}
 	}
 }

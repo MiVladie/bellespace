@@ -3,7 +3,7 @@
 @import '../../assets/styles/sizing';
 @import '../../assets/styles/spacing';
 
-.SignIn {
+.Auth {
 	width: 100%;
 	min-height: 100vh;
 
@@ -131,7 +131,7 @@
 }
 
 @media (min-width: 720px) {
-	.SignIn {
+	.Auth {
 		.Actions,
 		.Info {
 			.Wrapper {
@@ -163,7 +163,7 @@
 }
 
 @media (min-width: 1024px) {
-	.SignIn {
+	.Auth {
 		flex-flow: row-reverse;
 
 		.Actions,
