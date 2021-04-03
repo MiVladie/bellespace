@@ -1,0 +1,32 @@
+@import '../../../assets/styles/colors';
+@import '../../../assets/styles/fonts';
+@import '../../../assets/styles/sizing';
+@import '../../../assets/styles/spacing';
+
+.Button {
+	width: 75%;
+	height: $space-lg * 1.25;
+
+	font-family: $secondary-font;
+	color: $primary-color;
+
+	background-color: $fifth-color;
+
+	justify-content: space-between;
+
+	position: relative;
+
+	transition: all 0.15s;
+	border-radius: $space-lg;
+	box-shadow: 0 4px 8px rgba($fifth-color, 0.25);
+
+	border: none;
+
+	&:disabled {
+		background-color: $secondary-color;
+	}
+
+	&:hover:not([disabled]) {
+		background-color: darken($fifth-color, 5);
+	}
+}

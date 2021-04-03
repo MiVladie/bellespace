@@ -2,8 +2,13 @@ import React from 'react';
 
 import classes from './Container.module.scss';
 
-const Container: React.FC = ({ children }) => {
-	return <div className={classes.Container}>{children}</div>;
+interface Props {
+	className?: string;
+	children: React.ReactNode;
+}
+
+const Container: React.FC<Props> = ({ className, children }) => {
+	return <div className={[classes.Container, className].join(' ')}>{children}</div>;
 };
 
 export default Container;

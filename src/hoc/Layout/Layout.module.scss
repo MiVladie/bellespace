@@ -1,3 +1,9 @@
+@import '../../assets/styles/colors';
+
+body {
+	background-color: $primary-color;
+}
+
 .Layout {
 	max-width: 2048px;
 }
