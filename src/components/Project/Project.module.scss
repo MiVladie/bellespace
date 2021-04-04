@@ -28,9 +28,14 @@
 
 		border-radius: 4px;
 		box-shadow: 0 0 8px rgba($fifth-color, 0.15);
+		background-color: $fourth-color;
 
 		padding-top: 56.25%;
 		margin: 0;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
 		position: relative;
 
@@ -48,6 +53,39 @@
 
 			object-fit: cover;
 			object-position: center;
+		}
+
+		.Icon {
+			width: 100%;
+			height: 100%;
+
+			margin: 0;
+			padding: 0;
+
+			position: absolute;
+			top: 0;
+			left: 0;
+
+			div {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+
+				transform: translate(-50%, -50%);
+
+				margin: 0;
+				padding: 0;
+
+				width: 4px;
+				height: $space-lg;
+
+				border-radius: 2px;
+				background-color: $fifth-color;
+
+				&:last-of-type {
+					transform: translate(-50%, -50%) rotateZ(90deg);
+				}
+			}
 		}
 	}
 }

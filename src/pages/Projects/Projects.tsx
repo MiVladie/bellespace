@@ -1,9 +1,9 @@
 import React from 'react';
 
 import Container from 'hoc/Container/Container';
+import Gallery from 'containers/Gallery/Gallery';
 
 import classes from './Projects.module.scss';
-import Gallery from 'containers/Gallery/Gallery';
 
 const library = [
 	{
@@ -49,7 +49,7 @@ const Projects: React.FC = () => {
 						</div>
 
 						<div className={classes.Content}>
-							<Gallery data={library} onClick={console.log} />
+							<Gallery data={library} onClick={console.log} onNewClick={console.log} />
 						</div>
 
 						<p className={classes.Extra}>
