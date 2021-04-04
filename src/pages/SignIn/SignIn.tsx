@@ -14,10 +14,12 @@ const SignIn: React.FC = () => {
 
 	const history = useHistory();
 
-	const submitHandler = ({ email, password }: Credentials) => {
+	const submitHandler = async ({ email, password }: Credentials) => {
 		setLoading(true);
 
 		console.log({ email, password });
+
+		await new Promise((resolve) => setTimeout(resolve, 1500));
 
 		history.push('/projects');
 	};

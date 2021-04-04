@@ -16,10 +16,12 @@ const SignUp: React.FC = () => {
 
 	const history = useHistory();
 
-	const submitHandler = ({ email, password, confirmPassword, agree }: Credentials) => {
+	const submitHandler = async ({ email, password, confirmPassword, agree }: Credentials) => {
 		setLoading(true);
 
 		console.log({ email, password, confirmPassword, agree });
+
+		await new Promise((resolve) => setTimeout(resolve, 1500));
 
 		history.push('/projects');
 	};
