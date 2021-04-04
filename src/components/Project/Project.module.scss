@@ -1,0 +1,71 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/fonts';
+@import '../../assets/styles/sizing';
+@import '../../assets/styles/spacing';
+
+.Project {
+	width: 100%;
+
+	transition: all 0.25s;
+
+	cursor: pointer;
+
+	&:hover {
+		transform: translateY(-$space-xs / 4);
+	}
+
+	.Label {
+		font-family: $secondary-font;
+		font-size: $size-xs;
+		line-height: $size-md;
+		color: $primary-color;
+
+		margin-left: $space-xs / 2;
+	}
+
+	.Holder {
+		width: 100%;
+
+		border-radius: 4px;
+		box-shadow: 0 0 8px rgba($fifth-color, 0.15);
+
+		padding-top: 56.25%;
+		margin: 0;
+
+		position: relative;
+
+		overflow: hidden;
+
+		.Image {
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+
+			width: 100%;
+			height: 100%;
+
+			object-fit: cover;
+			object-position: center;
+		}
+	}
+}
+
+.Dark {
+	.Label {
+		color: $fifth-color;
+	}
+}
+
+@media (min-width: 720px) {
+	.Project {
+		// max-width: 45%;
+	}
+}
+
+@media (min-width: 720px) {
+	.Project {
+		// max-width: 50%;
+	}
+}

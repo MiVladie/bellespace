@@ -1,0 +1,54 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/fonts';
+@import '../../assets/styles/sizing';
+@import '../../assets/styles/spacing';
+
+.Gallery {
+	width: 100%;
+
+	display: flex;
+
+	flex-flow: column;
+
+	div {
+		margin-top: $space-sm;
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+}
+
+@media (min-width: 720px) {
+	.Gallery {
+		justify-content: space-around;
+
+		flex-flow: row;
+
+		flex-wrap: wrap;
+
+		div {
+			width: calc(50% - #{$space-sm});
+
+			margin: $space-xs 0 0;
+
+			&:first-child {
+				margin: $space-xs 0 0;
+			}
+		}
+	}
+}
+
+@media (min-width: 1024px) {
+	.Gallery {
+		justify-content: space-between;
+
+		div {
+			margin: $space-sm 0 0;
+
+			&:first-child {
+				margin: $space-sm 0 0;
+			}
+		}
+	}
+}
