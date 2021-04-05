@@ -16,7 +16,11 @@
 
 	transform: translateX(-90%);
 
-	transition: all 0.25s;
+	transition: all 0.35s;
+
+	&:hover {
+		transform: translateX(0);
+	}
 
 	.Info {
 		width: 80%;
@@ -79,6 +83,14 @@
 			margin-top: $space-xs / 2;
 			padding-left: $space-md;
 
+			&:hover:not(.SelectedPage, .NewPage) {
+				.Item {
+					.Name {
+						transform: translateX($space-xs / 2);
+					}
+				}
+			}
+
 			.Item {
 				height: $space-lg;
 
@@ -95,7 +107,6 @@
 
 					transition: transform 0.15s;
 				}
-
 				.Indicator {
 					transition: all 0.15s;
 				}
@@ -105,7 +116,7 @@
 				width: 100%;
 
 				.Component {
-					width: calc(100% - 1px);
+					width: calc(100% - 1px - $space-sm * 2);
 					height: $space-lg;
 
 					margin-top: $space-xs / 2;
@@ -119,13 +130,23 @@
 
 					cursor: pointer;
 
+					margin-left: $space-sm;
+					padding-left: $space-sm;
+
+					&:hover:not(.SelectedComponent) {
+						background-color: $fourth-color;
+					}
+
 					.Title {
 						font-family: $secondary-font;
 						font-size: $size-xs;
 
 						color: $primary-color;
+					}
 
-						margin-left: $space-sm;
+					.Icon {
+						color: $primary-color;
+						margin-right: $space-xs / 2;
 					}
 				}
 
@@ -136,6 +157,13 @@
 						color: $fifth-color;
 					}
 				}
+			}
+		}
+
+		.NewPage {
+			.Icon {
+				color: $primary-color;
+				margin-right: $space-xs / 2;
 			}
 		}
 
@@ -168,27 +196,50 @@
 		position: absolute;
 
 		top: 50%;
-		right: calc(5% - 1.5px);
+		right: 0;
 		transform: translateY(-50%);
 
-		width: 3px;
-		height: $space-md * 1.25;
+		width: 10%;
+		height: 7em;
 
-		border-radius: 2px;
-		background-color: rgba($primary-color, 0.25);
-
-		transition: all 0.15s;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
 		cursor: pointer;
 
 		&:hover {
-			background-color: rgba($primary-color, 0.5);
+			.Icon {
+				background-color: rgba($primary-color, 0.5);
+			}
+		}
+
+		.Icon {
+			width: 3px;
+			height: $space-md * 1.25;
+
+			border-radius: 2px;
+			background-color: rgba($primary-color, 0.25);
+
+			transition: all 0.15s;
 		}
 	}
 }
 
 .Expanded {
 	transform: translateX(0);
+
+	.Toggle {
+		&:hover {
+			.Icon {
+				background-color: $primary-color;
+			}
+		}
+
+		.Icon {
+			background-color: $primary-color;
+		}
+	}
 }
 
 @media (min-width: 720px) {

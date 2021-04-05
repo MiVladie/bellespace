@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { AddRounded } from '@material-ui/icons';
+
 import classes from './Sitemap.module.scss';
 
 interface Component {
@@ -22,6 +24,8 @@ interface Props {
 	selectedComponent: number | null;
 	onPageClick: (id: number) => void;
 	onComponentClick: (id: number) => void;
+	onNewPage?: () => void;
+	onNewComponent?: (pageId: number) => void;
 }
 
 const Sitemap: React.FC<Props> = ({
@@ -31,7 +35,9 @@ const Sitemap: React.FC<Props> = ({
 	selectedPage,
 	selectedComponent,
 	onPageClick,
-	onComponentClick
+	onComponentClick,
+	onNewPage,
+	onNewComponent
 }) => {
 	const [expanded, setExpanded] = useState<boolean>(false);
 
@@ -70,13 +76,31 @@ const Sitemap: React.FC<Props> = ({
 										<p className={classes.Title}>{component.name}</p>
 									</div>
 								))}
+
+								{onNewComponent && (
+									<div className={classes.Component} onClick={() => onNewComponent(page.id)}>
+										<AddRounded className={classes.Icon} />
+										<p className={classes.Title}>New Component</p>
+									</div>
+								)}
 							</div>
 						)}
 					</li>
 				))}
+
+				{onNewPage && (
+					<li className={[classes.Page, classes.NewPage].join(' ')}>
+						<div className={classes.Item} onClick={onNewPage}>
+							<AddRounded className={classes.Icon} />
+							<p className={classes.Name}>New Page</p>
+						</div>
+					</li>
+				)}
 			</ul>
 
-			<div className={classes.Toggle} onClick={() => setExpanded((prevState) => !prevState)} />
+			<div className={classes.Toggle} onClick={() => setExpanded((prevState) => !prevState)}>
+				<div className={classes.Icon} />
+			</div>
 		</div>
 	);
 };

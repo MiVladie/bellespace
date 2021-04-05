@@ -78,6 +78,10 @@ const Project: React.FC = () => {
 		setSelectedComponent((prevState) => (prevState === id ? null : id));
 	};
 
+	const newPageHandler = () => {};
+
+	const newComponentHandler = (pageId: number) => {};
+
 	return (
 		<div className={classes.Project}>
 			<Sitemap
@@ -88,6 +92,8 @@ const Project: React.FC = () => {
 				selectedComponent={selectedComponent}
 				onPageClick={pageClickHandler}
 				onComponentClick={componentClickHandler}
+				onNewPage={newPageHandler}
+				onNewComponent={newComponentHandler}
 			/>
 		</div>
 	);
