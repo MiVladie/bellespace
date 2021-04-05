@@ -3,8 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Sitemap from 'components/Sitemap/Sitemap';
+import Sidebar from 'containers/Sidebar/Sidebar';
 
 import classes from './Project.module.scss';
+
+type Module = 'page' | 'component';
+
+type Action = 'new' | 'content' | 'styles' | 'delete' | 'settings';
 
 interface Params {
 	id: string;
@@ -26,6 +31,9 @@ const Project: React.FC = () => {
 	const [sitemap, setSitemap] = useState<Page[]>([]);
 	const [selectedPage, setSelectedPage] = useState<number | null>(null);
 	const [selectedComponent, setSelectedComponent] = useState<number | null>(null);
+
+	const [module, setModule] = useState<Module | null>(null);
+	const [action, setAction] = useState<Action | null>(null);
 
 	const { id } = useParams<Params>();
 
@@ -70,17 +78,53 @@ const Project: React.FC = () => {
 		setSelectedPage((prevState) => {
 			setSelectedComponent(null);
 
-			return prevState === id ? null : id;
+			if (prevState === id) {
+				setModule(null);
+				setAction(null);
+
+				return null;
+			} else {
+				setModule('page');
+				setAction('content');
+
+				return id;
+			}
 		});
 	};
 
 	const componentClickHandler = (id: number) => {
-		setSelectedComponent((prevState) => (prevState === id ? null : id));
+		setSelectedComponent((prevState) => {
+			if (prevState === id) {
+				setModule('page');
+				setAction('content');
+
+				return null;
+			} else {
+				setModule('component');
+				setAction('content');
+
+				return id;
+			}
+		});
 	};
 
-	const newPageHandler = () => {};
+	const newPageHandler = () => {
+		setModule('page');
+		setAction('new');
 
-	const newComponentHandler = (pageId: number) => {};
+		setSelectedPage(null);
+	};
+
+	const newComponentHandler = () => {
+		setModule('component');
+		setAction('new');
+
+		setSelectedComponent(null);
+	};
+
+	const selectActionHandler = (type: Action) => {
+		setAction(type);
+	};
 
 	return (
 		<div className={classes.Project}>
@@ -94,6 +138,13 @@ const Project: React.FC = () => {
 				onComponentClick={componentClickHandler}
 				onNewPage={newPageHandler}
 				onNewComponent={newComponentHandler}
+			/>
+
+			<Sidebar
+				visible={!!module && !!action}
+				module={module}
+				action={action}
+				onSelectAction={selectActionHandler}
 			/>
 		</div>
 	);

@@ -25,7 +25,7 @@ interface Props {
 	onPageClick: (id: number) => void;
 	onComponentClick: (id: number) => void;
 	onNewPage?: () => void;
-	onNewComponent?: (pageId: number) => void;
+	onNewComponent?: () => void;
 }
 
 const Sitemap: React.FC<Props> = ({
@@ -78,7 +78,7 @@ const Sitemap: React.FC<Props> = ({
 								))}
 
 								{onNewComponent && (
-									<div className={classes.Component} onClick={() => onNewComponent(page.id)}>
+									<div className={classes.Component} onClick={onNewComponent}>
 										<AddRounded className={classes.Icon} />
 										<p className={classes.Title}>New Component</p>
 									</div>
