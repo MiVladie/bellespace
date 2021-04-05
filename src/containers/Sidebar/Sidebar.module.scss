@@ -8,7 +8,7 @@
 	$bar: $space-xl * 1.125;
 	$action: $space-md * 1.25;
 
-	position: absolute;
+	position: fixed;
 	top: 0;
 	right: 0;
 	bottom: 0;
@@ -27,6 +27,8 @@
 		transform: translateX(0);
 
 		.Header {
+			border-bottom-color: $fourth-color;
+
 			.Indicator {
 				opacity: 1;
 			}
@@ -47,9 +49,11 @@
 		margin: 0;
 
 		box-sizing: border-box;
-		border-bottom: 2px solid $fourth-color;
+		border-bottom: 2px solid transparent;
 
 		position: relative;
+
+		transition: all 0.35s;
 
 		.Indicator {
 			position: absolute;
@@ -231,6 +235,8 @@
 	transform: translateX(0);
 
 	.Header {
+		border-bottom-color: $fourth-color;
+
 		.Indicator {
 			opacity: 1;
 		}

@@ -76,7 +76,7 @@ const Projects: React.FC = () => {
 				<Container>
 					<div className={classes.Wrapper}>
 						<div className={classes.Title}>
-							<h1 className={classes.Heading}>Or explore exising..</h1>
+							<h1 className={classes.Heading}>Or explore existing..</h1>
 
 							<div className={classes.Line} />
 						</div>

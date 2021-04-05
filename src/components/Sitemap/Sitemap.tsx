@@ -98,7 +98,9 @@ const Sitemap: React.FC<Props> = ({
 				)}
 			</ul>
 
-			<div className={classes.Toggle} onClick={() => setExpanded((prevState) => !prevState)}>
+			<div
+				className={classes.Toggle}
+				onClick={() => window.screen.width >= 720 && setExpanded((prevState) => !prevState)}>
 				<div className={classes.Icon} />
 			</div>
 		</div>

@@ -141,6 +141,7 @@ const Sidebar: React.FC<Props> = ({ visible, module, action, onSelectAction }) =
 					<div className={classes.Main}>
 						{actions.map((act) => (
 							<div
+								key={act.type}
 								className={[classes.Action, action === act.type ? classes.SelectedAction : ''].join(
 									' '
 								)}
@@ -154,7 +155,9 @@ const Sidebar: React.FC<Props> = ({ visible, module, action, onSelectAction }) =
 				</div>
 			</div>
 
-			<div className={classes.Toggle} onClick={() => setExpanded((prevState) => !prevState)}>
+			<div
+				className={classes.Toggle}
+				onClick={() => window.screen.width >= 720 && setExpanded((prevState) => !prevState)}>
 				<div className={classes.Hook} />
 			</div>
 		</div>
