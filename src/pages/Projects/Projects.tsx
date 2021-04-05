@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useHistory } from 'react-router-dom';
+
 import Container from 'hoc/Container/Container';
 import Gallery from 'containers/Gallery/Gallery';
 
@@ -37,6 +39,8 @@ const catalogue = [
 ];
 
 const Projects: React.FC = () => {
+	const history = useHistory();
+
 	return (
 		<div className={classes.Projects}>
 			<div className={classes.Library}>
@@ -49,7 +53,11 @@ const Projects: React.FC = () => {
 						</div>
 
 						<div className={classes.Content}>
-							<Gallery data={library} onClick={console.log} onNewClick={console.log} />
+							<Gallery
+								data={library}
+								onClick={(id) => history.push(`/projects/${id}`)}
+								onNewClick={() => history.push('/projects/new')}
+							/>
 						</div>
 
 						<p className={classes.Extra}>
@@ -74,7 +82,7 @@ const Projects: React.FC = () => {
 						</div>
 
 						<div className={classes.Content}>
-							<Gallery data={catalogue} onClick={console.log} dark />
+							<Gallery data={catalogue} onClick={(id) => history.push(`/projects/${id}`)} dark />
 						</div>
 					</div>
 				</Container>

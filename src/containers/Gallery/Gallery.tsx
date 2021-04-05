@@ -32,7 +32,7 @@ const Gallery: React.FC<Props> = ({ data, onClick, onNewClick, dark }) => {
 					id={project.id}
 					name={project.name}
 					url={project.url}
-					onClick={onClick}
+					onClick={() => (project.id === 0 ? onNewClick!() : onClick(project.id))}
 					dark={dark}
 				/>
 			))}

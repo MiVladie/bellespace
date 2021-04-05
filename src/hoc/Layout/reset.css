@@ -86,6 +86,8 @@ video {
 	font: inherit;
 	vertical-align: baseline;
 	outline: 0;
+
+	-webkit-tap-highlight-color: transparent;
 }
 
 html {

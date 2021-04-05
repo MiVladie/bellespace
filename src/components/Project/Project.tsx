@@ -16,8 +16,8 @@ const Project: React.FC<Props> = ({ id, name, url, onClick, dark }) => {
 			<h4 className={classes.Label}>{name}</h4>
 
 			<div className={classes.Holder}>
-				{url ? (
-					<img className={classes.Image} src={url} alt={name} />
+				{id !== 0 ? (
+					<img className={classes.Image} src={url || ''} alt={name} />
 				) : (
 					<div className={classes.Icon}>
 						<div />

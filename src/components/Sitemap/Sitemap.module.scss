@@ -1,0 +1,204 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/fonts';
+@import '../../assets/styles/sizing';
+@import '../../assets/styles/spacing';
+
+.Sitemap {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+
+	width: 90%;
+	height: 100vh;
+
+	box-shadow: 0 0 8px rgba($fifth-color, 0.25);
+	background-color: $fifth-color;
+
+	transform: translateX(-90%);
+
+	transition: all 0.25s;
+
+	.Info {
+		width: 80%;
+
+		margin: $space-sm auto 0;
+		padding-top: $space-md;
+
+		.Name,
+		.Category {
+			text-align: center;
+		}
+
+		.Holder {
+			width: $space-xl * 2.25;
+			height: $space-xl * 2.25;
+
+			margin: 0 auto;
+
+			border-radius: 50%;
+			background-color: $primary-color;
+
+			overflow: hidden;
+		}
+
+		.Name {
+			font-family: $secondary-font;
+			font-size: $size-sm;
+			font-weight: 600;
+
+			color: $primary-color;
+
+			margin-top: $space-sm * 1.5;
+		}
+
+		.Category {
+			font-family: $secondary-font;
+			font-size: $size-xs;
+
+			color: $third-color;
+
+			margin-top: $space-xs / 2;
+		}
+
+		.Line {
+			width: $space-lg;
+			height: 2px;
+
+			margin: $space-sm * 1.5 auto 0;
+
+			background-color: $primary-color;
+		}
+	}
+
+	.Pages {
+		width: 90%;
+
+		margin-top: $space-lg;
+
+		.Page {
+			margin-top: $space-xs / 2;
+			padding-left: $space-md;
+
+			.Item {
+				height: $space-lg;
+
+				display: flex;
+				align-items: center;
+
+				cursor: pointer;
+
+				.Name {
+					font-family: $secondary-font;
+					font-size: $size-sm;
+
+					color: $primary-color;
+
+					transition: transform 0.15s;
+				}
+
+				.Indicator {
+					transition: all 0.15s;
+				}
+			}
+
+			.Content {
+				width: 100%;
+
+				.Component {
+					width: calc(100% - 1px);
+					height: $space-lg;
+
+					margin-top: $space-xs / 2;
+
+					display: flex;
+					align-items: center;
+
+					border-radius: 6px;
+
+					transition: all 0.15s;
+
+					cursor: pointer;
+
+					.Title {
+						font-family: $secondary-font;
+						font-size: $size-xs;
+
+						color: $primary-color;
+
+						margin-left: $space-sm;
+					}
+				}
+
+				.SelectedComponent {
+					background-color: $primary-color;
+
+					.Title {
+						color: $fifth-color;
+					}
+				}
+			}
+		}
+
+		.SelectedPage {
+			position: relative;
+
+			.Item {
+				.Name {
+					transform: translateX($space-xs);
+
+					font-weight: 600;
+				}
+
+				.Indicator {
+					position: absolute;
+					top: 0;
+					left: 0;
+
+					width: 3px;
+					height: $space-lg;
+
+					border-radius: 0 2px 2px 0;
+					background-color: $primary-color;
+				}
+			}
+		}
+	}
+
+	.Toggle {
+		position: absolute;
+
+		top: 50%;
+		right: calc(5% - 1.5px);
+		transform: translateY(-50%);
+
+		width: 3px;
+		height: $space-md * 1.25;
+
+		border-radius: 2px;
+		background-color: rgba($primary-color, 0.25);
+
+		transition: all 0.15s;
+
+		cursor: pointer;
+
+		&:hover {
+			background-color: rgba($primary-color, 0.5);
+		}
+	}
+}
+
+.Expanded {
+	transform: translateX(0);
+}
+
+@media (min-width: 720px) {
+	.Sitemap {
+		max-width: 340px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.Sitemap {
+		max-width: 350px;
+	}
+}
