@@ -217,11 +217,11 @@
 			.Circle {
 				position: absolute;
 
-				right: -$space-xl * 1.75;
+				right: calc(#{$space-xl} * -1.75);
 				bottom: $space-xl;
 
-				width: $space-xl * 2.5;
-				height: $space-xl * 2.5;
+				width: calc(#{$space-xl} * 2.5);
+				height: calc(#{$space-xl} * 2.5);
 
 				border-radius: 50%;
 

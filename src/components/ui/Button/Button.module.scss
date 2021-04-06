@@ -5,7 +5,7 @@
 
 .Button {
 	width: 75%;
-	height: $space-lg * 1.25;
+	height: calc(#{$space-lg} * 1.25);
 
 	font-family: $secondary-font;
 	color: $primary-color;

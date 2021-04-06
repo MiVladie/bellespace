@@ -37,8 +37,8 @@
 		}
 
 		.Holder {
-			width: $space-xl * 2.25;
-			height: $space-xl * 2.25;
+			width: calc(#{$space-xl} * 2.25);
+			height: calc(#{$space-xl} * 2.25);
 
 			margin: 0 auto;
 
@@ -55,7 +55,7 @@
 
 			color: $primary-color;
 
-			margin-top: $space-sm * 1.5;
+			margin-top: calc(#{$space-sm} * 1.5);
 		}
 
 		.Category {
@@ -64,14 +64,14 @@
 
 			color: $third-color;
 
-			margin-top: $space-xs / 2;
+			margin-top: calc(#{$space-xs} / 2);
 		}
 
 		.Line {
 			width: $space-lg;
 			height: 2px;
 
-			margin: $space-sm * 1.5 auto 0;
+			margin: calc(#{$space-sm} * 1.5) auto 0;
 
 			background-color: $primary-color;
 		}
@@ -83,7 +83,7 @@
 		margin-top: $space-lg;
 
 		.Page {
-			margin-top: $space-xs / 2;
+			margin-top: calc(#{$space-xs} / 2);
 			padding-left: $space-md;
 
 			&:hover:not(.SelectedPage, .NewPage) {
@@ -119,10 +119,10 @@
 				width: 100%;
 
 				.Component {
-					width: calc(100% - 1px - $space-sm * 2);
+					width: calc(100% - 1px - #{$space-sm} * 2);
 					height: $space-lg;
 
-					margin-top: $space-xs / 2;
+					margin-top: calc(#{$space-xs} / 2);
 
 					display: flex;
 					align-items: center;
@@ -149,7 +149,7 @@
 
 					.Icon {
 						color: $primary-color;
-						margin-right: $space-xs / 2;
+						margin-right: calc(#{$space-xs} / 2);
 					}
 				}
 
@@ -166,7 +166,7 @@
 		.NewPage {
 			.Icon {
 				color: $primary-color;
-				margin-right: $space-xs / 2;
+				margin-right: calc(#{$space-xs} / 2);
 			}
 		}
 
@@ -219,7 +219,7 @@
 
 		.Icon {
 			width: 3px;
-			height: $space-md * 1.25;
+			height: calc(#{$space-md} * 1.25);
 
 			border-radius: 2px;
 			background-color: rgba($primary-color, 0.25);

@@ -20,7 +20,7 @@
 		line-height: $size-md;
 		color: $primary-color;
 
-		margin-left: $space-xs / 2;
+		margin-left: calc(#{$space-xs} / 2);
 	}
 
 	.Holder {
