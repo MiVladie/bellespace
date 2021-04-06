@@ -70,7 +70,7 @@ const Auth: React.FC<Props> = ({ action, onSubmit, loading }) => {
 				}
 			/>
 
-			<Button className={classes.Submit} onClick={onSubmitHandler} loading={loading}>
+			<Button className={classes.Submit} onClick={onSubmitHandler} loading={loading} dark rounded>
 				Register
 			</Button>
 
@@ -99,7 +99,7 @@ const Auth: React.FC<Props> = ({ action, onSubmit, loading }) => {
 				/>
 			</form>
 
-			<Button className={classes.Submit} onClick={onSubmitHandler} loading={loading}>
+			<Button className={classes.Submit} onClick={onSubmitHandler} loading={loading} dark rounded>
 				Login
 			</Button>
 

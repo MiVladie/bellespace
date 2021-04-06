@@ -1,0 +1,70 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/fonts';
+@import '../../assets/styles/sizing';
+@import '../../assets/styles/spacing';
+
+.Component {
+	width: 100%;
+
+	transition: all 0.25s;
+
+	cursor: pointer;
+
+	&:hover {
+		transform: translateY(-$space-xs / 4);
+	}
+
+	.Label {
+		font-family: $secondary-font;
+		font-size: $size-xs * 0.9;
+		line-height: $size-md;
+		color: $secondary-color;
+
+		margin-left: calc(#{$space-xs} / 2);
+	}
+
+	.Holder {
+		width: 100%;
+
+		border-radius: 4px;
+		box-shadow: 0 0 8px rgba($fifth-color, 0.15);
+		background-color: $fourth-color;
+
+		padding-top: 56.25%;
+		margin: 0;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		position: relative;
+
+		overflow: hidden;
+
+		.Image {
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+
+			width: 100%;
+			height: 100%;
+
+			object-fit: cover;
+			object-position: center;
+		}
+	}
+}
+
+@media (min-width: 720px) {
+	.Component {
+		// max-width: 45%;
+	}
+}
+
+@media (min-width: 720px) {
+	.Component {
+		// max-width: 50%;
+	}
+}

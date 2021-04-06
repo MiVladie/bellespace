@@ -4,7 +4,7 @@
 @import '../../assets/styles/spacing';
 
 .Sidebar {
-	$toggle: 3%;
+	$toggle: 0.65em;
 	$bar: calc(#{$space-xl} * 1.125);
 	$action: calc(#{$space-md} * 1.25);
 
@@ -31,6 +31,14 @@
 
 			.Indicator {
 				opacity: 1;
+			}
+		}
+
+		.Wrapper {
+			.Base {
+				.Actions {
+					border-top-color: $fourth-color;
+				}
 			}
 		}
 	}
@@ -107,14 +115,52 @@
 	.Wrapper {
 		display: flex;
 
-		width: calc(100% - #{$toggle} * 2);
-		height: calc(100vh - #{$bar});
+		width: 100%;
+		height: calc(100% - #{$bar});
 
-		float: right;
+		// background-color: blue;
 
-		.Content {
+		.Base {
 			width: calc(100% - #{$bar});
 			height: 100%;
+
+			// background-color: lightsalmon;
+
+			.Content {
+				width: calc(100% - #{$toggle} * 4);
+
+				min-height: calc(100% - #{$bar} - #{$space-xs});
+				max-height: 100%;
+
+				margin-top: $space-xs;
+				padding: 0 calc(#{$toggle} * 2);
+			}
+
+			.Actions {
+				width: calc(100% - #{$toggle} * 4);
+				height: calc(#{$bar});
+
+				display: flex;
+				align-items: center;
+
+				border-top: 2px solid transparent;
+
+				// background-color: lightpink;
+				padding: 0 calc(#{$toggle} * 2);
+
+				transition: all 0.35s;
+
+				button {
+					width: 45%;
+					height: calc(#{$space-md} * 1.25);
+
+					margin-left: calc(#{$space-xs} / 2);
+
+					&:first-of-type {
+						margin-left: 0;
+					}
+				}
+			}
 		}
 
 		.Bar {
@@ -127,6 +173,8 @@
 			justify-content: space-between;
 
 			flex-direction: column;
+
+			// background-color: lightgrey;
 
 			.Main {
 				width: 100%;
@@ -148,6 +196,8 @@
 					justify-content: center;
 					align-items: center;
 
+					position: relative;
+
 					margin-top: calc(#{$space-sm} * 1.25);
 
 					transition: all 0.15s;
@@ -161,7 +211,7 @@
 						margin-top: 0;
 					}
 
-					.Icon {
+					svg {
 						width: 65%;
 						height: 65%;
 
@@ -169,12 +219,33 @@
 
 						transition: all 0.15s;
 					}
+
+					.Label {
+						width: calc(#{$bar} * 1.35);
+
+						position: absolute;
+						bottom: calc(-#{$size-xs} - 2px);
+						left: 50%;
+
+						transform: translateX(-50%);
+
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
+
+						font-family: $secondary-font;
+						font-size: calc(#{$size-xs} / 1.5);
+
+						text-align: center;
+
+						color: $primary-color;
+					}
 				}
 
 				.SelectedAction {
 					background-color: $primary-color;
 
-					.Icon {
+					svg {
 						color: $fifth-color;
 					}
 				}
@@ -239,6 +310,14 @@
 
 		.Indicator {
 			opacity: 1;
+		}
+	}
+
+	.Wrapper {
+		.Base {
+			.Actions {
+				border-top-color: $fourth-color;
+			}
 		}
 	}
 

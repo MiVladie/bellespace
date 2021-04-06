@@ -34,7 +34,7 @@ interface Structure {
 	id: number;
 	name: string;
 	category: number;
-	image?: string;
+	url?: string;
 	fields: Field[];
 }
 

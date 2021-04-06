@@ -6,10 +6,16 @@ import Sitemap from 'components/Sitemap/Sitemap';
 import Sidebar from 'containers/Sidebar/Sidebar';
 
 import classes from './Project.module.scss';
+import Library from 'containers/Library/Library';
 
-type Module = 'page' | 'component';
-
-type Action = 'new' | 'content' | 'styles' | 'delete' | 'settings';
+enum Type {
+	NEW_PAGE,
+	NEW_COMPONENT,
+	MODIFY_PAGE,
+	MODIFY_COMPONENT,
+	DELETE_PAGE,
+	DELETE_COMPONENT
+}
 
 interface Params {
 	id: string;
@@ -85,8 +91,7 @@ const Project: React.FC = () => {
 	const [selectedPage, setSelectedPage] = useState<number | null>(null);
 	const [selectedComponent, setSelectedComponent] = useState<number | null>(null);
 
-	const [module, setModule] = useState<Module | null>(null);
-	const [action, setAction] = useState<Action | null>(null);
+	const [type, setType] = useState<Type | null>(null);
 
 	const { id } = useParams<Params>();
 
@@ -132,13 +137,11 @@ const Project: React.FC = () => {
 			setSelectedComponent(null);
 
 			if (prevState === id) {
-				setModule(null);
-				setAction(null);
+				setType(null);
 
 				return null;
 			} else {
-				setModule('page');
-				setAction('content');
+				setType(Type.MODIFY_PAGE);
 
 				return id;
 			}
@@ -148,13 +151,11 @@ const Project: React.FC = () => {
 	const componentClickHandler = (id: number) => {
 		setSelectedComponent((prevState) => {
 			if (prevState === id) {
-				setModule('page');
-				setAction('content');
+				setType(Type.MODIFY_PAGE);
 
 				return null;
 			} else {
-				setModule('component');
-				setAction('content');
+				setType(Type.MODIFY_COMPONENT);
 
 				return id;
 			}
@@ -162,21 +163,15 @@ const Project: React.FC = () => {
 	};
 
 	const newPageHandler = () => {
-		setModule('page');
-		setAction('new');
+		setType(Type.NEW_PAGE);
 
 		setSelectedPage(null);
 	};
 
 	const newComponentHandler = () => {
-		setModule('component');
-		setAction('new');
+		setType(Type.NEW_COMPONENT);
 
 		setSelectedComponent(null);
-	};
-
-	const selectActionHandler = (type: Action) => {
-		setAction(type);
 	};
 
 	return (
@@ -193,12 +188,7 @@ const Project: React.FC = () => {
 				onNewComponent={newComponentHandler}
 			/>
 
-			<Sidebar
-				visible={!!module && !!action}
-				module={module}
-				action={action}
-				onSelectAction={selectActionHandler}
-			/>
+			<Sidebar visible={type != null} type={type} />
 		</div>
 	);
 };

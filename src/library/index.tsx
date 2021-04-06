@@ -4,40 +4,37 @@ import { data as BannerData } from './Banner/Banner';
 
 interface Component {
 	id: number;
-	image?: string;
+	name: string;
+	url?: string;
 }
 
 interface Category {
 	id: number;
-	name: string;
 	icon?: React.ReactNode;
 	components: Component[];
 }
 
 export const Categories: Category[] = [
 	{
-		id: 1,
-		name: 'Banner',
+		id: 0,
 		components: [
 			{
 				id: BannerData.id,
-				image: BannerData.image
+				name: BannerData.name,
+				url: BannerData.url
 			}
 		]
 	},
 	{
+		id: 1,
+		components: []
+	},
+	{
 		id: 2,
-		name: 'Introduction',
 		components: []
 	},
 	{
 		id: 3,
-		name: 'Interstitial',
-		components: []
-	},
-	{
-		id: 4,
-		name: 'Gallery',
 		components: []
 	}
 ];

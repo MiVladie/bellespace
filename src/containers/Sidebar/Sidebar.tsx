@@ -1,133 +1,95 @@
-import { AddRounded, DeleteOutline, FormatPaintRounded, FormatSizeRounded, SettingsRounded } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
+
+import Library, { Sections as LibrarySections, Heading as LibraryHeading } from 'containers/Library/Library';
+import Button from 'components/ui/Button/Button';
 
 import classes from './Sidebar.module.scss';
 
-type Module = 'page' | 'component';
-
-type Type = 'new' | 'content' | 'styles' | 'delete' | 'settings';
+enum Type {
+	NEW_PAGE,
+	NEW_COMPONENT,
+	MODIFY_PAGE,
+	MODIFY_COMPONENT,
+	DELETE_PAGE,
+	DELETE_COMPONENT
+}
 
 interface Action {
-	type: Type;
-	heading: string;
+	label: string;
+	onClick: () => void;
+}
+
+interface Section {
+	id: number;
+	name?: string;
 	icon: React.ReactNode;
 }
 
 interface Props {
 	visible: boolean;
-	module: Module | null;
-	action: Type | null;
-	onSelectAction: (type: Type) => void;
+	type: Type | null;
 }
 
-const Sidebar: React.FC<Props> = ({ visible, module, action, onSelectAction }) => {
+const Sidebar: React.FC<Props> = ({ visible, type }) => {
+	const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
+
+	const [section, setSection] = useState<number>(0);
 	const [expanded, setExpanded] = useState<boolean>(false);
+
+	useEffect(() => {
+		window.addEventListener('resize', () => {
+			if (window.innerWidth < 720 && expanded) {
+				setExpanded(false);
+			}
+
+			setWindowWidth(window.innerWidth);
+		});
+
+		return () => window.removeEventListener('resize', () => setWindowWidth(window.innerWidth));
+	}, []);
 
 	useEffect(() => {
 		setExpanded(false);
 	}, [visible]);
 
-	const establishActions = (): Action[] => {
+	const establishData = (): [string, Section[], React.ReactNode, Action[]] => {
+		let heading: string = '';
+		let sections: Section[] = [];
+		let content: React.ReactNode;
 		let actions: Action[] = [];
 
-		if (action === 'new') {
-			switch (module) {
-				case 'page':
-					actions = [
-						{
-							type: 'new',
-							heading: 'New Page',
-							icon: <AddRounded className={classes.Icon} />
-						}
-					];
-					break;
-
-				case 'component':
-					actions = [
-						{
-							type: 'new',
-							heading: 'New Component',
-							icon: <AddRounded className={classes.Icon} />
-						}
-					];
-					break;
-
-				default:
-					if (!!module) {
-						throw new Error(`Could not establish the ${module} module! Please, check for misspellings!`);
-					}
-					break;
-			}
-
-			return actions;
-		}
-
-		switch (module) {
-			case 'page':
+		switch (type) {
+			case Type.NEW_COMPONENT:
+				heading = LibraryHeading;
+				sections = LibrarySections;
+				content = <Library category={section} onSelect={console.log} />;
 				actions = [
 					{
-						type: 'content',
-						heading: 'Modify Page',
-						icon: <FormatSizeRounded className={classes.Icon} />
+						label: 'Add',
+						onClick: () => console.log('adding..')
 					},
 					{
-						type: 'delete',
-						heading: 'Delete Page',
-						icon: <DeleteOutline className={classes.Icon} />
-					},
-					{
-						type: 'settings',
-						heading: 'Settings',
-						icon: <SettingsRounded className={classes.Icon} />
-					}
-				];
-				break;
-
-			case 'component':
-				actions = [
-					{
-						type: 'content',
-						heading: 'Modify Component',
-						icon: <FormatSizeRounded className={classes.Icon} />
-					},
-					{
-						type: 'styles',
-						heading: 'Modify Styles',
-						icon: <FormatPaintRounded className={classes.Icon} />
-					},
-					{
-						type: 'delete',
-						heading: 'Delete Component',
-						icon: <DeleteOutline className={classes.Icon} />
-					},
-					{
-						type: 'settings',
-						heading: 'Settings',
-						icon: <SettingsRounded className={classes.Icon} />
+						label: 'Cancel',
+						onClick: () => console.log('cancelling..')
 					}
 				];
 				break;
 
 			default:
-				if (!!module) {
-					throw new Error(`Could not establish the ${module} module! Please, check for misspellings!`);
-				}
 				break;
 		}
 
-		return actions;
+		return [heading, sections, content, actions];
 	};
 
-	let actions: Action[] = establishActions();
+	let [heading, sections, content, actions] = establishData();
 
 	return (
 		<div className={[classes.Sidebar, !visible ? classes.Hidden : '', expanded ? classes.Expanded : ''].join(' ')}>
 			<div className={classes.Header}>
 				<span className={classes.Indicator} />
 
-				<h1 className={classes.Heading}>
-					{(actions && actions.length && actions.find((a) => a.type === action)!.heading) || ''}
-				</h1>
+				<h1 className={classes.Heading}>{heading}</h1>
 
 				<div className={classes.Referrer}>
 					<i className={classes.Logo} />
@@ -135,18 +97,28 @@ const Sidebar: React.FC<Props> = ({ visible, module, action, onSelectAction }) =
 			</div>
 
 			<div className={classes.Wrapper}>
-				<div className={classes.Content}></div>
+				<div className={classes.Base}>
+					<div className={classes.Content}>{content}</div>
+					{actions && (
+						<div className={classes.Actions}>
+							{actions.map((action, index) => (
+								<Button key={index} onClick={action.onClick} filled={index === 0}>
+									{action.label}
+								</Button>
+							))}
+						</div>
+					)}
+				</div>
 
 				<div className={classes.Bar}>
 					<div className={classes.Main}>
-						{actions.map((act) => (
+						{sections.map((s) => (
 							<div
-								key={act.type}
-								className={[classes.Action, action === act.type ? classes.SelectedAction : ''].join(
-									' '
-								)}
-								onClick={() => onSelectAction(act.type)}>
-								{act.icon}
+								key={s.id}
+								className={[classes.Action, section === s.id ? classes.SelectedAction : ''].join(' ')}
+								onClick={() => setSection(s.id)}>
+								{s.icon}
+								{s.name && <p className={classes.Label}>{s.name}</p>}
 							</div>
 						))}
 					</div>
@@ -157,7 +129,7 @@ const Sidebar: React.FC<Props> = ({ visible, module, action, onSelectAction }) =
 
 			<div
 				className={classes.Toggle}
-				onClick={() => window.screen.width >= 720 && setExpanded((prevState) => !prevState)}>
+				onClick={() => windowWidth >= 720 && setExpanded((prevState) => !prevState)}>
 				<div className={classes.Hook} />
 			</div>
 		</div>

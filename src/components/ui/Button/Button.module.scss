@@ -10,8 +10,6 @@
 	font-family: $secondary-font;
 	color: $primary-color;
 
-	background-color: $fifth-color;
-
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -19,20 +17,81 @@
 	position: relative;
 
 	transition: all 0.15s;
-	border-radius: $space-lg;
-	box-shadow: 0 4px 8px rgba($fifth-color, 0.25);
+	border-radius: calc(#{$space-xs} / 1.5);
+
+	background-color: transparent;
 
 	border: none;
 
+	&:hover:not(.Filled) {
+		color: darken($primary-color, 5);
+		background-color: $fourth-color;
+	}
+
+	&:active:not(.Filled) {
+		color: darken($primary-color, 8);
+	}
+
+	&:disabled:not(.Filled) {
+		color: darken($primary-color, 8);
+	}
+}
+
+.Dark {
+	color: $fifth-color;
+
 	&:hover {
-		background-color: darken($fifth-color, 5);
+		color: darken($primary-color, 5);
 	}
 
 	&:active {
-		background-color: darken($fifth-color, 8);
+		color: darken($primary-color, 8);
 	}
 
 	&:disabled {
-		background-color: darken($fifth-color, 8);
+		color: darken($primary-color, 8);
 	}
+}
+
+.Filled {
+	box-shadow: 0 4px 8px rgba($fifth-color, 0.25);
+	background-color: $primary-color;
+	color: $fifth-color;
+
+	&:hover {
+		background-color: darken($primary-color, 5);
+	}
+
+	&:active {
+		background-color: darken($primary-color, 8);
+	}
+
+	&:disabled {
+		background-color: darken($primary-color, 8);
+	}
+
+	&.Dark {
+		background-color: $fifth-color;
+		color: $primary-color;
+
+		&:hover {
+			background-color: darken($fifth-color, 5);
+		}
+
+		&:active {
+			background-color: darken($fifth-color, 8);
+		}
+
+		&:disabled {
+			background-color: darken($fifth-color, 8);
+		}
+	}
+
+	&.Rounded {
+		border-radius: $space-lg;
+	}
+}
+
+.Rounded {
+	border-radius: $space-lg;
 }

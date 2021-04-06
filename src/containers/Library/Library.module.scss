@@ -1,0 +1,12 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/fonts';
+@import '../../assets/styles/sizing';
+@import '../../assets/styles/spacing';
+
+.Library {
+	width: 100%;
+
+	div {
+		margin-bottom: $space-xs;
+	}
+}
