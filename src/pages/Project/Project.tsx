@@ -27,8 +27,61 @@ interface Page {
 	components: Component[];
 }
 
+/*
+
+	** Website structure: **
+
+
+	// Pages
+
+	[
+		{
+			id: number;
+			name: string;
+			url: string;
+			components: [componentId: number, ...]
+		},
+		...
+	]
+
+	// Components
+
+	[
+		{
+			id: number;
+			name: string;
+			styleId: number;
+			content: {
+				name: string;
+				...
+			}
+		},
+		...
+	]
+
+	// Styles
+
+	[
+		{
+			id: number;
+			styles: {
+				main: {
+					fontFamily: string;
+				},
+				meta: {
+					fontSize: number;
+				}
+			}
+		},
+		...
+	]
+
+*/
+
 const Project: React.FC = () => {
-	const [sitemap, setSitemap] = useState<Page[]>([]);
+	const [pages, setPages] = useState<Page[]>([]);
+	const [components, setComponents] = useState<Page[]>([]);
+
 	const [selectedPage, setSelectedPage] = useState<number | null>(null);
 	const [selectedComponent, setSelectedComponent] = useState<number | null>(null);
 
@@ -71,7 +124,7 @@ const Project: React.FC = () => {
 			}
 		];
 
-		setSitemap(sampleSitemap);
+		setPages(sampleSitemap);
 	};
 
 	const pageClickHandler = (id: number) => {
@@ -129,7 +182,7 @@ const Project: React.FC = () => {
 	return (
 		<div className={classes.Project}>
 			<Sitemap
-				data={sitemap}
+				data={pages}
 				name='Ashk Aesthetics'
 				category='Beauty Salon'
 				selectedPage={selectedPage}
