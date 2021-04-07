@@ -28,9 +28,10 @@ interface Section {
 interface Props {
 	visible: boolean;
 	type: Type | null;
+	onCancel: () => void;
 }
 
-const Sidebar: React.FC<Props> = ({ visible, type }) => {
+const Sidebar: React.FC<Props> = ({ visible, type, onCancel }) => {
 	const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
 
 	const [section, setSection] = useState<number>(0);
@@ -40,9 +41,7 @@ const Sidebar: React.FC<Props> = ({ visible, type }) => {
 
 	useEffect(() => {
 		window.addEventListener('resize', () => {
-			if (window.innerWidth < 720 && expanded) {
-				setExpanded(false);
-			}
+			setExpanded((prevState) => (window.innerWidth < 720 && prevState ? false : prevState));
 
 			setWindowWidth(window.innerWidth);
 		});
@@ -51,8 +50,14 @@ const Sidebar: React.FC<Props> = ({ visible, type }) => {
 	}, []);
 
 	useEffect(() => {
-		setExpanded(false);
+		resetSidebar();
 	}, [visible]);
+
+	const resetSidebar = () => {
+		setSelectedComponent(null);
+
+		setExpanded(false);
+	};
 
 	const establishData = (): [string, Section[], React.ReactNode, Action[]] => {
 		let heading: string = '';
@@ -72,7 +77,10 @@ const Sidebar: React.FC<Props> = ({ visible, type }) => {
 					},
 					{
 						label: 'Cancel',
-						onClick: () => console.log('cancelling..')
+						onClick: () => {
+							resetSidebar();
+							onCancel();
+						}
 					}
 				];
 				break;

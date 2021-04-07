@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { AddRounded } from '@material-ui/icons';
 
@@ -39,7 +39,19 @@ const Sitemap: React.FC<Props> = ({
 	onNewPage,
 	onNewComponent
 }) => {
+	const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
+
 	const [expanded, setExpanded] = useState<boolean>(false);
+
+	useEffect(() => {
+		window.addEventListener('resize', () => {
+			setExpanded((prevState) => (window.innerWidth < 720 && prevState ? false : prevState));
+
+			setWindowWidth(window.innerWidth);
+		});
+
+		return () => window.removeEventListener('resize', () => setWindowWidth(window.innerWidth));
+	}, []);
 
 	return (
 		<div className={[classes.Sitemap, expanded ? classes.Expanded : ''].join(' ')}>
@@ -100,7 +112,7 @@ const Sitemap: React.FC<Props> = ({
 
 			<div
 				className={classes.Toggle}
-				onClick={() => window.screen.width >= 720 && setExpanded((prevState) => !prevState)}>
+				onClick={() => windowWidth >= 720 && setExpanded((prevState) => !prevState)}>
 				<div className={classes.Icon} />
 			</div>
 		</div>

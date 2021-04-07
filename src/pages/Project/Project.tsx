@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { useParams } from 'react-router-dom';
 
-import Sitemap from 'components/Sitemap/Sitemap';
+import Sitemap from 'containers/Sitemap/Sitemap';
 import Sidebar from 'containers/Sidebar/Sidebar';
 
 import classes from './Project.module.scss';
@@ -174,6 +174,10 @@ const Project: React.FC = () => {
 		setSelectedComponent(null);
 	};
 
+	const hideSidebarHandler = () => {
+		setType(null);
+	};
+
 	return (
 		<div className={classes.Project}>
 			<Sitemap
@@ -188,7 +192,7 @@ const Project: React.FC = () => {
 				onNewComponent={newComponentHandler}
 			/>
 
-			<Sidebar visible={type != null} type={type} />
+			<Sidebar visible={type != null} type={type} onCancel={hideSidebarHandler} />
 		</div>
 	);
 };
