@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { CollectionsRounded, GroupRounded, StorageRounded, WallpaperRounded } from '@material-ui/icons';
 import { Categories } from 'library';
@@ -7,23 +7,35 @@ import Component from 'components/Component/Component';
 
 import classes from './Library.module.scss';
 
-interface Props {
-	category: number;
-	onSelect: (id: number) => void;
+interface ComponentType {
+	id: number;
+	name: string;
+	url?: string;
 }
 
-const Library: React.FC<Props> = ({ category, onSelect }) => {
-	const data = Categories.find((c) => c.id === category)?.components || [];
+interface Props {
+	category: number;
+	selected: number | null;
+	onSelect: (id: number | null) => void;
+}
+
+const Library: React.FC<Props> = ({ category, selected, onSelect }) => {
+	const [data, setData] = useState<ComponentType[]>([]);
+
+	useEffect(() => {
+		setData(Categories.find((c) => c.id === category)?.components || []);
+	}, [category]);
 
 	return (
 		<div className={classes.Library}>
 			{data.map((component) => (
 				<Component
+					selected={selected === component.id}
 					key={component.id}
 					id={component.id}
 					name={component.name}
 					url={component.url}
-					onSelect={onSelect}
+					onSelect={(id) => onSelect(selected === id ? null : id)}
 				/>
 			))}
 		</div>

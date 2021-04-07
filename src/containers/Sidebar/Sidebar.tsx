@@ -36,6 +36,8 @@ const Sidebar: React.FC<Props> = ({ visible, type }) => {
 	const [section, setSection] = useState<number>(0);
 	const [expanded, setExpanded] = useState<boolean>(false);
 
+	const [selectedComponent, setSelectedComponent] = useState<number | null>(null);
+
 	useEffect(() => {
 		window.addEventListener('resize', () => {
 			if (window.innerWidth < 720 && expanded) {
@@ -62,7 +64,7 @@ const Sidebar: React.FC<Props> = ({ visible, type }) => {
 			case Type.NEW_COMPONENT:
 				heading = LibraryHeading;
 				sections = LibrarySections;
-				content = <Library category={section} onSelect={console.log} />;
+				content = <Library category={section} selected={selectedComponent} onSelect={setSelectedComponent} />;
 				actions = [
 					{
 						label: 'Add',
@@ -80,6 +82,15 @@ const Sidebar: React.FC<Props> = ({ visible, type }) => {
 		}
 
 		return [heading, sections, content, actions];
+	};
+
+	const selectSectionHandler = (id: number) => {
+		if (section === id) {
+			return;
+		}
+
+		setSelectedComponent(null);
+		setSection(id);
 	};
 
 	let [heading, sections, content, actions] = establishData();
@@ -116,7 +127,7 @@ const Sidebar: React.FC<Props> = ({ visible, type }) => {
 							<div
 								key={s.id}
 								className={[classes.Action, section === s.id ? classes.SelectedAction : ''].join(' ')}
-								onClick={() => setSection(s.id)}>
+								onClick={() => selectSectionHandler(s.id)}>
 								{s.icon}
 								{s.name && <p className={classes.Label}>{s.name}</p>}
 							</div>
