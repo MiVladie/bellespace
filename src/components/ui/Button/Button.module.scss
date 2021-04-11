@@ -1,0 +1,67 @@
+@import '../../../assets/styles/colors';
+@import '../../../assets/styles/fonts';
+@import '../../../assets/styles/sizing';
+@import '../../../assets/styles/spacing';
+
+@mixin animations($color) {
+	&:hover {
+		background-color: darken($color, 5);
+	}
+
+	&:active {
+		background-color: darken($color, 8);
+	}
+
+	&:disabled {
+		background-color: darken($color, 5);
+	}
+}
+
+.Button {
+	height: $space-lg;
+	padding: 0 $space-lg;
+
+	font-family: $secondary-font;
+	color: $primary-color;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	position: relative;
+	border-radius: $space-xs;
+
+	transition: all 0.15s;
+
+	background: none;
+	border: none;
+
+	@include animations($fifth-color);
+}
+
+.Dark {
+	color: $fifth-color;
+
+	@include animations($primary-color);
+
+	&.Filled {
+		color: $primary-color;
+		background-color: $fifth-color;
+
+		box-shadow: 0 4px 8px rgba($fifth-color, 0.25);
+
+		@include animations($fifth-color);
+	}
+}
+
+.Filled {
+	color: $fifth-color;
+
+	background-color: $primary-color;
+
+	@include animations($primary-color);
+}
+
+.Rounded {
+	border-radius: $space-lg;
+}
