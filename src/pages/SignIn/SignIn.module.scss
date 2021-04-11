@@ -4,5 +4,272 @@
 @import '../../assets/styles/spacing';
 
 .SignIn {
-	display: block;
+	width: 100%;
+
+	display: flex;
+
+	flex-flow: column;
+
+	.Actions,
+	.Info {
+		width: calc(100% - #{$space-sm} * 2);
+
+		padding-left: $space-sm;
+		padding-right: $space-sm;
+
+		.Wrapper {
+			width: 100%;
+
+			.Heading {
+				font-family: $primary-font;
+				font-size: $size-xl;
+			}
+
+			.Line {
+				width: $space-xl;
+				height: 2.5px;
+
+				margin-top: $space-md;
+			}
+		}
+	}
+
+	.Actions {
+		min-height: 100vh;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.Wrapper {
+			.Heading {
+				text-align: center;
+				color: $fifth-color;
+			}
+
+			.Line {
+				margin: $space-md auto 0;
+				background-color: $fifth-color;
+			}
+
+			.Form {
+				width: 100%;
+
+				margin-top: $space-lg;
+
+				.Input {
+					margin-top: $space-md;
+				}
+
+				.Button {
+					width: 75%;
+					height: $space-xl;
+
+					margin: $space-lg auto 0;
+				}
+
+				.Error {
+					font-family: $secondary-font;
+					font-size: $size-md;
+					line-height: $space-lg;
+					text-align: center;
+
+					color: $danger-color;
+
+					margin-top: $space-sm;
+				}
+
+				.Redirect {
+					display: block;
+
+					font-family: $secondary-font;
+					font-size: $size-sm;
+
+					color: $secondary-color;
+
+					margin-top: $space-md;
+
+					text-align: center;
+
+					&:hover {
+						color: $third-color;
+					}
+				}
+			}
+		}
+	}
+
+	.Info {
+		padding-top: $space-lg;
+		padding-bottom: $space-lg;
+
+		background-color: $fifth-color;
+
+		.Wrapper {
+			.Heading {
+				color: $primary-color;
+			}
+
+			.Line {
+				background-color: $primary-color;
+			}
+
+			.Description {
+				font-family: $secondary-font;
+				font-size: $size-md;
+				line-height: calc(#{$size-md} + 6px);
+
+				color: $primary-color;
+
+				margin-top: $space-md;
+			}
+		}
+
+		.Extra {
+			display: block;
+
+			font-family: $secondary-font;
+			font-size: $size-sm;
+
+			color: $primary-color;
+
+			margin-top: $space-md;
+
+			.Link {
+				color: $primary-color;
+			}
+		}
+
+		.Circle {
+			display: none;
+		}
+	}
+}
+
+@media screen and (min-width: 720px) {
+	.SignIn {
+		.Actions,
+		.Info {
+			$space: 25%;
+
+			width: calc(100% - #{$space});
+
+			padding-left: calc(#{$space} / 2);
+			padding-right: calc(#{$space} / 2);
+		}
+
+		.Actions {
+			.Wrapper {
+				.Form {
+					.Button {
+						width: 65%;
+					}
+				}
+			}
+		}
+
+		.Info {
+			.Wrapper {
+				.Heading {
+					text-align: center;
+				}
+
+				.Line {
+					margin-left: auto;
+					margin-right: auto;
+				}
+
+				.Description {
+					text-align: center;
+				}
+			}
+
+			.Extra {
+				text-align: center;
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 720px) {
+	.SignIn {
+		$space: 15%;
+
+		flex-flow: row-reverse;
+
+		.Actions,
+		.Info {
+			width: calc(50% - #{$space});
+
+			padding-left: calc(#{$space} / 2);
+			padding-right: calc(#{$space} / 2);
+		}
+
+		.Actions {
+			.Wrapper {
+				.Form {
+					.Button {
+						width: 50%;
+					}
+				}
+			}
+		}
+
+		.Info {
+			padding-top: 0;
+			padding-bottom: 0;
+
+			min-height: 100vh;
+
+			display: flex;
+			justify-content: center;
+
+			flex-flow: column;
+
+			position: relative;
+
+			.Wrapper {
+				.Heading {
+					text-align: left;
+				}
+
+				.Line {
+					margin-left: 0;
+					margin-right: 0;
+				}
+
+				.Description {
+					text-align: left;
+				}
+			}
+
+			.Extra {
+				position: absolute;
+
+				left: $space;
+				bottom: $space-xl;
+			}
+
+			.Circle {
+				$size: 14em;
+
+				display: block;
+
+				position: absolute;
+
+				right: calc(#{$size} / -2);
+				bottom: $space-xl;
+
+				width: $size;
+				height: $size;
+
+				border-radius: 50%;
+
+				box-sizing: border-box;
+
+				background-color: transparent;
+				border: $size-xl solid $primary-color;
+			}
+		}
+	}
 }
