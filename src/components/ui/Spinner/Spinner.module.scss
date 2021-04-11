@@ -1,0 +1,25 @@
+@import '../../../assets/styles/colors';
+
+.Spinner {
+	width: 64px;
+	height: 64px;
+
+	border-radius: 50%;
+	border: 6px solid $primary-color;
+
+	border-color: $primary-color transparent $primary-color transparent;
+	animation: spinning 1.2s linear infinite;
+}
+
+.Dark {
+	border-color: $fifth-color transparent $fifth-color transparent;
+}
+
+@keyframes spinning {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
