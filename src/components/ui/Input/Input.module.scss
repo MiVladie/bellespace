@@ -1,0 +1,99 @@
+@import '../../../assets/styles/colors';
+@import '../../../assets/styles/fonts';
+@import '../../../assets/styles/sizing';
+@import '../../../assets/styles/spacing';
+
+.Input,
+.Textarea {
+	border-bottom: 1.5px solid $secondary-color;
+
+	font-family: $secondary-font;
+	font-size: $size-md;
+	color: $primary-color;
+
+	// Non-Styling
+
+	width: calc(100% - #{$space-xs});
+	height: 2em;
+
+	padding-left: $space-xs;
+
+	background: none;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	transition: color 0.15s;
+
+	&::placeholder {
+		font-weight: 300;
+		text-transform: capitalize;
+		color: $secondary-color;
+
+		// Non-Styling
+
+		transition: color 0.15s;
+	}
+
+	&:focus {
+		border-bottom: 1.5px solid $primary-color;
+
+		&::placeholder {
+			color: $primary-color;
+		}
+	}
+}
+
+.Input {
+	// Non-Styling
+
+	height: 2em;
+}
+
+.Textarea {
+	// Non-Styling
+
+	min-height: 8em;
+	max-height: 14em;
+}
+
+.Label {
+	display: block;
+
+	font-family: $secondary-font;
+	font-size: $size-xs;
+
+	color: $secondary-color;
+
+	margin-bottom: calc(#{$space-xs} / 3);
+}
+
+.Dark {
+	color: $fifth-color;
+
+	&:focus {
+		border-bottom-color: $fifth-color;
+
+		&::placeholder {
+			color: $fifth-color;
+		}
+	}
+}
+
+.Error {
+	border-bottom-color: $danger-color;
+
+	&:focus {
+		border-bottom-color: $danger-color;
+	}
+}
+
+.Message {
+	display: block;
+
+	font-family: $secondary-font;
+	font-size: $size-xs;
+
+	color: $danger-color;
+
+	margin: calc(#{$space-xs} / 2) 0 0 $space-xs;
+}
