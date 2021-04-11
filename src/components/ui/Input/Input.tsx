@@ -10,7 +10,10 @@ interface Props {
 	type: InputType;
 	placeholder: string;
 	onChange: (e: string) => void;
+	onFocus?: () => void;
+	onBlur?: () => void;
 	value: string | number;
+	prefix?: string;
 	label?: string;
 	error?: string;
 	disabled?: boolean;
@@ -23,14 +26,15 @@ const Input: React.FC<Props> = ({
 	type,
 	placeholder,
 	onChange,
+	onFocus,
+	onBlur,
 	value,
+	prefix,
 	label,
 	error,
 	disabled,
 	dark
 }) => {
-	console.log({ className });
-
 	switch (type) {
 		case 'textarea':
 			return (
@@ -40,17 +44,27 @@ const Input: React.FC<Props> = ({
 							{label}
 						</label>
 					)}
-					<textarea
-						name={name}
-						className={[classes.Textarea, dark ? classes.Dark : null, error ? classes.Error : null].join(
+					<div
+						className={[classes.Wrapper, dark ? classes.Dark : null, error ? classes.Error : null].join(
 							' '
-						)}
-						style={label ? { width: '100%', padding: 0 } : {}}
-						placeholder={placeholder}
-						onChange={(e) => e.target.value}
-						value={value}
-						disabled={disabled}
-					/>
+						)}>
+						{prefix && <span className={classes.Prefix}>{prefix}</span>}
+						<textarea
+							name={name}
+							className={[
+								classes.Textarea,
+								dark ? classes.Dark : null,
+								error ? classes.Error : null
+							].join(' ')}
+							style={label || prefix ? { width: '100%', padding: 0 } : {}}
+							placeholder={placeholder}
+							onChange={(e) => onChange(e.target.value)}
+							onFocus={onFocus}
+							onBlur={onBlur}
+							value={value}
+							disabled={disabled}
+						/>
+					</div>
 					{error && <small className={classes.Message}>{error}</small>}
 				</div>
 			);
@@ -63,15 +77,24 @@ const Input: React.FC<Props> = ({
 							{label}
 						</label>
 					)}
-					<input
-						name={name}
-						className={[classes.Input, dark ? classes.Dark : null, error ? classes.Error : null].join(' ')}
-						style={label ? { width: '100%', padding: 0 } : {}}
-						placeholder={placeholder}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
-						value={value}
-						disabled={disabled}
-					/>
+					<div
+						className={[classes.Wrapper, dark ? classes.Dark : null, error ? classes.Error : null].join(
+							' '
+						)}>
+						{prefix && <span className={classes.Prefix}>{prefix}</span>}
+						<input
+							name={name}
+							className={classes.Input}
+							style={label || prefix ? { width: '100%', padding: 0 } : {}}
+							placeholder={placeholder}
+							type={type}
+							onChange={(e) => onChange(e.target.value)}
+							onFocus={onFocus}
+							onBlur={onBlur}
+							value={value}
+							disabled={disabled}
+						/>
+					</div>
 					{error && <small className={classes.Message}>{error}</small>}
 				</div>
 			);
