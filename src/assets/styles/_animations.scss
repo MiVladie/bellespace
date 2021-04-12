@@ -1,0 +1,15 @@
+@mixin popUp($time: 0.05s, $offset: -0.5em) {
+	animation: fadeIn $time 0s backwards;
+
+	@keyframes fadeIn {
+		from {
+			transform: translateY($offset);
+			opacity: 0.5;
+		}
+
+		to {
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
+}

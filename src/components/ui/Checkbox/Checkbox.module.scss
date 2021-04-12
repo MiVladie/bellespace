@@ -2,6 +2,7 @@
 @import '../../../assets/styles/fonts';
 @import '../../../assets/styles/sizing';
 @import '../../../assets/styles/spacing';
+@import '../../../assets/styles/animations';
 
 .Wrapper {
 	position: relative;
@@ -112,6 +113,7 @@
 
 .Message {
 	display: block;
+	position: absolute;
 
 	font-family: $secondary-font;
 	font-size: $size-xs;
@@ -119,4 +121,6 @@
 	color: $danger-color;
 
 	margin: $space-xs 0 0 $space-xs;
+
+	@include popUp;
 }
