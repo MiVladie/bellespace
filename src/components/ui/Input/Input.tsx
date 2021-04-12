@@ -38,7 +38,7 @@ const Input: React.FC<Props> = ({
 	switch (type) {
 		case 'textarea':
 			return (
-				<div className={className}>
+				<div className={[classes.Main, className].join(' ')}>
 					{label && (
 						<label className={classes.Label} htmlFor={name}>
 							{label}
@@ -71,7 +71,7 @@ const Input: React.FC<Props> = ({
 
 		default:
 			return (
-				<div className={className}>
+				<div className={[classes.Main, className].join(' ')}>
 					{label && (
 						<label className={classes.Label} htmlFor={name}>
 							{label}

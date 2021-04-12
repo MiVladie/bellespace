@@ -30,36 +30,48 @@ const Auth: React.FC<Props> = ({ type, onSubmit, loading, message }) => {
 	const [error, setError] = useState<InputError>({ email: null, password: null, confirmPassword: null });
 
 	const submitHandler = async () => {
-		if (email.trim().length === 0) {
-			setError((prevState) => ({ ...prevState, email: 'This field is required!' }));
-			return;
-		}
-
-		if (password.trim().length === 0) {
-			setError((prevState) => ({ ...prevState, password: 'This field is required!' }));
+		if (hasErrors()) {
 			return;
 		}
 
 		if (type === 'signin') {
 			onSubmit({ email, password });
 		} else {
+			onSubmit({ email, password, confirmPassword });
+		}
+	};
+
+	const hasErrors = (): boolean => {
+		let errorsFound = false;
+
+		if (email.trim().length === 0) {
+			setError((prevState) => ({ ...prevState, email: 'This field is required!' }));
+			errorsFound = true;
+		}
+
+		if (password.trim().length === 0) {
+			setError((prevState) => ({ ...prevState, password: 'This field is required!' }));
+			errorsFound = true;
+		}
+
+		if (type === 'signup') {
 			if (confirmPassword.trim().length === 0) {
 				setError((prevState) => ({ ...prevState, confirmPassword: 'This field is required!' }));
-				return;
+				errorsFound = true;
 			}
 
 			if (confirmPassword.trim().length === 0) {
 				setError((prevState) => ({ ...prevState, confirmPassword: 'This field is required!' }));
-				return;
+				errorsFound = true;
 			}
 
 			if (password !== confirmPassword) {
 				setError((prevState) => ({ ...prevState, confirmPassword: 'Passwords do not match!' }));
-				return;
+				errorsFound = true;
 			}
-
-			onSubmit({ email, password, confirmPassword });
 		}
+
+		return errorsFound;
 	};
 
 	return (
@@ -76,6 +88,7 @@ const Auth: React.FC<Props> = ({ type, onSubmit, loading, message }) => {
 							placeholder='Your Email..'
 							type='email'
 							onChange={setEmail}
+							onFocus={() => setError((prevState) => ({ ...prevState, email: null }))}
 							value={email}
 							error={error.email}
 							dark
@@ -86,6 +99,7 @@ const Auth: React.FC<Props> = ({ type, onSubmit, loading, message }) => {
 							placeholder='Your Password..'
 							type='password'
 							onChange={setPassword}
+							onFocus={() => setError((prevState) => ({ ...prevState, password: null }))}
 							value={password}
 							error={error.password}
 							dark
@@ -97,6 +111,7 @@ const Auth: React.FC<Props> = ({ type, onSubmit, loading, message }) => {
 								placeholder='Confirm Password..'
 								type='password'
 								onChange={setConfirmPassword}
+								onFocus={() => setError((prevState) => ({ ...prevState, confirmPassword: null }))}
 								value={confirmPassword}
 								error={error.confirmPassword}
 								dark

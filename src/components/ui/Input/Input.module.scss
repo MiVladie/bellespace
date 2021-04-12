@@ -3,119 +3,123 @@
 @import '../../../assets/styles/sizing';
 @import '../../../assets/styles/spacing';
 
-.Label {
-	display: block;
-
-	font-family: $secondary-font;
-	font-size: $size-xs;
-
-	color: $secondary-color;
-
-	margin-bottom: $space-xs;
-}
-
-.Wrapper {
+.Main {
 	width: 100%;
 
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	.Label {
+		display: block;
 
-	border-bottom: 1.5px solid $secondary-color;
-
-	transition: all 0.15s;
-
-	&:focus-within {
-		border-bottom-color: $primary-color;
-	}
-
-	.Prefix {
 		font-family: $secondary-font;
-		font-size: $size-md;
+		font-size: $size-xs;
+
 		color: $secondary-color;
 
-		margin-right: $space-xs;
+		margin-bottom: $space-xs;
 	}
 
-	.Input,
-	.Textarea {
-		font-family: $secondary-font;
-		font-size: $size-md;
-		color: $primary-color;
+	.Wrapper {
+		width: 100%;
 
-		width: calc(100% - #{$space-sm});
-		padding-left: $space-sm;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
-		background: none;
-		border: none;
+		border-bottom: 1.5px solid $secondary-color;
+
 		transition: all 0.15s;
 
-		&:focus {
+		&:focus-within {
+			border-bottom-color: $primary-color;
+		}
+
+		.Prefix {
+			font-family: $secondary-font;
+			font-size: $size-md;
+			color: $secondary-color;
+
+			margin-right: $space-xs;
+		}
+
+		.Input,
+		.Textarea {
+			font-family: $secondary-font;
+			font-size: $size-md;
+			color: $primary-color;
+
+			width: calc(100% - #{$space-sm});
+			padding-left: $space-sm;
+
+			background: none;
+			border: none;
+			transition: all 0.15s;
+
+			&:focus {
+				&::placeholder {
+					color: $primary-color;
+				}
+			}
+
 			&::placeholder {
+				font-weight: 300;
+				text-transform: capitalize;
+				color: $secondary-color;
+
+				transition: color 0.15s;
+			}
+
+			&:-webkit-autofill::first-line {
+				font-family: $secondary-font;
 				color: $primary-color;
 			}
 		}
 
-		&::placeholder {
-			font-weight: 300;
-			text-transform: capitalize;
-			color: $secondary-color;
-
-			transition: color 0.15s;
+		.Input {
+			height: 2em;
 		}
 
-		&:-webkit-autofill::first-line {
-			font-family: $secondary-font;
-			color: $primary-color;
+		.Textarea {
+			min-height: 8em;
+			max-height: 14em;
 		}
 	}
 
-	.Input {
-		height: 2em;
-	}
+	.Dark {
+		&:focus-within {
+			border-bottom-color: $fifth-color;
+		}
 
-	.Textarea {
-		min-height: 8em;
-		max-height: 14em;
-	}
-}
+		.Input,
+		.Textarea {
+			color: $fifth-color;
 
-.Dark {
-	&:focus-within {
-		border-bottom-color: $fifth-color;
-	}
+			&:focus {
+				&::placeholder {
+					color: $fifth-color;
+				}
+			}
 
-	.Input,
-	.Textarea {
-		color: $fifth-color;
-
-		&:focus {
-			&::placeholder {
+			&:-webkit-autofill::first-line {
 				color: $fifth-color;
 			}
 		}
+	}
 
-		&:-webkit-autofill::first-line {
-			color: $fifth-color;
+	.Error {
+		border-bottom-color: $danger-color;
+
+		&:focus-within {
+			border-bottom-color: $danger-color;
 		}
 	}
-}
 
-.Error {
-	border-bottom-color: $danger-color;
+	.Message {
+		display: block;
 
-	&:focus-within {
-		border-bottom-color: $danger-color;
+		font-family: $secondary-font;
+		font-size: $size-xs;
+
+		color: $danger-color;
+
+		margin: $space-xs 0 0 $space-xs;
 	}
-}
-
-.Message {
-	display: block;
-
-	font-family: $secondary-font;
-	font-size: $size-xs;
-
-	color: $danger-color;
-
-	margin: $space-xs 0 0 $space-xs;
 }

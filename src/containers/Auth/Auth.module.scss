@@ -57,8 +57,29 @@
 
 				margin-top: $space-lg;
 
+				display: flex;
+				align-items: center;
+
+				flex-flow: column;
+
 				.Input {
 					margin-top: $space-md;
+				}
+
+				.Message {
+					font-family: $secondary-font;
+					font-size: $size-sm;
+					line-height: $space-lg;
+					text-align: center;
+
+					color: $danger-color;
+
+					margin-top: $space-xs;
+				}
+
+				.Legal {
+					margin-top: $space-md;
+					text-align: center;
 				}
 
 				.Button {
@@ -68,25 +89,7 @@
 					margin: $space-lg auto 0;
 				}
 
-				.Legal {
-					margin-top: $space-md;
-					text-align: center;
-				}
-
-				.Message {
-					font-family: $secondary-font;
-					font-size: $size-md;
-					line-height: $space-lg;
-					text-align: center;
-
-					color: $danger-color;
-
-					margin-top: $space-sm;
-				}
-
 				.Redirect {
-					display: block;
-
 					font-family: $secondary-font;
 					font-size: $size-sm;
 
