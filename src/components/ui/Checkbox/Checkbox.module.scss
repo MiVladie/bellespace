@@ -42,6 +42,7 @@
 			transition: all 0.15s;
 			background: $primary-color;
 			border-radius: 4px;
+			box-sizing: border-box;
 			box-shadow: 0 0 8px rgba($fifth-color, 0.25);
 		}
 
@@ -97,4 +98,25 @@
 				4px -4px 0 $primary-color, 4px -6px 0 $primary-color, 4px -8px 0 $primary-color;
 		}
 	}
+}
+
+.Error {
+	.Checkbox {
+		// Box
+		& + label:before {
+			border: 1.5px solid $danger-color;
+			box-shadow: 0 0 8px rgba($danger-color, 0.25);
+		}
+	}
+}
+
+.Message {
+	display: block;
+
+	font-family: $secondary-font;
+	font-size: $size-xs;
+
+	color: $danger-color;
+
+	margin: $space-xs 0 0 $space-xs;
 }
