@@ -436,12 +436,14 @@ textarea {
 }
 
 ::-moz-selection {
-	background: purple;
+	background: #4b0082;
+	color: #ecf0f1;
 	text-shadow: none;
 }
 
 ::selection {
-	background: purple;
+	background: #4b0082;
+	color: #ecf0f1;
 	text-shadow: none;
 }
 
