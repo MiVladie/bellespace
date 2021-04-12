@@ -1,0 +1,100 @@
+@import '../../../assets/styles/colors';
+@import '../../../assets/styles/fonts';
+@import '../../../assets/styles/sizing';
+@import '../../../assets/styles/spacing';
+
+.Wrapper {
+	position: relative;
+
+	.Checkbox {
+		position: absolute;
+		opacity: 0;
+
+		// Label
+		& + label {
+			font-family: $secondary-font;
+			font-size: $size-sm;
+			line-height: $size-md;
+			color: $primary-color;
+
+			text-align: center;
+
+			padding: 0;
+
+			position: relative;
+
+			cursor: pointer;
+
+			a {
+				color: $primary-color;
+			}
+		}
+
+		// Box
+		& + label:before {
+			content: '';
+			margin-right: 10px;
+			display: inline-block;
+			vertical-align: text-top;
+			width: 20px;
+			height: 20px;
+
+			transition: all 0.15s;
+			background: $primary-color;
+			border-radius: 4px;
+			box-shadow: 0 0 8px rgba($fifth-color, 0.25);
+		}
+
+		// Disabled state label
+		&:disabled + label {
+			color: $third-color;
+			cursor: auto;
+		}
+
+		// Disabled box
+		&:disabled + label:before {
+			box-shadow: none;
+		}
+
+		// Checkmark. Could be replaced with an image
+		&:checked + label:after {
+			content: '';
+			position: absolute;
+			left: 5px;
+			top: 9px;
+			width: 2px;
+			height: 2px;
+
+			background: $fifth-color;
+			box-shadow: 2px 0 0 $fifth-color, 4px 0 0 $fifth-color, 4px -2px 0 $fifth-color, 4px -4px 0 $fifth-color,
+				4px -6px 0 $fifth-color, 4px -8px 0 $fifth-color;
+			transform: rotate(45deg);
+		}
+	}
+}
+
+.Dark {
+	.Checkbox {
+		// Label
+		& + label {
+			color: $fifth-color;
+
+			a {
+				color: $fifth-color;
+			}
+		}
+
+		// Box
+		& + label:before {
+			background: $fifth-color;
+			box-shadow: 0 0 8px rgba($fifth-color, 0.25);
+		}
+
+		// Checkmark. Could be replaced with an image
+		&:checked + label:after {
+			background: $primary-color;
+			box-shadow: 2px 0 0 $primary-color, 4px 0 0 $primary-color, 4px -2px 0 $primary-color,
+				4px -4px 0 $primary-color, 4px -6px 0 $primary-color, 4px -8px 0 $primary-color;
+		}
+	}
+}
