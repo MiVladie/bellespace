@@ -3,7 +3,7 @@
 @import '../../assets/styles/sizing';
 @import '../../assets/styles/spacing';
 
-.SignIn {
+.Auth {
 	width: 100%;
 
 	display: flex;
@@ -68,7 +68,12 @@
 					margin: $space-lg auto 0;
 				}
 
-				.Error {
+				.Legal {
+					margin-top: $space-md;
+					text-align: center;
+				}
+
+				.Message {
 					font-family: $secondary-font;
 					font-size: $size-md;
 					line-height: $space-lg;
@@ -90,6 +95,8 @@
 					margin-top: $space-md;
 
 					text-align: center;
+
+					transition: all 0.15s;
 
 					&:hover {
 						color: $third-color;
@@ -147,7 +154,7 @@
 }
 
 @media screen and (min-width: 720px) {
-	.SignIn {
+	.Auth {
 		.Actions,
 		.Info {
 			$space: 25%;
@@ -191,8 +198,8 @@
 	}
 }
 
-@media screen and (min-width: 720px) {
-	.SignIn {
+@media screen and (min-width: 1024px) {
+	.Auth {
 		$space: 15%;
 
 		flex-flow: row-reverse;

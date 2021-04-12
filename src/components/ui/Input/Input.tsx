@@ -15,7 +15,7 @@ interface Props {
 	value: string | number;
 	prefix?: string;
 	label?: string;
-	error?: string;
+	error?: string | null;
 	disabled?: boolean;
 	dark?: boolean;
 }
