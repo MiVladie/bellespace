@@ -203,7 +203,7 @@
 
 @media screen and (min-width: 1024px) {
 	.Auth {
-		$space: 15%;
+		$space: 15vw;
 
 		flex-flow: row-reverse;
 
@@ -256,29 +256,27 @@
 			.Extra {
 				position: absolute;
 
-				left: $space;
+				left: calc(#{$space} / 2);
 				bottom: $space-xl;
 			}
 
 			.Circle {
-				$size: 14em;
-
 				display: block;
 
 				position: absolute;
 
-				right: calc(#{$size} / -2);
-				bottom: $space-xl;
+				right: calc(#{$space} / -2);
+				bottom: $space-lg;
 
-				width: $size;
-				height: $size;
+				width: $space;
+				height: $space;
 
 				border-radius: 50%;
 
 				box-sizing: border-box;
 
 				background-color: transparent;
-				border: $size-xl solid $primary-color;
+				border: 2.5vw solid $primary-color;
 			}
 		}
 	}

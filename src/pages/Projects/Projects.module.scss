@@ -4,5 +4,159 @@
 @import '../../assets/styles/spacing';
 
 .Projects {
-	display: block;
+	width: 100%;
+
+	display: flex;
+
+	flex-flow: column;
+
+	.Selection,
+	.Library {
+		width: calc(100% - #{$space-sm} * 2);
+
+		padding: $space-lg $space-sm;
+
+		.Wrapper {
+			width: 100%;
+
+			.Heading {
+				font-family: $primary-font;
+				font-size: $size-xl;
+			}
+
+			.Line {
+				width: $space-xl;
+				height: 2.5px;
+
+				margin-top: $space-md;
+			}
+
+			.Gallery {
+				width: 100%;
+
+				margin-top: $space-md;
+			}
+		}
+	}
+
+	.Library {
+		.Wrapper {
+			.Heading {
+				text-align: center;
+				color: $fifth-color;
+			}
+
+			.Line {
+				margin: $space-md auto 0;
+				background-color: $fifth-color;
+			}
+		}
+	}
+
+	.Selection {
+		background-color: $fifth-color;
+
+		.Wrapper {
+			.Heading {
+				color: $primary-color;
+			}
+
+			.Line {
+				background-color: $primary-color;
+			}
+		}
+
+		.Circle {
+			display: none;
+		}
+	}
+}
+
+@media screen and (min-width: 720px) {
+	.Projects {
+		.Selection,
+		.Library {
+			$space: 25%;
+
+			width: calc(100% - #{$space});
+
+			padding-left: calc(#{$space} / 2);
+			padding-right: calc(#{$space} / 2);
+
+			.Wrapper {
+				.Heading {
+					text-align: center;
+				}
+
+				.Line {
+					margin-left: auto;
+					margin-right: auto;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.Projects {
+		$space: 15vw;
+
+		flex-flow: row;
+
+		.Selection,
+		.Library {
+			width: calc(50% - #{$space});
+			height: calc(100vh - #{$space-lg} * 2);
+
+			padding-left: calc(#{$space} / 2);
+			padding-right: calc(#{$space} / 2);
+
+			.Wrapper {
+				height: 100%;
+
+				display: flex;
+				flex-flow: column;
+
+				.Gallery {
+					flex: 1 1 auto;
+
+					overflow-y: auto;
+				}
+			}
+		}
+
+		.Selection {
+			position: relative;
+
+			.Wrapper {
+				.Heading {
+					text-align: left;
+				}
+
+				.Line {
+					margin-left: 0;
+					margin-right: 0;
+				}
+			}
+
+			.Circle {
+				display: block;
+
+				position: absolute;
+
+				right: calc(#{$space} / -2);
+				bottom: $space-lg;
+
+				width: $space;
+				height: $space;
+
+				border-radius: 50%;
+
+				box-sizing: border-box;
+
+				background-color: transparent;
+				border: 2.5vw solid $primary-color;
+			}
+		}
+	}
 }
