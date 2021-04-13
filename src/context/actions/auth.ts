@@ -1,0 +1,5 @@
+export enum Action {
+	SET_AUTH = 'SET_AUTH',
+	UPDATE_AUTH = 'UPDATE_AUTH',
+	DELETE_AUTH = 'DELETE_AUTH'
+}

@@ -1,3 +1,3 @@
-import User from './user';
+import { IUser, ICredentials } from './auth';
 
-export type { User };
+export type { IUser, ICredentials };
