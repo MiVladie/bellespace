@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom';
+import { areSameValues, isEmpty, isValidEmail, isValidPassword, validateInput } from 'util/validation';
 
 import Input from 'components/ui/Input/Input';
 import Button from 'components/ui/Button/Button';
@@ -12,6 +13,7 @@ interface InputError {
 	email: string | null;
 	password: string | null;
 	confirmPassword: string | null;
+	legal: string | null;
 }
 
 interface Props {
@@ -27,7 +29,7 @@ const Auth: React.FC<Props> = ({ type, onSubmit, loading, message }) => {
 	const [confirmPassword, setConfirmPassword] = useState<string>('');
 	const [agree, setAgree] = useState<boolean>(false);
 
-	const [error, setError] = useState<InputError>({ email: null, password: null, confirmPassword: null });
+	const [error, setError] = useState<InputError>({ email: null, password: null, confirmPassword: null, legal: null });
 
 	const submitHandler = async () => {
 		if (hasErrors()) {
@@ -42,36 +44,83 @@ const Auth: React.FC<Props> = ({ type, onSubmit, loading, message }) => {
 	};
 
 	const hasErrors = (): boolean => {
-		let errorsFound = false;
+		let hasErrors = false;
 
-		if (email.trim().length === 0) {
-			setError((prevState) => ({ ...prevState, email: 'This field is required!' }));
-			errorsFound = true;
+		if (validateField('email', email)) {
+			hasErrors = true;
 		}
 
-		if (password.trim().length === 0) {
-			setError((prevState) => ({ ...prevState, password: 'This field is required!' }));
-			errorsFound = true;
+		if (validateField('password', password)) {
+			hasErrors = true;
 		}
 
 		if (type === 'signup') {
-			if (confirmPassword.trim().length === 0) {
-				setError((prevState) => ({ ...prevState, confirmPassword: 'This field is required!' }));
-				errorsFound = true;
+			if (!agree) {
+				setError((prevState) => ({
+					...prevState,
+					legal: 'You must agree to our Terms of Service and Privacy Policy!'
+				}));
+				hasErrors = true;
 			}
 
-			if (confirmPassword.trim().length === 0) {
-				setError((prevState) => ({ ...prevState, confirmPassword: 'This field is required!' }));
-				errorsFound = true;
-			}
-
-			if (password !== confirmPassword) {
-				setError((prevState) => ({ ...prevState, confirmPassword: 'Passwords do not match!' }));
-				errorsFound = true;
+			if (validateField('confirmPassword', confirmPassword)) {
+				hasErrors = true;
 			}
 		}
 
-		return errorsFound;
+		return hasErrors;
+	};
+
+	const validateField = (name: 'email' | 'password' | 'confirmPassword', value: string): boolean => {
+		switch (name) {
+			case 'email':
+				if (isEmpty(value)) {
+					setError((prevState) => ({ ...prevState, email: 'This field is required!' }));
+					return true;
+				}
+
+				if (!isValidEmail(value)) {
+					setError((prevState) => ({ ...prevState, email: 'Provide a valid email address!' }));
+					return true;
+				}
+				break;
+
+			case 'password':
+				if (isEmpty(value)) {
+					setError((prevState) => ({ ...prevState, password: 'This field is required!' }));
+					return true;
+				}
+
+				if (!isValidPassword(value)) {
+					setError((prevState) => ({
+						...prevState,
+						password: 'Password must be between 8 and 15 characters long!'
+					}));
+					return true;
+				}
+
+				if (type === 'signup' && !isEmpty(confirmPassword)) {
+					validateField('confirmPassword', confirmPassword);
+				}
+				break;
+
+			case 'confirmPassword':
+				if (isEmpty(value)) {
+					setError((prevState) => ({ ...prevState, confirmPassword: 'This field is required!' }));
+					return true;
+				}
+
+				if (!areSameValues(password, value)) {
+					setError((prevState) => ({ ...prevState, confirmPassword: 'Passwords do not match!' }));
+					return true;
+				}
+				break;
+
+			default:
+				throw new Error(`Could not identify ${name} field! Please, check for misspellings!`);
+		}
+
+		return false;
 	};
 
 	return (
@@ -89,6 +138,7 @@ const Auth: React.FC<Props> = ({ type, onSubmit, loading, message }) => {
 							type='email'
 							onChange={setEmail}
 							onFocus={() => setError((prevState) => ({ ...prevState, email: null }))}
+							onBlur={() => validateField('email', email)}
 							value={email}
 							error={error.email}
 							dark
@@ -99,7 +149,10 @@ const Auth: React.FC<Props> = ({ type, onSubmit, loading, message }) => {
 							placeholder='Your Password..'
 							type='password'
 							onChange={setPassword}
-							onFocus={() => setError((prevState) => ({ ...prevState, password: null }))}
+							onFocus={() =>
+								setError((prevState) => ({ ...prevState, password: null, confirmPassword: null }))
+							}
+							onBlur={() => validateField('password', password)}
 							value={password}
 							error={error.password}
 							dark
@@ -112,6 +165,7 @@ const Auth: React.FC<Props> = ({ type, onSubmit, loading, message }) => {
 								type='password'
 								onChange={setConfirmPassword}
 								onFocus={() => setError((prevState) => ({ ...prevState, confirmPassword: null }))}
+								onBlur={() => validateField('confirmPassword', confirmPassword)}
 								value={confirmPassword}
 								error={error.confirmPassword}
 								dark
@@ -124,7 +178,9 @@ const Auth: React.FC<Props> = ({ type, onSubmit, loading, message }) => {
 								className={classes.Legal}
 								name='agree'
 								onChange={setAgree}
+								onFocus={() => setError((prevState) => ({ ...prevState, legal: null }))}
 								value={agree}
+								error={error.legal}
 								dark
 								label={
 									<span>
