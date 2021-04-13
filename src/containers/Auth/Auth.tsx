@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom';
-import { areSameValues, isEmpty, isValidEmail, isValidPassword, validateInput } from 'util/validation';
+import { ICredentials } from 'interfaces';
+import { areSameValues, isEmpty, isValidEmail, isValidPassword } from 'util/validation';
 
 import Input from 'components/ui/Input/Input';
 import Button from 'components/ui/Button/Button';
@@ -18,7 +19,7 @@ interface InputError {
 
 interface Props {
 	type: 'signin' | 'signup';
-	onSubmit: (data: object) => void;
+	onSubmit: (data: ICredentials) => void;
 	loading: boolean;
 	message?: string;
 }
