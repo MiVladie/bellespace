@@ -16,7 +16,10 @@ const Loader: React.FC<Props> = ({ className, style, dark, size = 64 }) => {
 		<div className={[classes.Loader, dark ? classes.Dark : null, className].join(' ')} style={style}>
 			<Spinner size={size} dark={!dark} />
 
-			<h1 className={classes.Heading}>Loading..</h1>
+			<h1 className={classes.Heading}>
+				Loading
+				<span className={classes.Dots} />
+			</h1>
 		</div>
 	);
 };

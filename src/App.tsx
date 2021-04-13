@@ -10,7 +10,6 @@ import Layout from 'hoc/Layout/Layout';
 import SignIn from 'pages/SignIn/SignIn';
 import SignUp from 'pages/SignUp/SignUp';
 import Projects from 'pages/Projects/Projects';
-import Spinner from 'components/ui/Spinner/Spinner';
 import Loader from 'containers/Loader/Loader';
 
 const App: React.FC = () => {
