@@ -1,0 +1,36 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/fonts';
+@import '../../assets/styles/sizing';
+@import '../../assets/styles/spacing';
+
+.Loader {
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	flex-flow: column;
+
+	background-color: $primary-color;
+
+	.Heading {
+		font-family: $secondary-font;
+		font-size: $size-md;
+
+		text-align: 'center';
+
+		color: $fifth-color;
+
+		margin-top: $space-md;
+	}
+}
+
+.Dark {
+	background-color: $fifth-color;
+
+	.Heading {
+		color: $primary-color;
+	}
+}
