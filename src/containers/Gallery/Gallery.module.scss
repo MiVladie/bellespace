@@ -1,0 +1,30 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/fonts';
+@import '../../assets/styles/sizing';
+@import '../../assets/styles/spacing';
+
+.Gallery {
+	width: 100%;
+
+	display: grid;
+
+	row-gap: $space-sm;
+}
+
+@media screen and (min-width: 720px) {
+	.Gallery {
+		grid-template-columns: 1fr 1fr;
+
+		column-gap: $space-sm;
+
+		.Project {
+			margin-top: 0;
+		}
+	}
+}
+
+@media screen and (min-width: 720px) {
+	.Gallery {
+		column-gap: $space-md;
+	}
+}
