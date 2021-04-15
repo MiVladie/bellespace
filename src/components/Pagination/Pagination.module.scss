@@ -1,0 +1,87 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/fonts';
+@import '../../assets/styles/sizing';
+@import '../../assets/styles/spacing';
+
+.Pagination {
+	width: 100%;
+	height: $space-sm;
+
+	margin: 0 auto;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	.Page {
+		$size: 0.65em;
+
+		width: $size;
+		height: $size;
+
+		border-radius: 50%;
+
+		background-color: $secondary-color;
+
+		margin: 0 $space-xs;
+
+		box-shadow: 0 0 8px rgba($primary-color, 0.1);
+
+		transition: all 0.25s;
+		cursor: pointer;
+
+		&:hover:not(.Active) {
+			transform: scale(1.35);
+			background-color: $primary-color;
+		}
+	}
+
+	.Active {
+		background-color: $primary-color;
+		transform: scale(1.35);
+	}
+}
+
+.Dark {
+	.Page {
+		background-color: $third-color;
+
+		box-shadow: 0 0 8px rgba($fifth-color, 0.1);
+
+		&:hover:not(.Active) {
+			background-color: $fifth-color;
+		}
+	}
+
+	.Active {
+		background-color: $fifth-color;
+	}
+}
+
+.Disabled {
+	.Page {
+		cursor: auto;
+
+		&:hover {
+			transform: scale(1) !important;
+		}
+
+		&:hover:not(.Active) {
+			background-color: $secondary-color !important;
+		}
+	}
+
+	.Active {
+		&:hover {
+			transform: scale(1.35) !important;
+		}
+	}
+
+	&.Dark {
+		.Page {
+			&:hover:not(.Active) {
+				background-color: $third-color !important;
+			}
+		}
+	}
+}
