@@ -1,0 +1,46 @@
+@import '../../../assets/styles/colors';
+@import '../../../assets/styles/fonts';
+@import '../../../assets/styles/sizing';
+@import '../../../assets/styles/spacing';
+
+.Skeleton {
+	$background: lighten($secondary-color, 10);
+	$highlight: $primary-color;
+
+	.Indicator {
+		width: 100%;
+
+		display: inline-block;
+
+		line-height: 1;
+
+		border-radius: 4px;
+
+		background-color: $background;
+		background-image: linear-gradient(90deg, $background, $highlight, $background);
+		background-size: 200px 100%;
+		background-repeat: no-repeat;
+
+		animation: translate 1.2s ease-in-out infinite;
+	}
+
+	@keyframes translate {
+		0% {
+			background-position: -200px 0;
+		}
+
+		100% {
+			background-position: calc(200px + 100%) 0;
+		}
+	}
+}
+
+.Dark {
+	$background: $fourth-color;
+	$highlight: lighten($fourth-color, 4);
+
+	.Indicator {
+		background-color: $background;
+		background-image: linear-gradient(90deg, $background, $highlight, $background);
+	}
+}
