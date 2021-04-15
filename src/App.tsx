@@ -13,7 +13,7 @@ import Projects from 'pages/Projects/Projects';
 import Loader from 'containers/Loader/Loader';
 
 const App: React.FC = () => {
-	const [loading, setLoading] = useState<boolean>(true);
+	const [loading, setLoading] = useState<boolean>(false);
 
 	const { state, dispatch } = useContext(AuthContext);
 
@@ -25,12 +25,13 @@ const App: React.FC = () => {
 		const token = localStorage.getItem('token');
 
 		if (!token) {
-			setLoading(false);
 			return;
 		}
 
+		setLoading(true);
+
 		try {
-			await new Promise((resolve) => setTimeout(resolve, 1500));
+			await new Promise((resolve) => setTimeout(resolve, 1000));
 
 			const user: IUser = {
 				id: 1,

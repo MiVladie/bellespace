@@ -261,22 +261,24 @@
 			}
 
 			.Circle {
+				$size: calc(#{$space} - #{$space-md});
+
 				display: block;
 
 				position: absolute;
 
-				right: calc(#{$space} / -2);
+				right: calc(#{$size} / -2);
 				bottom: $space-lg;
 
-				width: $space;
-				height: $space;
+				width: $size;
+				height: $size;
 
 				border-radius: 50%;
 
 				box-sizing: border-box;
 
 				background-color: transparent;
-				border: 2.5vw solid $primary-color;
+				border: 2.25vw solid $primary-color;
 			}
 		}
 	}
