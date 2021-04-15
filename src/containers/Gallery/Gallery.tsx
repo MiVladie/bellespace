@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { IProject } from 'interfaces';
+import { AddRounded } from '@material-ui/icons';
 
 import Project from 'components/Project/Project';
 
@@ -26,6 +27,8 @@ const Gallery: React.FC<Props> = ({ data, onClick, onNew, dark }) => {
 					dark={dark}
 				/>
 			))}
+
+			{onNew && <Project name='Create New Project..' icon={<AddRounded />} onClick={onNew} />}
 		</div>
 	);
 };
