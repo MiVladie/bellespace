@@ -99,17 +99,16 @@
 
 @media screen and (min-width: 1024px) {
 	.Projects {
-		$space: 15vw;
+		$space: 12.5vw;
 
 		flex-flow: row;
 
 		.Selection,
 		.Library {
 			width: calc(50% - #{$space});
-			height: calc(100vh - #{$space-lg} * 2);
+			height: calc(100vh - #{$space-xl} * 2);
 
-			padding-left: calc(#{$space} / 2);
-			padding-right: calc(#{$space} / 2);
+			padding: $space-xl calc(#{$space} / 2);
 
 			.Wrapper {
 				height: 100%;
@@ -118,6 +117,7 @@
 				flex-flow: column;
 
 				.Gallery {
+					margin-top: $space-lg;
 					flex: 1 1 auto;
 				}
 			}
