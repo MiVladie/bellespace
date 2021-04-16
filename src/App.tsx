@@ -10,10 +10,12 @@ import Layout from 'hoc/Layout/Layout';
 import SignIn from 'pages/SignIn/SignIn';
 import SignUp from 'pages/SignUp/SignUp';
 import Projects from 'pages/Projects/Projects';
+import Project from 'pages/Project/Project';
+
 import Loader from 'containers/Loader/Loader';
 
 const App: React.FC = () => {
-	const [loading, setLoading] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(true);
 
 	const { state, dispatch } = useContext(AuthContext);
 
@@ -25,10 +27,9 @@ const App: React.FC = () => {
 		const token = localStorage.getItem('token');
 
 		if (!token) {
+			setLoading(false);
 			return;
 		}
-
-		setLoading(true);
 
 		try {
 			await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -65,6 +66,7 @@ const App: React.FC = () => {
 								<Redirect exact path='/' to='/projects' />
 
 								<Route path='/projects' exact component={Projects} />
+								<Route path='/projects/:id' exact component={Project} />
 
 								<Redirect to='/projects' />
 							</Switch>

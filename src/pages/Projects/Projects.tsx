@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { IProject } from 'interfaces';
+import { useHistory } from 'react-router-dom';
 
 import Gallery from 'containers/Gallery/Gallery';
 import Pagination from 'components/Pagination/Pagination';
@@ -16,6 +17,8 @@ const Projects: React.FC = () => {
 
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<string | undefined>();
+
+	const history = useHistory();
 
 	useEffect(() => {
 		fetchData();
@@ -79,6 +82,17 @@ const Projects: React.FC = () => {
 		}
 	};
 
+	const projectSelectHandler = (id?: number) => {
+		console.log({ id });
+
+		if (id) {
+			history.push(`/projects/${id}`);
+			return;
+		}
+
+		history.push('/projects/new');
+	};
+
 	return (
 		<div className={classes.Projects}>
 			<div className={classes.Selection}>
@@ -89,8 +103,8 @@ const Projects: React.FC = () => {
 					<div className={classes.Gallery}>
 						<Gallery
 							data={selection}
-							onClick={console.log}
-							onNew={() => console.log('new')}
+							onClick={projectSelectHandler}
+							onNew={projectSelectHandler}
 							loading={loading}
 							number={4}
 						/>
@@ -114,7 +128,7 @@ const Projects: React.FC = () => {
 					<div className={classes.Line} />
 
 					<div className={classes.Gallery}>
-						<Gallery data={library} onClick={console.log} loading={loading} number={4} dark />
+						<Gallery data={library} onClick={projectSelectHandler} loading={loading} number={4} dark />
 					</div>
 				</div>
 

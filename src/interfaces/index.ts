@@ -1,4 +1,4 @@
 import { IUser, ICredentials } from './auth';
-import { IProject } from './projects';
+import { IProject, IPage, IComponent } from './projects';
 
-export type { IUser, ICredentials, IProject };
+export type { IUser, ICredentials, IProject, IPage, IComponent };

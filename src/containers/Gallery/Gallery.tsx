@@ -33,7 +33,7 @@ const Gallery: React.FC<Props> = ({ data, onClick, onNew, number = 3, loading, d
 						/>
 				  ))}
 
-			{onNew && !loading && <Project name='Create New Project..' icon={<AddRounded />} onClick={onNew} />}
+			{onNew && !loading && <Project name='Create New Project..' icon={<AddRounded />} onClick={() => onNew()} />}
 		</div>
 	);
 };

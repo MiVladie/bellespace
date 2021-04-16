@@ -1,0 +1,52 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/fonts';
+@import '../../assets/styles/sizing';
+@import '../../assets/styles/spacing';
+
+.Sitemap {
+	display: block;
+
+	.Info {
+		.Logo {
+			display: block;
+		}
+
+		.Description {
+			.Heading {
+				display: block;
+			}
+
+			.Category {
+				display: block;
+			}
+		}
+
+		.Line {
+			display: block;
+		}
+	}
+
+	.Pages {
+		.Page {
+			.Title {
+				display: block;
+			}
+
+			.Indicator {
+				display: block;
+			}
+
+			.Component {
+				.Name {
+					.Icon {
+						display: block;
+					}
+				}
+			}
+		}
+	}
+
+	.Toggle {
+		display: block;
+	}
+}
