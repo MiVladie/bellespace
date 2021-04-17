@@ -2,11 +2,16 @@
 @import '../../assets/styles/fonts';
 @import '../../assets/styles/sizing';
 @import '../../assets/styles/spacing';
+@import '../../assets/styles/mixins';
 
 $toggle: 1.25rem;
 $offset: calc(#{$space-sm} * 1.5);
 
 .Sitemap {
+	display: flex;
+
+	flex-flow: column;
+
 	.Info {
 		width: calc(100% - #{$toggle} * 2);
 
@@ -38,6 +43,8 @@ $offset: calc(#{$space-sm} * 1.5);
 				font-size: $size-lg;
 
 				color: $primary-color;
+
+				word-break: break-all;
 			}
 
 			.Category {
@@ -47,6 +54,8 @@ $offset: calc(#{$space-sm} * 1.5);
 				color: $third-color;
 
 				margin-top: $space-xs;
+
+				word-break: break-all;
 			}
 		}
 
@@ -60,9 +69,14 @@ $offset: calc(#{$space-sm} * 1.5);
 	}
 
 	.Pages {
-		margin-top: $space-md;
+		padding: $space-md 0 $toggle;
 
-		// overflow-y: overlay;
+		// overflow-y: auto;
+		// direction: rtl;
+
+		// * {
+		// 	direction: ltr;
+		// }
 
 		li {
 			margin-top: $space-xs;
@@ -81,6 +95,9 @@ $offset: calc(#{$space-sm} * 1.5);
 				align-items: center;
 
 				padding: $space-xs $toggle;
+				margin-right: $toggle;
+
+				overflow: hidden;
 
 				position: relative;
 
@@ -93,6 +110,8 @@ $offset: calc(#{$space-sm} * 1.5);
 					transform: translateX($space-sm);
 
 					transition: transform 0.15s;
+
+					@include ellipsis;
 				}
 
 				.Indicator {
@@ -145,12 +164,18 @@ $offset: calc(#{$space-sm} * 1.5);
 
 						margin-left: $space-sm;
 
-						display: flex;
-						align-items: center;
+						@include ellipsis;
 
 						.Icon {
 							margin-right: $space-xs;
 						}
+					}
+				}
+
+				.NewComponent {
+					.Name {
+						display: flex;
+						align-items: center;
 					}
 				}
 
@@ -180,6 +205,8 @@ $offset: calc(#{$space-sm} * 1.5);
 
 			padding: $space-xs 0;
 
+			overflow: hidden;
+
 			border-radius: 6px;
 
 			display: flex;
@@ -200,6 +227,8 @@ $offset: calc(#{$space-sm} * 1.5);
 
 				display: flex;
 				align-items: center;
+
+				@include ellipsis;
 
 				.Icon {
 					margin-right: $space-xs;

@@ -36,6 +36,54 @@ const data: { name: string; category: string; pages: IPage[] } = {
 				{
 					id: 3,
 					name: 'Banner'
+				},
+				{
+					id: 4,
+					name: 'Banner'
+				},
+				{
+					id: 5,
+					name: 'Banner'
+				},
+				{
+					id: 6,
+					name: 'Banner'
+				},
+				{
+					id: 7,
+					name: 'Banner'
+				},
+				{
+					id: 8,
+					name: 'Banner'
+				},
+				{
+					id: 9,
+					name: 'Banner'
+				},
+				{
+					id: 10,
+					name: 'Banner'
+				},
+				{
+					id: 11,
+					name: 'Banner'
+				},
+				{
+					id: 12,
+					name: 'Banner'
+				},
+				{
+					id: 13,
+					name: 'Banner'
+				},
+				{
+					id: 14,
+					name: 'Banner'
+				},
+				{
+					id: 15,
+					name: 'Banner'
 				}
 			]
 		}
@@ -129,6 +177,7 @@ const Sitemap: React.FC<Props> = ({ readOnly }) => {
 								<div
 									className={[
 										classes.Component,
+										classes.NewComponent,
 										selectedNewComponent ? classes.SelectedNewComponent : null
 									].join(' ')}
 									onClick={selectNewComponentHandler}>

@@ -2,11 +2,14 @@
 @import '../../assets/styles/fonts';
 @import '../../assets/styles/sizing';
 @import '../../assets/styles/spacing';
+@import '../../assets/styles/mixins';
 
 .Project {
 	width: 100%;
 
 	transition: all 0.25s;
+
+	overflow: hidden;
 
 	cursor: pointer;
 
@@ -20,6 +23,10 @@
 		color: $primary-color;
 
 		margin: 0 $space-xs $space-xs;
+
+		width: 100%;
+
+		@include ellipsis;
 	}
 
 	.Placeholder {

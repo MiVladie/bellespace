@@ -24,6 +24,8 @@ $offset: calc(#{$space-sm} * 1.5);
 	transform: translateX(calc(-100% + #{$toggle}));
 	transition: transform 0.35s ease;
 
+	overflow: hidden;
+
 	&:hover {
 		transform: translateX(0);
 	}
@@ -57,6 +59,10 @@ $offset: calc(#{$space-sm} * 1.5);
 	}
 }
 
+.Hidden {
+	transform: translateX(-100%);
+}
+
 .Reverse {
 	left: auto;
 	right: 0;
@@ -70,6 +76,10 @@ $offset: calc(#{$space-sm} * 1.5);
 	.Toggle {
 		right: auto;
 		left: 0;
+	}
+
+	&.Hidden {
+		transform: translateX(100%);
 	}
 }
 

@@ -37,16 +37,13 @@ const Sidebar: React.FC<Props> = ({ className, visible = true, reverse, children
 		}
 	};
 
-	if (!visible) {
-		return null;
-	}
-
 	return (
 		<div
 			className={[
 				classes.Sidebar,
 				snapped ? classes.Snapped : null,
 				reverse ? classes.Reverse : null,
+				!visible ? classes.Hidden : null,
 				className
 			].join(' ')}>
 			{children}
