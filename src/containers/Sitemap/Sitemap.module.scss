@@ -3,50 +3,264 @@
 @import '../../assets/styles/sizing';
 @import '../../assets/styles/spacing';
 
-.Sitemap {
-	display: block;
+$toggle: 1.25rem;
+$offset: calc(#{$space-sm} * 1.5);
 
+.Sitemap {
 	.Info {
+		width: calc(100% - #{$toggle} * 2);
+
+		margin-top: $space-lg;
+		padding: 0 $toggle;
+
+		display: flex;
+		align-items: center;
+
+		flex-flow: column;
+
 		.Logo {
-			display: block;
+			$size: 9em;
+
+			width: $size;
+			height: $size;
+
+			border-radius: 50%;
+			background-color: $primary-color;
 		}
 
 		.Description {
+			text-align: center;
+
+			margin-top: $space-md;
+
 			.Heading {
-				display: block;
+				font-family: $secondary-font;
+				font-size: $size-lg;
+
+				color: $primary-color;
 			}
 
 			.Category {
-				display: block;
+				font-family: $secondary-font;
+				font-size: $size-sm;
+
+				color: $third-color;
+
+				margin-top: $space-xs;
 			}
 		}
 
 		.Line {
-			display: block;
+			width: $space-lg;
+			height: 1.5px;
+
+			margin: $space-md auto 0;
+			background-color: $primary-color;
 		}
 	}
 
 	.Pages {
+		margin-top: $space-md;
+
+		// overflow-y: overlay;
+
+		li {
+			margin-top: $space-xs;
+		}
+
 		.Page {
-			.Title {
-				display: block;
+			width: 100%;
+
+			.Wrapper {
+				height: $space-lg;
+
+				transition: all 0.15s;
+				cursor: pointer;
+
+				display: flex;
+				align-items: center;
+
+				padding: $space-xs $toggle;
+
+				position: relative;
+
+				.Title {
+					font-family: $secondary-font;
+					font-size: $size-md;
+
+					color: $primary-color;
+
+					transform: translateX($space-sm);
+
+					transition: transform 0.15s;
+				}
+
+				.Indicator {
+					position: absolute;
+
+					top: 50%;
+					left: -3px;
+
+					transform: translateY(-50%);
+
+					width: 3px;
+					height: $space-lg;
+
+					border-radius: 0 2px 2px 0;
+					background-color: $primary-color;
+
+					opacity: 0;
+					transition: all 0.15s;
+				}
 			}
 
-			.Indicator {
-				display: block;
-			}
+			.Components {
+				display: none;
 
-			.Component {
-				.Name {
-					.Icon {
-						display: block;
+				margin: $space-xs $toggle $space-xs calc(#{$offset} + #{$toggle});
+
+				overflow: hidden;
+				transition: max-height 0.25s ease;
+
+				.Component {
+					height: $space-lg;
+
+					margin-top: $space-xs;
+
+					display: flex;
+					align-items: center;
+
+					border-radius: 6px;
+
+					transition: all 0.15s;
+					cursor: pointer;
+
+					.Name {
+						font-family: $secondary-font;
+						font-size: $size-sm;
+
+						color: $primary-color;
+
+						transition: transform 0.15s;
+
+						margin-left: $space-sm;
+
+						display: flex;
+						align-items: center;
+
+						.Icon {
+							margin-right: $space-xs;
+						}
+					}
+				}
+
+				.SelectedComponent {
+					background-color: $primary-color;
+
+					.Name {
+						color: $fifth-color;
+					}
+				}
+
+				.SelectedNewComponent {
+					background-color: $primary-color;
+
+					.Name {
+						color: $fifth-color;
 					}
 				}
 			}
 		}
-	}
 
-	.Toggle {
-		display: block;
+		.New {
+			height: $space-lg;
+
+			margin-left: $toggle;
+			margin-right: $toggle;
+
+			padding: $space-xs 0;
+
+			border-radius: 6px;
+
+			display: flex;
+			align-items: center;
+
+			transition: all 0.15s;
+			cursor: pointer;
+
+			.Title {
+				font-family: $secondary-font;
+				font-size: $size-md;
+
+				color: $primary-color;
+
+				transform: translateX($space-sm);
+
+				transition: all 0.15s;
+
+				display: flex;
+				align-items: center;
+
+				.Icon {
+					margin-right: $space-xs;
+				}
+			}
+		}
+
+		.SelectedNewPage {
+			background-color: $primary-color;
+
+			.Title {
+				color: $fifth-color;
+			}
+		}
+
+		.SelectedPage {
+			.Wrapper {
+				.Title {
+					font-weight: 600;
+					transform: translateX($offset);
+				}
+
+				.Indicator {
+					opacity: 1;
+					left: 0;
+				}
+			}
+
+			.Components {
+				display: block;
+			}
+		}
+	}
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.Sitemap {
+		.Pages {
+			.Page {
+				.Wrapper {
+					&:hover:not(.SelectedPage) {
+						.Title {
+							transform: translateX($offset);
+						}
+					}
+				}
+
+				.Components {
+					.Component {
+						&:hover:not(.SelectedComponent, .SelectedNewComponent) {
+							background-color: $fourth-color;
+						}
+					}
+				}
+			}
+
+			.New {
+				&:hover:not(.SelectedNewPage) {
+					background-color: $fourth-color;
+				}
+			}
+		}
 	}
 }
