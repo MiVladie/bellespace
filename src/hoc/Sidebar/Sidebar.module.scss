@@ -1,0 +1,112 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/fonts';
+@import '../../assets/styles/sizing';
+@import '../../assets/styles/spacing';
+
+$toggle: 1.25rem;
+$offset: calc(#{$space-sm} * 1.5);
+
+.Sidebar {
+	width: 90%;
+	max-width: 340px;
+
+	height: 100vh;
+
+	position: fixed;
+
+	top: 0;
+	bottom: 0;
+	left: 0;
+
+	box-shadow: 0 0 8px rgba($fifth-color, 0.25);
+	background-color: $fifth-color;
+
+	transform: translateX(calc(-100% + #{$toggle}));
+	transition: transform 0.35s ease;
+
+	&:hover {
+		transform: translateX(0);
+	}
+
+	.Toggle {
+		width: $toggle;
+		height: 100vh;
+
+		position: absolute;
+
+		top: 0;
+		bottom: 0;
+		right: 0;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		cursor: pointer;
+
+		.Hook {
+			width: 3px;
+			height: $space-lg;
+
+			border-radius: 2px;
+
+			background-color: rgba($primary-color, 0.25);
+
+			transition: all 0.15s;
+		}
+	}
+}
+
+.Reverse {
+	left: auto;
+	right: 0;
+
+	transform: translateX(calc(100% - #{$toggle}));
+
+	&:hover {
+		transform: translateX(0);
+	}
+
+	.Toggle {
+		right: auto;
+		left: 0;
+	}
+}
+
+.Snapped {
+	transform: translateX(0);
+
+	.Toggle {
+		.Hook {
+			background-color: $primary-color;
+		}
+	}
+}
+
+@media (min-width: 1024px) {
+	.Sidebar {
+		max-width: 350px;
+	}
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.Sidebar {
+		.Toggle {
+			&:hover {
+				.Hook {
+					background-color: rgba($primary-color, 0.5);
+				}
+			}
+		}
+	}
+
+	.Snapped {
+		.Toggle {
+			&:hover {
+				.Hook {
+					background-color: $primary-color;
+				}
+			}
+		}
+	}
+}
