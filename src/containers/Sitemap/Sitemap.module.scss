@@ -71,12 +71,9 @@ $offset: calc(#{$space-sm} * 1.5);
 	.Pages {
 		padding: $space-md 0 $toggle;
 
-		// overflow-y: auto;
-		// direction: rtl;
+		margin-right: $toggle;
 
-		// * {
-		// 	direction: ltr;
-		// }
+		overflow-y: auto;
 
 		li {
 			margin-top: $space-xs;
@@ -95,7 +92,7 @@ $offset: calc(#{$space-sm} * 1.5);
 				align-items: center;
 
 				padding: $space-xs $toggle;
-				margin-right: $toggle;
+				margin-right: $space-xs;
 
 				overflow: hidden;
 
@@ -136,7 +133,7 @@ $offset: calc(#{$space-sm} * 1.5);
 			.Components {
 				display: none;
 
-				margin: $space-xs $toggle $space-xs calc(#{$offset} + #{$toggle});
+				margin: $space-xs $space-xs $space-xs calc(#{$offset} + #{$toggle});
 
 				overflow: hidden;
 				transition: max-height 0.25s ease;
@@ -201,7 +198,7 @@ $offset: calc(#{$space-sm} * 1.5);
 			height: $space-lg;
 
 			margin-left: $toggle;
-			margin-right: $toggle;
+			margin-right: $space-xs;
 
 			padding: $space-xs 0;
 

@@ -95,22 +95,26 @@ html {
 }
 
 ::-webkit-scrollbar {
-	width: 8px;
+	width: 6px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-	background: white;
+	/* background: transparent; */
+	/* background: #34495e; */
+	background: rgba(0, 0, 0, 0.075);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: #151515;
+	transition: all 0.15s;
+	background: rgba(0, 0, 0, 0.15);
+	border-radius: 4px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-	background: black;
+	background: rgba(0, 0, 0, 0.3);
 }
 
 /* make sure to set some focus styles for accessibility */
