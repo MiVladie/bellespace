@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { FormatPaintRounded } from '@material-ui/icons';
+import { CollectionsRounded, GroupRounded, StorageRounded, WallpaperRounded } from '@material-ui/icons';
 
 import Sidebar from 'hoc/Sidebar/Sidebar';
 import Button from 'components/ui/Button/Button';
@@ -27,20 +27,26 @@ const Explorer: React.FC = () => {
 		{
 			id: 1,
 			onClick: () => null,
-			icon: <FormatPaintRounded />,
-			label: 'Styles'
+			icon: <WallpaperRounded />,
+			label: 'Banner'
 		},
 		{
 			id: 2,
 			onClick: () => null,
-			icon: <FormatPaintRounded />,
-			label: 'Styles'
+			icon: <GroupRounded />,
+			label: 'Introduction'
 		},
 		{
 			id: 3,
 			onClick: () => null,
-			icon: <FormatPaintRounded />,
-			label: 'Styles'
+			icon: <StorageRounded />,
+			label: 'Interstitial'
+		},
+		{
+			id: 4,
+			onClick: () => null,
+			icon: <CollectionsRounded />,
+			label: 'Gallery'
 		}
 	];
 
