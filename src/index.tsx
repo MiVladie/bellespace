@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { AuthProvider } from 'context/providers/auth';
 
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 ReactDOM.render(
 	<Router basename={process.env.PUBLIC_URL}>
@@ -15,4 +15,4 @@ ReactDOM.render(
 	document.getElementById('root')
 );
 
-registerServiceWorker();
+serviceWorkerRegistration.register();
