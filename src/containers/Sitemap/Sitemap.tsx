@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
+import { ActivityContext } from 'context/providers/activity';
+import { Action } from 'context/actions/activity';
 import { AddRounded } from '@material-ui/icons';
 import { IPage } from 'interfaces';
 
@@ -43,49 +45,30 @@ const data: { name: string; category: string; pages: IPage[] } = {
 };
 
 const Sitemap: React.FC<Props> = ({ readOnly }) => {
-	const [selectedPage, setSelectedPage] = useState<number | null>(null);
-	const [selectedComponent, setSelectedComponent] = useState<number | null>(null);
-
-	const [selectedNewPage, setSelectedNewPage] = useState<boolean>(false);
-	const [selectedNewComponent, setSelectedNewComponent] = useState<boolean>(false);
+	const { state, dispatch } = useContext(ActivityContext);
 
 	const selectPageHandler = (id: number) => {
-		setSelectedComponent(null);
-		setSelectedNewComponent(false);
-
-		if (selectedPage === id) {
-			setSelectedPage(null);
+		if (state.activePage === id) {
+			dispatch({ type: Action.DELETE_ACTIVE_PAGE });
 		} else {
-			setSelectedNewPage(false);
-			setSelectedPage(id);
+			dispatch({ type: Action.SET_ACTIVE_PAGE, payload: { activePage: id } });
 		}
 	};
 
 	const selectNewPageHandler = () => {
-		if (selectedNewPage) {
-			setSelectedNewPage(false);
-		} else {
-			setSelectedPage(null);
-			setSelectedNewPage(true);
-		}
+		dispatch({ type: Action.SET_NEW_PAGE, payload: { newPage: !state.newPage } });
 	};
 
 	const selectComponentHandler = (id: number) => {
-		if (selectedComponent === id) {
-			setSelectedComponent(null);
+		if (state.activeComponent === id) {
+			dispatch({ type: Action.DELETE_ACTIVE_COMPONENT });
 		} else {
-			setSelectedNewComponent(false);
-			setSelectedComponent(id);
+			dispatch({ type: Action.SET_ACTIVE_COMPONENT, payload: { activeComponent: id } });
 		}
 	};
 
 	const selectNewComponentHandler = () => {
-		if (selectedNewComponent) {
-			setSelectedNewComponent(false);
-		} else {
-			setSelectedComponent(null);
-			setSelectedNewComponent(true);
-		}
+		dispatch({ type: Action.SET_NEW_COMPONENT, payload: { newComponent: !state.newComponent } });
 	};
 
 	return (
@@ -104,7 +87,7 @@ const Sitemap: React.FC<Props> = ({ readOnly }) => {
 			<ul className={classes.Pages}>
 				{data.pages.map((page) => (
 					<li
-						className={[classes.Page, page.id === selectedPage ? classes.SelectedPage : null].join(' ')}
+						className={[classes.Page, page.id === state.activePage ? classes.SelectedPage : null].join(' ')}
 						key={page.id}>
 						<div className={classes.Wrapper} onClick={() => selectPageHandler(page.id)}>
 							<h2 className={classes.Title}>{page.title}</h2>
@@ -117,7 +100,7 @@ const Sitemap: React.FC<Props> = ({ readOnly }) => {
 								<div
 									className={[
 										classes.Component,
-										component.id === selectedComponent ? classes.SelectedComponent : null
+										component.id === state.activeComponent ? classes.SelectedComponent : null
 									].join(' ')}
 									onClick={() => selectComponentHandler(component.id)}
 									key={component.id}>
@@ -130,7 +113,7 @@ const Sitemap: React.FC<Props> = ({ readOnly }) => {
 									className={[
 										classes.Component,
 										classes.NewComponent,
-										selectedNewComponent ? classes.SelectedNewComponent : null
+										state.newComponent ? classes.SelectedNewComponent : null
 									].join(' ')}
 									onClick={selectNewComponentHandler}>
 									<h3 className={classes.Name}>
@@ -145,7 +128,7 @@ const Sitemap: React.FC<Props> = ({ readOnly }) => {
 
 				{!readOnly && (
 					<li
-						className={[classes.New, selectedNewPage ? classes.SelectedNewPage : null].join(' ')}
+						className={[classes.New, state.newPage ? classes.SelectedNewPage : null].join(' ')}
 						onClick={selectNewPageHandler}>
 						<h2 className={classes.Title}>
 							<AddRounded className={classes.Icon} />

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { CollectionsRounded, GroupRounded, StorageRounded, WallpaperRounded } from '@material-ui/icons';
+import { ActivityContext } from 'context/providers/activity';
 
 import Sidebar from 'hoc/Sidebar/Sidebar';
 import Button from 'components/ui/Button/Button';
@@ -9,6 +10,8 @@ import classes from './Explorer.module.scss';
 
 const Explorer: React.FC = () => {
 	const [selectedHandle, setSelectedHandle] = useState<number | undefined>();
+
+	const { state, dispatch } = useContext(ActivityContext);
 
 	const actions = [
 		{
@@ -64,7 +67,7 @@ const Explorer: React.FC = () => {
 
 			<div className={classes.Body}>
 				<div className={classes.Wrapper}>
-					<div className={classes.Content}></div>
+					<div className={classes.Content} style={{ color: 'white' }}></div>
 
 					<div className={classes.Actions}>
 						{actions.map((action, index) => (
