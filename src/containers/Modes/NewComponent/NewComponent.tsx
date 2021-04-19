@@ -25,7 +25,7 @@ const NewComponent: React.FC<Props> = ({ onDismiss }) => {
 		{
 			id: 1,
 			icon: <WallpaperRounded />,
-			label: 'Banner',
+			label: 'Banners',
 			onClick: () => switchBarHandler(1)
 		},
 		{
@@ -77,6 +77,14 @@ const NewComponent: React.FC<Props> = ({ onDismiss }) => {
 		{
 			id: 4,
 			name: 'Video Centered'
+		},
+		{
+			id: 5,
+			name: 'Image Slideshow'
+		},
+		{
+			id: 6,
+			name: 'Centered Information'
 		}
 	];
 

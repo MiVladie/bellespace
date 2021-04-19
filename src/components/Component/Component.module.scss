@@ -8,12 +8,6 @@
 
 	cursor: pointer;
 
-	&:hover:not(.Selected) {
-		.Holder {
-			border-color: $third-color;
-		}
-	}
-
 	.Label {
 		font-family: $secondary-font;
 		font-size: $size-xs;
@@ -71,5 +65,15 @@
 
 	.Holder {
 		border-color: $primary-color;
+	}
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.Component {
+		&:hover:not(.Selected) {
+			.Holder {
+				border-color: $third-color;
+			}
+		}
 	}
 }
