@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { AddRounded } from '@material-ui/icons';
 import { IAction, IBar } from 'interfaces/activities';
 
-import Hierarchy from 'containers/Hierarchy/Hierarchy';
+import Hierarchy from 'components/Hierarchy/Hierarchy';
 
 interface Props {
 	onDismiss: () => void;

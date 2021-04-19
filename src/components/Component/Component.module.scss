@@ -1,0 +1,75 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/fonts';
+@import '../../assets/styles/sizing';
+@import '../../assets/styles/spacing';
+
+.Component {
+	width: 100%;
+
+	cursor: pointer;
+
+	&:hover:not(.Selected) {
+		.Holder {
+			border-color: $third-color;
+		}
+	}
+
+	.Label {
+		font-family: $secondary-font;
+		font-size: $size-xs;
+		color: $secondary-color;
+
+		margin-left: $space-xs;
+		margin-bottom: $space-xs;
+
+		transition: all 0.15s;
+	}
+
+	.Holder {
+		width: 100%;
+
+		border-radius: 4px;
+		box-shadow: 0 0 8px rgba($fifth-color, 0.15);
+		background-color: $fourth-color;
+
+		padding-top: 56.25%;
+		margin: 0;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		position: relative;
+
+		transition: all 0.15s;
+
+		border: 2px solid transparent;
+
+		box-sizing: border-box;
+		overflow: hidden;
+
+		.Image {
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+
+			width: 100%;
+			height: 100%;
+
+			object-fit: cover;
+			object-position: center;
+		}
+	}
+}
+
+.Selected {
+	.Label {
+		color: $primary-color;
+	}
+
+	.Holder {
+		border-color: $primary-color;
+	}
+}

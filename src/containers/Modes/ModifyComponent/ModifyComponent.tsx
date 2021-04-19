@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { DeleteRounded, FormatPaintRounded, SettingsRounded, TextFieldsRounded } from '@material-ui/icons';
 import { IBar } from 'interfaces/activities';
 
-import Hierarchy from 'containers/Hierarchy/Hierarchy';
+import Hierarchy from 'components/Hierarchy/Hierarchy';
 
 const ModifyComponent: React.FC = () => {
 	const [activeBar, setActiveBar] = useState<number>(1);
