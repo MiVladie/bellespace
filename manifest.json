@@ -1,6 +1,7 @@
 {
 	"short_name": "Bellespace",
 	"name": "Bellespace",
+	"description": "Bellespace is a website constructor that allows you to build a website using provided styled components.",
 	"icons": [
 		{
 			"src": "favicon.ico",
@@ -19,7 +20,7 @@
 		}
 	],
 	"start_url": ".",
-	"display": "standalone",
+	"display": "minimal-ui",
 	"theme_color": "#2c3e50",
 	"background_color": "#ecf0f1"
 }
