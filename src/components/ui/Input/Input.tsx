@@ -1,20 +1,21 @@
+import { IField } from 'interfaces';
 import React from 'react';
 
 import classes from './Input.module.scss';
 
-type InputType = 'date' | 'textarea' | 'email' | 'number' | 'password' | 'tel' | 'text' | 'time';
+// type InputType = 'date' | 'textarea' | 'email' | 'number' | 'password' | 'tel' | 'text' | 'time';
 
-interface Props {
+interface Props extends IField {
 	className?: string;
-	name: string;
-	type: InputType;
-	placeholder: string;
+	// name: string;
+	// type: InputType;
+	// placeholder: string;
 	onChange: (e: string) => void;
 	onFocus?: () => void;
 	onBlur?: () => void;
 	value: string | number;
-	prefix?: string;
-	label?: string;
+	// prefix?: string;
+	// label?: string;
 	error?: string | null;
 	disabled?: boolean;
 	dark?: boolean;

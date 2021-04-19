@@ -1,0 +1,77 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/fonts';
+@import '../../assets/styles/sizing';
+@import '../../assets/styles/spacing';
+
+$toggle: 1.25rem;
+
+.Form {
+	width: 100%;
+
+	.Accordion {
+		width: 100%;
+
+		&:last-child {
+			.Content {
+				border-bottom: none;
+			}
+		}
+
+		.Wrapper {
+			width: 100%;
+			height: $space-xl;
+
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			border-bottom: 2px solid $fourth-color;
+			box-sizing: border-box;
+
+			padding: 0 $toggle;
+
+			transition: all 0.15s;
+			cursor: pointer;
+
+			&:hover {
+				background-color: $fourth-color;
+			}
+
+			.Name {
+				font-family: $secondary-font;
+				font-size: $size-md;
+				font-weight: 600;
+
+				color: $primary-color;
+			}
+
+			svg {
+				color: $primary-color;
+			}
+		}
+
+		.Content {
+			display: none;
+		}
+	}
+
+	.Expanded {
+		width: 100%;
+
+		.Content {
+			display: block;
+
+			padding: $space-sm $toggle;
+
+			border-bottom: 2px solid $fourth-color;
+
+			* {
+				margin-top: $space-sm;
+
+				&:first-of-type {
+					margin-top: 0;
+				}
+			}
+		}
+	}
+}

@@ -24,7 +24,7 @@
 
 		margin: 0 $space-xs $space-xs;
 
-		width: 100%;
+		max-width: 100%;
 
 		@include ellipsis;
 	}
