@@ -26,13 +26,13 @@ const Sidebar: React.FC<Props> = ({ className, visible = true, reverse, children
 	}, [visible]);
 
 	useEffect(() => {
-		if (width < 720 && snapped) {
+		if (width < 1024 && snapped) {
 			setSnapped(false);
 		}
 	}, [width, snapped]);
 
 	const snapClickHandler = () => {
-		if (width >= 720) {
+		if (width >= 1024) {
 			setSnapped((prevState) => !prevState);
 		}
 	};
