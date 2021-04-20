@@ -33,10 +33,6 @@ $toggle: 1.25rem;
 			transition: all 0.15s;
 			cursor: pointer;
 
-			&:hover {
-				background-color: $fourth-color;
-			}
-
 			.Name {
 				font-family: $secondary-font;
 				font-size: $size-md;
@@ -51,16 +47,6 @@ $toggle: 1.25rem;
 		}
 
 		.Content {
-			display: none;
-		}
-	}
-
-	.Expanded {
-		width: 100%;
-
-		.Content {
-			display: block;
-
 			padding: $space-sm $toggle;
 
 			border-bottom: 2px solid $fourth-color;
@@ -70,6 +56,18 @@ $toggle: 1.25rem;
 
 				&:first-of-type {
 					margin-top: 0;
+				}
+			}
+		}
+	}
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.Form {
+		.Accordion {
+			.Wrapper {
+				&:hover {
+					background-color: $fourth-color;
 				}
 			}
 		}

@@ -131,8 +131,6 @@ $offset: calc(#{$space-sm} * 1.5);
 			}
 
 			.Components {
-				display: none;
-
 				margin: $space-xs $space-xs $space-xs calc(#{$offset} + #{$toggle});
 
 				overflow: hidden;
@@ -252,10 +250,6 @@ $offset: calc(#{$space-sm} * 1.5);
 					opacity: 1;
 					left: 0;
 				}
-			}
-
-			.Components {
-				display: block;
 			}
 		}
 	}

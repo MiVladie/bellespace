@@ -40,7 +40,7 @@ const NewPage: React.FC<Props> = ({ onDismiss }) => {
 
 	const form: IAccordion[] = [
 		{
-			name: 'Content',
+			name: 'General',
 			type: 'accordion',
 			fields: [
 				{
@@ -50,30 +50,23 @@ const NewPage: React.FC<Props> = ({ onDismiss }) => {
 					label: 'Name'
 				},
 				{
-					name: 'description',
-					type: 'textarea',
-					placeholder: 'Type something..',
-					label: 'Description'
-				}
-			]
-		},
-		{
-			name: 'Links',
-			type: 'accordion',
-			fields: [
-				{
 					name: 'url',
 					type: 'text',
 					placeholder: 'about',
 					label: 'URL',
 					prefix: '/'
-				},
+				}
+			]
+		},
+		{
+			name: 'Extra',
+			type: 'accordion',
+			fields: [
 				{
-					name: 'scroll',
-					type: 'text',
-					placeholder: 'introduction',
-					label: 'Scroll To',
-					prefix: '#'
+					name: 'description',
+					type: 'textarea',
+					placeholder: 'Type something..',
+					label: 'Description'
 				}
 			]
 		}

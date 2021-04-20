@@ -1,10 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 
 import { ActivityContext } from 'context/providers/activity';
 import { Action } from 'context/actions/activity';
 import { AddRounded } from '@material-ui/icons';
 import { IPage } from 'interfaces';
 
+import Accordion from 'components/ui/Accordion/Accordion';
 import Sidebar from 'hoc/Sidebar/Sidebar';
 
 import classes from './Sitemap.module.scss';
@@ -95,7 +96,7 @@ const Sitemap: React.FC<Props> = ({ readOnly }) => {
 							<span className={classes.Indicator} />
 						</div>
 
-						<div className={classes.Components}>
+						<Accordion className={classes.Components} expanded={page.id === state.activePage}>
 							{page.components.map((component) => (
 								<div
 									className={[
@@ -122,7 +123,7 @@ const Sitemap: React.FC<Props> = ({ readOnly }) => {
 									</h3>
 								</div>
 							)}
-						</div>
+						</Accordion>
 					</li>
 				))}
 

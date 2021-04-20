@@ -142,6 +142,7 @@ const Auth: React.FC<Props> = ({ type, onSubmit, loading, message }) => {
 							onBlur={() => validateField('email', email)}
 							value={email}
 							error={error.email}
+							autoComplete
 							dark
 						/>
 						<Input
@@ -156,6 +157,7 @@ const Auth: React.FC<Props> = ({ type, onSubmit, loading, message }) => {
 							onBlur={() => validateField('password', password)}
 							value={password}
 							error={error.password}
+							autoComplete
 							dark
 						/>
 						{type === 'signup' && (
@@ -169,6 +171,7 @@ const Auth: React.FC<Props> = ({ type, onSubmit, loading, message }) => {
 								onBlur={() => validateField('confirmPassword', confirmPassword)}
 								value={confirmPassword}
 								error={error.confirmPassword}
+								autoComplete
 								dark
 							/>
 						)}

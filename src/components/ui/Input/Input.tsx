@@ -3,21 +3,15 @@ import React from 'react';
 
 import classes from './Input.module.scss';
 
-// type InputType = 'date' | 'textarea' | 'email' | 'number' | 'password' | 'tel' | 'text' | 'time';
-
 interface Props extends IField {
 	className?: string;
-	// name: string;
-	// type: InputType;
-	// placeholder: string;
 	onChange: (e: string) => void;
 	onFocus?: () => void;
 	onBlur?: () => void;
 	value: string | number;
-	// prefix?: string;
-	// label?: string;
 	error?: string | null;
 	disabled?: boolean;
+	autoComplete?: boolean;
 	dark?: boolean;
 }
 
@@ -34,6 +28,7 @@ const Input: React.FC<Props> = ({
 	label,
 	error,
 	disabled,
+	autoComplete,
 	dark
 }) => {
 	switch (type) {
@@ -94,6 +89,7 @@ const Input: React.FC<Props> = ({
 							onBlur={onBlur}
 							value={value}
 							disabled={disabled}
+							autoComplete={autoComplete ? 'on' : 'off'}
 						/>
 					</div>
 					{error && <small className={classes.Message}>{error}</small>}
