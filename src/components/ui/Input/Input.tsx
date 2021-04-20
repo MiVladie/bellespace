@@ -1,5 +1,7 @@
-import { IField } from 'interfaces';
 import React from 'react';
+
+import { IField } from 'interfaces';
+import { HelpOutline } from '@material-ui/icons';
 
 import classes from './Input.module.scss';
 
@@ -24,6 +26,7 @@ const Input: React.FC<Props> = ({
 	onFocus,
 	onBlur,
 	value,
+	info,
 	prefix,
 	label,
 	error,
@@ -38,6 +41,15 @@ const Input: React.FC<Props> = ({
 					{label && (
 						<label className={classes.Label} htmlFor={name}>
 							{label}
+							{info && (
+								<span className={classes.Info}>
+									<HelpOutline />
+
+									<div className={classes.Popover}>
+										<p className={classes.Description}>{info}</p>
+									</div>
+								</span>
+							)}
 						</label>
 					)}
 					<div
@@ -71,6 +83,16 @@ const Input: React.FC<Props> = ({
 					{label && (
 						<label className={classes.Label} htmlFor={name}>
 							{label}
+							{info && (
+								<span className={classes.Info}>
+									<HelpOutline />
+
+									<div className={classes.Popover}>
+										<div className={classes.Arrow} />
+										<p className={classes.Description}>{info}</p>
+									</div>
+								</span>
+							)}
 						</label>
 					)}
 					<div
