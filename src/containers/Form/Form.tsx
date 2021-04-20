@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
 import { AddRounded, RemoveRounded } from '@material-ui/icons';
-import { IAccordion } from 'interfaces';
+import { containsErrors } from 'util/validation';
+import { IAccordion, IField } from 'interfaces';
 
 import Accordion from 'components/ui/Accordion/Accordion';
 import Input from 'components/ui/Input/Input';
@@ -21,6 +22,7 @@ interface Props {
 const Form: React.FC<Props> = ({ className, data, hasErrors }) => {
 	const [expanded, setExpanded] = useState<number[]>([0]);
 	const [values, setValues] = useState<Value>({});
+	const [errors, setErrors] = useState<Value>({});
 
 	const onExpandClick = (id: number) => {
 		if (expanded.includes(id)) {
@@ -30,6 +32,32 @@ const Form: React.FC<Props> = ({ className, data, hasErrors }) => {
 		}
 
 		setExpanded([...expanded, id]);
+	};
+
+	const onFocus = (name: string) => {
+		if (name in errors) {
+			const newErrors = { ...errors };
+
+			delete newErrors[name];
+
+			setErrors(newErrors);
+		}
+	};
+
+	const onChange = (value: string, name: string) => {
+		setValues({ ...values, [name]: value });
+	};
+
+	const onBlur = (field: IField) => {
+		if (!field.rules) {
+			return;
+		}
+
+		const error = containsErrors(values[field.name], field.rules);
+
+		if (error) {
+			setErrors((prevState) => ({ ...prevState, [field.name]: error }));
+		}
 	};
 
 	return (
@@ -50,8 +78,12 @@ const Form: React.FC<Props> = ({ className, data, hasErrors }) => {
 								placeholder={field.placeholder}
 								prefix={field.prefix}
 								label={field.label}
-								onChange={(e) => setValues((prevState) => ({ ...prevState, [field.name]: e }))}
-								value={values[field.name]}
+								onFocus={() => onFocus(field.name)}
+								onChange={(val) => onChange(val, field.name)}
+								onBlur={() => onBlur(field)}
+								value={values[field.name] || ''}
+								info={field.info}
+								error={errors[field.name]}
 								key={field.name}
 							/>
 						))}

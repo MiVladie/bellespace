@@ -5,10 +5,10 @@ import { Action } from 'context/actions/activity';
 
 import Sidebar from 'hoc/Sidebar/Sidebar';
 
-import NewPage from 'containers/Modes/NewPage/NewPage';
-import NewComponent from 'containers/Modes/NewComponent/NewComponent';
-import ModifyPage from 'containers/Modes/ModifyPage/ModifyPage';
-import ModifyComponent from 'containers/Modes/ModifyComponent/ModifyComponent';
+import NewPage from './Modes/NewPage/NewPage';
+import NewComponent from './Modes/NewComponent/NewComponent';
+import ModifyPage from './Modes/ModifyPage/ModifyPage';
+import ModifyComponent from './Modes/ModifyComponent/ModifyComponent';
 
 const Explorer: React.FC = () => {
 	const { state, dispatch } = useContext(ActivityContext);

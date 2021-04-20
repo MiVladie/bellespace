@@ -7,8 +7,6 @@ import { IAccordion } from 'interfaces';
 import Hierarchy from 'components/Hierarchy/Hierarchy';
 import Form from 'containers/Form/Form';
 
-import classes from './NewPage.module.scss';
-
 interface Props {
 	onDismiss: () => void;
 }
@@ -41,26 +39,33 @@ const NewPage: React.FC<Props> = ({ onDismiss }) => {
 	const form: IAccordion[] = [
 		{
 			name: 'General',
-			type: 'accordion',
 			fields: [
 				{
 					name: 'name',
 					type: 'text',
 					placeholder: 'About',
-					label: 'Name'
+					label: 'Name',
+					info: 'The name of the webpage.',
+					rules: {
+						required: true
+					}
 				},
 				{
 					name: 'url',
 					type: 'text',
 					placeholder: 'about',
 					label: 'URL',
-					prefix: '/'
+					info: 'The route name of the web page. Route will be displayed at the end of the website link.',
+					prefix: '/',
+					rules: {
+						required: true,
+						isRoute: true
+					}
 				}
 			]
 		},
 		{
 			name: 'Extra',
-			type: 'accordion',
 			fields: [
 				{
 					name: 'description',
