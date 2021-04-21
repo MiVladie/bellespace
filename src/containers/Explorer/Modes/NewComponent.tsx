@@ -6,7 +6,7 @@ import { IAction, IBar } from 'interfaces/activities';
 import Hierarchy from 'components/Hierarchy/Hierarchy';
 import Components from 'containers/Components/Components';
 
-import classes from './NewComponent.module.scss';
+import classes from './Modes.module.scss';
 
 interface Props {
 	onDismiss: () => void;

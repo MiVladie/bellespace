@@ -28,6 +28,15 @@ export const containsErrors = (value: string, rules: IRules): string | false => 
 			error = 'Special characters are not allowed!';
 			return;
 		}
+
+		if (key === 'custom' && val) {
+			const result = val(value);
+
+			if (result) {
+				error = result;
+				return;
+			}
+		}
 	});
 
 	return error;

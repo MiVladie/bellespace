@@ -59,7 +59,14 @@ const NewPage: React.FC<Props> = ({ onDismiss }) => {
 					prefix: '/',
 					rules: {
 						required: true,
-						isRoute: true
+						isRoute: true,
+						custom: (value) => {
+							if (value === 'about' || value === 'home') {
+								return 'The route name is already taken!';
+							}
+
+							return false;
+						}
 					}
 				}
 			]

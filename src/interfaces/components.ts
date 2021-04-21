@@ -19,4 +19,5 @@ export interface IRules {
 	required?: boolean;
 	isURL?: boolean;
 	isRoute?: boolean;
+	custom?: (value: string) => string | false;
 }
