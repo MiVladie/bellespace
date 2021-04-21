@@ -4,6 +4,7 @@ import { IField } from 'interfaces';
 import { HelpOutline } from '@material-ui/icons';
 
 import classes from './Input.module.scss';
+import Tooltip from '../Tooltip/Tooltip';
 
 interface Props extends IField {
 	className?: string;
@@ -45,9 +46,9 @@ const Input: React.FC<Props> = ({
 								<span className={classes.Info}>
 									<HelpOutline />
 
-									<div className={classes.Popover}>
-										<p className={classes.Description}>{info}</p>
-									</div>
+									<Tooltip className={classes.Tooltip} dark={dark}>
+										{info}
+									</Tooltip>
 								</span>
 							)}
 						</label>
@@ -87,10 +88,9 @@ const Input: React.FC<Props> = ({
 								<span className={classes.Info}>
 									<HelpOutline />
 
-									<div className={classes.Popover}>
-										<div className={classes.Arrow} />
-										<p className={classes.Description}>{info}</p>
-									</div>
+									<Tooltip className={classes.Tooltip} dark={dark}>
+										{info}
+									</Tooltip>
 								</span>
 							)}
 						</label>

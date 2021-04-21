@@ -45,7 +45,7 @@ const NewPage: React.FC<Props> = ({ onDismiss }) => {
 					type: 'text',
 					placeholder: 'About',
 					label: 'Name',
-					info: 'The name of the webpage.',
+					info: 'The name of the web page.',
 					rules: {
 						required: true
 					}
@@ -55,7 +55,7 @@ const NewPage: React.FC<Props> = ({ onDismiss }) => {
 					type: 'text',
 					placeholder: 'about',
 					label: 'URL',
-					info: 'The route name of the web page. Route will be displayed at the end of the website link.',
+					info: 'The route of the web page. Route will be displayed at the end of the website link.',
 					prefix: '/',
 					rules: {
 						required: true,
