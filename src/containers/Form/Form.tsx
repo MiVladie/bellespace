@@ -19,7 +19,7 @@ interface Props {
 	hasErrors: (value: boolean) => void;
 }
 
-const Form: React.FC<Props> = ({ className, data, hasErrors }) => {
+const Form: React.FC<Props> = ({ className, data }) => {
 	const [expanded, setExpanded] = useState<number[]>([0]);
 	const [values, setValues] = useState<Value>({});
 	const [errors, setErrors] = useState<Value>({});

@@ -13,7 +13,7 @@ interface Props {
 
 const NewPage: React.FC<Props> = ({ onDismiss }) => {
 	const [activeBar, setActiveBar] = useState<number>(1);
-	const [hasErrors, setHasErrors] = useState<boolean>(false);
+	const [_, setHasErrors] = useState<boolean>(false);
 
 	const bars: IBar[] = [
 		{
