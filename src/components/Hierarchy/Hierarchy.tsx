@@ -11,7 +11,7 @@ interface Props {
 	content: React.ReactNode;
 	bars: IBar[];
 	activeBar: number;
-	actions?: IAction[];
+	actions?: IAction[] | null;
 }
 
 const Hierarchy: React.FC<Props> = ({ heading, content, bars, activeBar, actions }) => (

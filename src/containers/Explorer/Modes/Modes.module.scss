@@ -7,4 +7,11 @@ $toggle: 1.25rem;
 
 .Wrapper {
 	padding: $toggle;
+
+	.Heading {
+		font-family: $secondary-font;
+		font-size: $size-md;
+
+		color: $primary-color;
+	}
 }

@@ -20,6 +20,8 @@ const Explorer: React.FC = () => {
 			dispatch({ type: Action.SET_NEW_PAGE, payload: { newPage: false } });
 		} else if (state.activeComponent) {
 			dispatch({ type: Action.DELETE_ACTIVE_COMPONENT });
+		} else {
+			dispatch({ type: Action.DELETE_ACTIVE_PAGE });
 		}
 	};
 
@@ -32,7 +34,7 @@ const Explorer: React.FC = () => {
 	} else if (state.activeComponent) {
 		content = <ModifyComponent />;
 	} else if (state.activePage) {
-		content = <ModifyPage />;
+		content = <ModifyPage onDismiss={onDismiss} />;
 	}
 
 	return (
