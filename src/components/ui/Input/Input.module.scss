@@ -75,13 +75,13 @@
 
 			&:focus {
 				&::placeholder {
-					color: $primary-color;
+					color: $secondary-color;
 				}
 			}
 
 			&::placeholder {
 				font-weight: 300;
-				color: $secondary-color;
+				color: $third-color;
 
 				transition: color 0.15s;
 			}
@@ -93,7 +93,7 @@
 		}
 
 		.Input {
-			height: 2em;
+			height: $space-md;
 		}
 
 		.Textarea {
@@ -111,9 +111,13 @@
 		.Textarea {
 			color: $fifth-color;
 
+			&::placeholder {
+				color: $secondary-color;
+			}
+
 			&:focus {
 				&::placeholder {
-					color: $fifth-color;
+					color: $fourth-color;
 				}
 			}
 
@@ -132,8 +136,7 @@
 	}
 
 	.Message {
-		display: block;
-		// position: absolute;
+		display: inline-block;
 
 		font-family: $secondary-font;
 		font-size: $size-xs;

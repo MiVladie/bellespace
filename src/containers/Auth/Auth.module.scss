@@ -64,6 +64,10 @@
 
 				.Input {
 					margin-top: $space-md;
+
+					small {
+						position: absolute;
+					}
 				}
 
 				.Message {
