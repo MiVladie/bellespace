@@ -10,7 +10,8 @@ $offset: calc(#{$space-sm} * 1.5);
 	width: 90%;
 	max-width: 340px;
 
-	height: 100vh;
+	height: 100%;
+	max-height: 100vh;
 
 	position: fixed;
 
@@ -32,7 +33,7 @@ $offset: calc(#{$space-sm} * 1.5);
 
 	.Toggle {
 		width: $toggle;
-		height: 100vh;
+		height: 100%;
 
 		position: absolute;
 

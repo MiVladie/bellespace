@@ -12,6 +12,33 @@ interface Props {
 	onDismiss: () => void;
 }
 
+const bannerComponents = [
+	{
+		id: 1,
+		name: 'Image First'
+	},
+	{
+		id: 2,
+		name: 'Full Width'
+	},
+	{
+		id: 3,
+		name: 'Informational'
+	},
+	{
+		id: 4,
+		name: 'Video Centered'
+	},
+	{
+		id: 5,
+		name: 'Image Slideshow'
+	},
+	{
+		id: 6,
+		name: 'Centered Information'
+	}
+];
+
 const NewComponent: React.FC<Props> = ({ onDismiss }) => {
 	const [selected, setSelected] = useState<number | null>(null);
 	const [activeBar, setActiveBar] = useState<number>(1);
@@ -19,6 +46,10 @@ const NewComponent: React.FC<Props> = ({ onDismiss }) => {
 	const switchBarHandler = (id: number) => {
 		setSelected(null);
 		setActiveBar(id);
+	};
+
+	const onAddComponent = () => {
+		console.log({ selected });
 	};
 
 	const bars: IBar[] = [
@@ -52,39 +83,13 @@ const NewComponent: React.FC<Props> = ({ onDismiss }) => {
 		{
 			id: 1,
 			name: 'Add',
-			onClick: () => null
+			onClick: onAddComponent,
+			disabled: selected == null
 		},
 		{
 			id: 2,
 			name: 'Cancel',
 			onClick: onDismiss
-		}
-	];
-
-	const bannerComponents = [
-		{
-			id: 1,
-			name: 'Image First'
-		},
-		{
-			id: 2,
-			name: 'Full Width'
-		},
-		{
-			id: 3,
-			name: 'Informational'
-		},
-		{
-			id: 4,
-			name: 'Video Centered'
-		},
-		{
-			id: 5,
-			name: 'Image Slideshow'
-		},
-		{
-			id: 6,
-			name: 'Centered Information'
 		}
 	];
 

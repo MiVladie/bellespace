@@ -33,7 +33,12 @@ const Hierarchy: React.FC<Props> = ({ heading, content, bars, activeBar, actions
 				{actions && (
 					<div className={classes.Actions}>
 						{actions.map((action, index) => (
-							<Button onClick={action.onClick} filled={!index} key={action.id}>
+							<Button
+								onClick={action.onClick}
+								filled={!index}
+								disabled={action.disabled}
+								loading={action.loading}
+								key={action.id}>
 								{action.name}
 							</Button>
 						))}
