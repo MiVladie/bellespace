@@ -32,7 +32,7 @@ const Explorer: React.FC = () => {
 	} else if (state.newPage) {
 		content = <NewPage onDismiss={onDismiss} />;
 	} else if (state.activeComponent) {
-		content = <ModifyComponent />;
+		content = <ModifyComponent onDismiss={onDismiss} />;
 	} else if (state.activePage) {
 		content = <ModifyPage onDismiss={onDismiss} />;
 	}
