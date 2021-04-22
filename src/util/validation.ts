@@ -1,4 +1,20 @@
-import { IRules } from 'interfaces';
+import { IRules, IValidatable, IError } from 'interfaces';
+
+export const containsErrorsInSet = (form: IValidatable[]): IError => {
+	const errors: IError = {};
+
+	for (const field of form) {
+		if (field.rules) {
+			const result = containsErrors(field.value, field.rules);
+
+			if (result) {
+				errors[field.name] = result;
+			}
+		}
+	}
+
+	return errors;
+};
 
 export const containsErrors = (value: string, rules: IRules): string | false => {
 	let error: string | false = false;

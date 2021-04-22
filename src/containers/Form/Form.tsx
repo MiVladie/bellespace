@@ -2,27 +2,24 @@ import React, { useState } from 'react';
 
 import { AddRounded, RemoveRounded } from '@material-ui/icons';
 import { containsErrors } from 'util/validation';
-import { IAccordion, IField } from 'interfaces';
+import { IAccordion, IField, IValue } from 'interfaces';
 
 import Accordion from 'components/ui/Accordion/Accordion';
 import Input from 'components/ui/Input/Input';
 
 import classes from './Form.module.scss';
 
-interface Value {
-	[key: string]: string;
-}
-
 interface Props {
 	className?: string;
 	data: IAccordion[];
-	hasErrors: (value: boolean) => void;
+	onChange: (fields: IValue) => void;
+	onErrors: (errors: IValue) => void;
+	values: IValue;
+	errors: IValue;
 }
 
-const Form: React.FC<Props> = ({ className, data }) => {
+const Form: React.FC<Props> = ({ className, data, onChange, onErrors, values, errors }) => {
 	const [expanded, setExpanded] = useState<number[]>([0]);
-	const [values, setValues] = useState<Value>({});
-	const [errors, setErrors] = useState<Value>({});
 
 	const onExpandClick = (id: number) => {
 		if (expanded.includes(id)) {
@@ -34,21 +31,21 @@ const Form: React.FC<Props> = ({ className, data }) => {
 		setExpanded([...expanded, id]);
 	};
 
-	const onFocus = (name: string) => {
+	const onInputFocus = (name: string) => {
 		if (name in errors) {
 			const newErrors = { ...errors };
 
 			delete newErrors[name];
 
-			setErrors(newErrors);
+			onErrors(newErrors);
 		}
 	};
 
-	const onChange = (value: string, name: string) => {
-		setValues({ ...values, [name]: value });
+	const onInputChange = (value: string, name: string) => {
+		onChange({ ...values, [name]: value });
 	};
 
-	const onBlur = (field: IField) => {
+	const onInputBlur = (field: IField) => {
 		if (!field.rules) {
 			return;
 		}
@@ -56,7 +53,7 @@ const Form: React.FC<Props> = ({ className, data }) => {
 		const error = containsErrors(values[field.name], field.rules);
 
 		if (error) {
-			setErrors((prevState) => ({ ...prevState, [field.name]: error }));
+			onErrors({ ...errors, [field.name]: error });
 		}
 	};
 
@@ -78,9 +75,9 @@ const Form: React.FC<Props> = ({ className, data }) => {
 								placeholder={field.placeholder}
 								prefix={field.prefix}
 								label={field.label}
-								onFocus={() => onFocus(field.name)}
-								onChange={(val) => onChange(val, field.name)}
-								onBlur={() => onBlur(field)}
+								onFocus={() => onInputFocus(field.name)}
+								onChange={(val) => onInputChange(val, field.name)}
+								onBlur={() => onInputBlur(field)}
 								value={values[field.name] || ''}
 								info={field.info}
 								error={errors[field.name]}
