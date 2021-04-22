@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import { IProject } from 'interfaces';
 import { useHistory } from 'react-router-dom';
+import { IProject } from 'interfaces';
+import { Helmet } from 'react-helmet';
 
 import Gallery from 'containers/Gallery/Gallery';
 import Pagination from 'components/Pagination/Pagination';
@@ -16,7 +17,7 @@ const Projects: React.FC = () => {
 	const [libraryPage, setLibraryPage] = useState<number>(1);
 
 	const [loading, setLoading] = useState<boolean>(true);
-	const [error, setError] = useState<string | undefined>();
+	const [_, setError] = useState<string | undefined>();
 
 	const history = useHistory();
 
@@ -83,10 +84,9 @@ const Projects: React.FC = () => {
 	};
 
 	const projectSelectHandler = (id?: number) => {
-		console.log({ id });
-
 		if (id) {
 			history.push(`/projects/${id}`);
+
 			return;
 		}
 
@@ -95,6 +95,10 @@ const Projects: React.FC = () => {
 
 	return (
 		<div className={classes.Projects}>
+			<Helmet>
+				<title>Projects | Bellespace</title>
+			</Helmet>
+
 			<div className={classes.Selection}>
 				<div className={classes.Wrapper}>
 					<h1 className={classes.Heading}>Select Your Project..</h1>

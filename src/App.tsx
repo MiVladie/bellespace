@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { AuthContext } from 'context/providers/auth';
 import { Action } from 'context/actions/auth';
+import { Helmet } from 'react-helmet';
 import { IUser } from 'interfaces';
 
 import Layout from 'hoc/Layout/Layout';
@@ -58,6 +59,10 @@ const App: React.FC = () => {
 
 	return (
 		<Layout>
+			<Helmet>
+				<title>Bellespace</title>
+			</Helmet>
+
 			<Route
 				render={({ location }) => {
 					if (state.user) {

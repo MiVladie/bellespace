@@ -2,8 +2,9 @@ import React, { useState, useContext } from 'react';
 
 import { AuthContext } from 'context/providers/auth';
 import { ICredentials, IUser } from 'interfaces';
-import { Action } from 'context/actions/auth';
 import { useHistory } from 'react-router-dom';
+import { Action } from 'context/actions/auth';
+import { Helmet } from 'react-helmet';
 
 import Auth from 'containers/Auth/Auth';
 
@@ -38,7 +39,14 @@ const SignUp: React.FC = () => {
 			console.error(error);
 		}
 	};
-	return <Auth type='signup' onSubmit={submitHandler} loading={loading} message={error} />;
+	return (
+		<>
+			<Helmet>
+				<title>Sign Up | Bellespace</title>
+			</Helmet>
+			<Auth type='signup' onSubmit={submitHandler} loading={loading} message={error} />;
+		</>
+	);
 };
 
 export default SignUp;

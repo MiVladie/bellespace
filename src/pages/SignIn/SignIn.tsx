@@ -5,6 +5,8 @@ import { ICredentials, IUser } from 'interfaces';
 import { Action } from 'context/actions/auth';
 import { useHistory } from 'react-router-dom';
 
+import { Helmet } from 'react-helmet';
+
 import Auth from 'containers/Auth/Auth';
 
 const SignIn: React.FC = () => {
@@ -39,7 +41,15 @@ const SignIn: React.FC = () => {
 		}
 	};
 
-	return <Auth type='signin' onSubmit={submitHandler} loading={loading} message={error} />;
+	return (
+		<>
+			<Helmet>
+				<title>Sign In | Bellespace</title>
+			</Helmet>
+
+			<Auth type='signin' onSubmit={submitHandler} loading={loading} message={error} />
+		</>
+	);
 };
 
 export default SignIn;

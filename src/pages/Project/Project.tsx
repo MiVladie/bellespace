@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 
 import { ActivityContext } from 'context/providers/activity';
 import { Action } from 'context/actions/activity';
+import { Helmet } from 'react-helmet';
 
 import Sitemap from 'containers/Sitemap/Sitemap';
 import Explorer from 'containers/Explorer/Explorer';
@@ -22,6 +23,10 @@ const Project: React.FC = () => {
 
 	return (
 		<div className={classes.Project}>
+			<Helmet>
+				<title>Ashk Aesthetics | Bellespace</title>
+			</Helmet>
+
 			<Sitemap />
 			<Explorer />
 		</div>
