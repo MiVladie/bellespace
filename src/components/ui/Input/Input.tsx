@@ -13,6 +13,9 @@ interface Props extends IField {
 	onFocus?: () => void;
 	onBlur?: () => void;
 	value: string | number;
+	step?: number;
+	min?: number;
+	max?: number;
 	error?: string | null;
 	disabled?: boolean;
 	autoComplete?: boolean;
@@ -28,6 +31,9 @@ const Input: React.FC<Props> = ({
 	onFocus,
 	onBlur,
 	value,
+	step,
+	min,
+	max,
 	info,
 	prefix,
 	label,
@@ -36,6 +42,30 @@ const Input: React.FC<Props> = ({
 	autoComplete,
 	dark
 }) => {
+	const onInputBlur = () => {
+		if (type === 'number') {
+			let result = value;
+
+			if (min && +value < min) {
+				result = min.toString();
+			}
+
+			if (max && +value > max) {
+				result = max.toString();
+			}
+
+			if (step) {
+				let inv = 1.0 / step;
+
+				result = (Math.round(+value * inv) / inv).toString();
+			}
+
+			onChange(result.toString());
+		}
+
+		onBlur?.();
+	};
+
 	let content: React.ReactNode = null;
 
 	switch (type) {
@@ -65,8 +95,11 @@ const Input: React.FC<Props> = ({
 					type={type}
 					onChange={(e) => onChange(e.target.value)}
 					onFocus={onFocus}
-					onBlur={onBlur}
+					onBlur={onInputBlur}
 					value={value}
+					step={step}
+					min={min}
+					max={max}
 					disabled={disabled}
 					autoComplete={autoComplete ? 'on' : 'off'}
 				/>
