@@ -1,22 +1,25 @@
 {
   "files": {
-    "main.css": "/bellespace/static/css/main.1ec5f406.chunk.css",
-    "main.js": "/bellespace/static/js/main.ae0af427.chunk.js",
-    "main.js.map": "/bellespace/static/js/main.ae0af427.chunk.js.map",
+    "main.css": "/bellespace/static/css/main.f5b89bb7.chunk.css",
+    "main.js": "/bellespace/static/js/main.eeb818bb.chunk.js",
+    "main.js.map": "/bellespace/static/js/main.eeb818bb.chunk.js.map",
     "runtime-main.js": "/bellespace/static/js/runtime-main.39c655dc.js",
     "runtime-main.js.map": "/bellespace/static/js/runtime-main.39c655dc.js.map",
-    "static/js/2.1cfb4713.chunk.js": "/bellespace/static/js/2.1cfb4713.chunk.js",
-    "static/js/2.1cfb4713.chunk.js.map": "/bellespace/static/js/2.1cfb4713.chunk.js.map",
+    "static/css/2.d59c41ec.chunk.css": "/bellespace/static/css/2.d59c41ec.chunk.css",
+    "static/js/2.ec22add6.chunk.js": "/bellespace/static/js/2.ec22add6.chunk.js",
+    "static/js/2.ec22add6.chunk.js.map": "/bellespace/static/js/2.ec22add6.chunk.js.map",
     "index.html": "/bellespace/index.html",
     "service-worker.js": "/bellespace/service-worker.js",
     "service-worker.js.map": "/bellespace/service-worker.js.map",
-    "static/css/main.1ec5f406.chunk.css.map": "/bellespace/static/css/main.1ec5f406.chunk.css.map",
-    "static/js/2.1cfb4713.chunk.js.LICENSE.txt": "/bellespace/static/js/2.1cfb4713.chunk.js.LICENSE.txt"
+    "static/css/2.d59c41ec.chunk.css.map": "/bellespace/static/css/2.d59c41ec.chunk.css.map",
+    "static/css/main.f5b89bb7.chunk.css.map": "/bellespace/static/css/main.f5b89bb7.chunk.css.map",
+    "static/js/2.ec22add6.chunk.js.LICENSE.txt": "/bellespace/static/js/2.ec22add6.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.39c655dc.js",
-    "static/js/2.1cfb4713.chunk.js",
-    "static/css/main.1ec5f406.chunk.css",
-    "static/js/main.ae0af427.chunk.js"
+    "static/css/2.d59c41ec.chunk.css",
+    "static/js/2.ec22add6.chunk.js",
+    "static/css/main.f5b89bb7.chunk.css",
+    "static/js/main.eeb818bb.chunk.js"
   ]
 }
