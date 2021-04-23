@@ -21,9 +21,10 @@ interface Props {
 	options?: ISliderOptions;
 	onChange: (value: number) => void;
 	value: number;
+	dark?: boolean;
 }
 
-const Slider: React.FC<Props> = ({ name, defaultValue, label, info, marks, options, onChange, value }) => {
+const Slider: React.FC<Props> = ({ name, defaultValue, label, info, marks, options, onChange, value, dark }) => {
 	useEffect(() => {
 		if (defaultValue != null) {
 			onChange(defaultValue);
@@ -47,7 +48,7 @@ const Slider: React.FC<Props> = ({ name, defaultValue, label, info, marks, optio
 
 			<div className={classes.Wrapper}>
 				<Dragger
-					className='Dragger'
+					className={['Dragger', dark ? 'Dark' : null].join(' ')}
 					defaultValue={defaultValue || options?.min}
 					marks={marks}
 					min={options?.min}
@@ -68,6 +69,7 @@ const Slider: React.FC<Props> = ({ name, defaultValue, label, info, marks, optio
 						placeholder={defaultValue?.toString() || options?.min.toString() || '2'}
 						onChange={(val) => onChange(+val)}
 						value={value || (defaultValue ?? 0)}
+						dark={dark}
 					/>
 				)}
 			</div>

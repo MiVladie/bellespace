@@ -62,3 +62,31 @@
 		}
 	}
 }
+
+.Dark {
+	.rc-slider-rail {
+		background-color: $secondary-color;
+	}
+
+	.rc-slider-track {
+		background-color: $fifth-color;
+	}
+
+	.rc-slider-handle {
+		background-color: $primary-color;
+		border-color: $fifth-color;
+	}
+
+	.rc-slider-step {
+		.rc-slider-dot {
+			background-color: $primary-color;
+			border-color: $fifth-color;
+		}
+	}
+
+	.rc-slider-mark {
+		.rc-slider-mark-text {
+			color: $third-color;
+		}
+	}
+}
