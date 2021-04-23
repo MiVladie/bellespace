@@ -5,10 +5,11 @@ import { containsErrors } from 'util/validation';
 import { IAccordion, IDropdown, IError, IField, IValue } from 'interfaces';
 
 import Accordion from 'components/ui/Accordion/Accordion';
+import Dropdown from 'components/ui/Dropdown/Dropdown';
+import Slider from 'components/ui/Slider/Slider';
 import Input from 'components/ui/Input/Input';
 
 import classes from './Form.module.scss';
-import Dropdown from 'components/ui/Dropdown/Dropdown';
 
 interface Props {
 	className?: string;
@@ -82,6 +83,18 @@ const Form: React.FC<Props> = ({ className, data, onChange, onErrors, values, er
 									onBlur={() => onInputBlur(field)}
 									value={values[field.name] as number}
 									error={errors[field.name]}
+									key={field.name}
+								/>
+							) : field.type === 'slider' ? (
+								<Slider
+									name={field.name}
+									defaultValue={field.defaultValue}
+									marks={field.marks}
+									label={field.label}
+									info={field.info}
+									options={field.options}
+									onChange={(val) => onInputChange(val, field.name)}
+									value={+values[field.name]}
 									key={field.name}
 								/>
 							) : (

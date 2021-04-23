@@ -85,7 +85,7 @@ const NewPage: React.FC<Props> = ({ onDismiss }) => {
 
 		form.forEach((fieldset) => {
 			fieldset.fields.forEach((field) => {
-				if (field.type !== 'dropdown') {
+				if (field.type !== 'dropdown' && field.type !== 'slider') {
 					values.push({ name: field.name, value: fields[field.name] as string, rules: field.rules });
 				}
 			});

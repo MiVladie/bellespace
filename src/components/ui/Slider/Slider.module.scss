@@ -1,0 +1,61 @@
+@import '../../../assets/styles/colors';
+@import '../../../assets/styles/fonts';
+@import '../../../assets/styles/sizing';
+@import '../../../assets/styles/spacing';
+
+.Slider {
+	width: 100%;
+
+	cursor: pointer;
+
+	.Label {
+		display: flex;
+		align-items: center;
+
+		font-family: $secondary-font;
+		font-size: $size-xs;
+
+		color: $secondary-color;
+
+		margin-bottom: $space-xs;
+
+		.Info {
+			svg {
+				width: $size-xs;
+				height: $size-xs;
+
+				margin-left: $space-xs;
+
+				color: $secondary-color;
+
+				&:hover ~ .Tooltip {
+					opacity: 1;
+					visibility: visible;
+				}
+			}
+		}
+	}
+
+	.Wrapper {
+		width: 100%;
+
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		.Input {
+			width: $space-xl;
+
+			margin-left: $space-sm;
+
+			input {
+				width: 100%;
+
+				text-align: center;
+				font-size: $size-sm;
+
+				padding: 0;
+			}
+		}
+	}
+}

@@ -81,53 +81,37 @@ const stylesForm: IAccordion[] = [
 				rules: {
 					required: true
 				}
+			},
+			{
+				name: 'fontSize',
+				type: 'slider',
+				label: 'Font Size',
+				defaultValue: 1.5,
+				marks: {
+					0.75: 'sm',
+					1.5: 'md',
+					2.5: 'lg'
+				},
+				options: {
+					step: 0.25,
+					min: 0.5,
+					max: 3,
+					withInput: true
+				}
 			}
-			// {
-			// 	name: 'fontSize',
-			// 	type: 'slider',
-			// 	label: 'Font Size',
-			// 	step: 0.05,
-			// 	marks: [
-			// 		{
-			// 			value: 0.75,
-			// 			label: 'sm'
-			// 		},
-			// 		{
-			// 			value: 1,
-			// 			label: 'md'
-			// 		},
-			// 		{
-			// 			value: 2,
-			// 			label: 'lg'
-			// 		}
-			// 	],
-			// 	rules: {
-			// 		min: 0.5,
-			// 		max: 5
-			// 	}
-			// },
 			// {
 			// 	name: 'fontWeight',
 			// 	type: 'slider',
 			// 	label: 'Font Weight',
-			// 	step: 100,
-			// 	marks: [
-			// 		{
-			// 			value: 200,
-			// 			label: 'sm'
-			// 		},
-			// 		{
-			// 			value: 400,
-			// 			label: 'md'
-			// 		},
-			// 		{
-			// 			value: 600,
-			// 			label: 'lg'
-			// 		}
-			// 	],
-			// 	rules: {
-			// 		min: 200,
-			// 		max: 800
+			// 	marks: {
+			// 		200: 'thin',
+			// 		400: 'normal',
+			// 		800: 'bold'
+			// 	},
+			// 	options: {
+			// 		step: 100,
+			// 		min: 100,
+			// 		max: 900
 			// 	}
 			// }
 		]
