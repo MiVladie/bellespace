@@ -129,10 +129,6 @@
 
 	.Error {
 		border-bottom-color: $danger-color;
-
-		&:focus-within {
-			border-bottom-color: $danger-color;
-		}
 	}
 
 	.Message {
