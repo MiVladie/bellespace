@@ -1,6 +1,6 @@
 import { IUser, ICredentials } from './auth';
 import { IProject, IPage, IComponent } from './projects';
-import { IAccordion, IField, IRules } from './components';
+import { IAccordion, IField, IRules, IDropdown, IOption } from './components';
 import { IAction, IBar } from './activities';
 import { IValidatable, IValue, IError } from './validation';
 
@@ -15,6 +15,8 @@ export type {
 	IRules,
 	IAction,
 	IBar,
+	IDropdown,
+	IOption,
 	IValidatable,
 	IValue,
 	IError

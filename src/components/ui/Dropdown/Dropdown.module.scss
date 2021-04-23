@@ -1,0 +1,286 @@
+@import '../../../assets/styles/colors';
+@import '../../../assets/styles/fonts';
+@import '../../../assets/styles/sizing';
+@import '../../../assets/styles/spacing';
+@import '../../../assets/styles/animations';
+@import '../../../assets/styles/mixins';
+
+.Dropdown {
+	width: 100%;
+
+	.Label {
+		display: flex;
+		align-items: center;
+
+		font-family: $secondary-font;
+		font-size: $size-xs;
+
+		color: $secondary-color;
+
+		margin-bottom: $space-xs;
+
+		.Info {
+			svg {
+				width: $size-xs;
+				height: $size-xs;
+
+				margin-left: $space-xs;
+
+				color: $secondary-color;
+
+				&:hover ~ .Tooltip {
+					opacity: 1;
+					visibility: visible;
+				}
+			}
+		}
+	}
+
+	.Container {
+		width: 100%;
+
+		position: relative;
+
+		.Header {
+			width: calc(100% - #{$space-xs});
+			height: $space-md;
+
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+
+			padding-right: $space-xs;
+
+			border-bottom: 1.5px solid $secondary-color;
+
+			transition: all 0.15s;
+			cursor: pointer;
+
+			&:active {
+				border-bottom-color: $primary-color;
+
+				.Placeholder {
+					color: $primary-color;
+				}
+
+				.Icon {
+					color: $primary-color;
+				}
+			}
+
+			.Name,
+			.Placeholder {
+				font-family: $secondary-font;
+				font-size: $size-md;
+
+				transition: all 0.15s;
+
+				@include ellipsis;
+			}
+
+			.Name {
+				color: $primary-color;
+			}
+
+			.Placeholder {
+				color: $third-color;
+			}
+
+			.Icon {
+				color: $secondary-color;
+
+				transition: all 0.25s;
+			}
+
+			.Open {
+				transform: rotateX(180deg);
+			}
+		}
+
+		.Message {
+			display: inline-block;
+
+			font-family: $secondary-font;
+			font-size: $size-xs;
+
+			color: $danger-color;
+
+			margin: $space-xs 0 0 $space-xs;
+
+			@include popUp;
+		}
+
+		.Error {
+			border-bottom-color: $danger-color;
+		}
+
+		.Wrapper {
+			width: 100%;
+
+			position: absolute;
+			top: calc(#{$space-md} + 1.5px);
+			left: 0;
+			right: 0;
+
+			z-index: 1000;
+
+			.List {
+				$height: $space-lg;
+
+				width: 100%;
+				max-height: calc((#{$height} + #{$space-xs}) * 5);
+
+				overflow-y: auto;
+
+				padding: $space-xs 0;
+
+				border-bottom: 1.5px solid $secondary-color;
+				background-color: $fifth-color;
+
+				.Option {
+					width: 100%;
+					height: $height;
+
+					display: flex;
+					align-items: center;
+
+					margin-bottom: $space-xs;
+					border-radius: 6px;
+
+					transition: all 0.15s;
+					cursor: pointer;
+
+					&:last-of-type {
+						margin-bottom: 0;
+					}
+
+					.Label {
+						display: inline-block;
+
+						font-family: $secondary-font;
+						font-size: $size-sm;
+						color: $third-color;
+
+						margin: 0;
+						margin-left: 0.5rem;
+
+						transition: all 0.15s;
+
+						@include ellipsis;
+					}
+				}
+
+				.Selected {
+					background-color: $fourth-color;
+
+					.Label {
+						color: $primary-color;
+
+						margin-left: $space-sm;
+					}
+				}
+			}
+		}
+	}
+}
+
+.Dark {
+	.Container {
+		.Header {
+			border-bottom-color: $secondary-color;
+
+			&:active {
+				border-bottom-color: $fifth-color;
+
+				.Placeholder {
+					color: $fourth-color;
+				}
+
+				.Icon {
+					color: $fifth-color;
+				}
+			}
+
+			.Name {
+				color: $fifth-color;
+			}
+
+			.Placeholder {
+				color: $secondary-color;
+			}
+
+			.Icon {
+				color: $secondary-color;
+			}
+		}
+
+		.Wrapper {
+			.List {
+				border-bottom-color: $secondary-color;
+				background-color: $primary-color;
+
+				.Option {
+					.Label {
+						color: $third-color;
+					}
+				}
+
+				.Selected {
+					background-color: darken($primary-color, 4);
+
+					.Label {
+						color: $fifth-color;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.Dropdown {
+		.Container {
+			.Header {
+				&:hover {
+					.Placeholder {
+						color: $secondary-color;
+					}
+				}
+			}
+
+			.Wrapper {
+				.List {
+					.Option {
+						&:hover:not(.Selected) {
+							background-color: $fourth-color;
+
+							.Label {
+								color: $primary-color;
+
+								margin-left: $space-sm;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.Dark {
+		.Container {
+			.Wrapper {
+				.List {
+					.Option {
+						&:hover:not(.Selected) {
+							background-color: darken($primary-color, 4);
+
+							.Label {
+								color: $fifth-color;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

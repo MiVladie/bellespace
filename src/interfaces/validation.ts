@@ -7,7 +7,7 @@ export interface IValidatable {
 }
 
 export interface IValue {
-	[key: string]: string;
+	[key: string]: string | number;
 }
 
 export interface IError {

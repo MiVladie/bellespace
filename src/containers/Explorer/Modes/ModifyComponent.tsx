@@ -48,78 +48,90 @@ const contentForm: IAccordion[] = [
 ];
 
 const stylesForm: IAccordion[] = [
-	// {
-	// 	name: 'Title',
-	// 	fields: [
-	// 		{
-	// 			name: 'fontFamily',
-	// 			type: 'dropdown',
-	// 			placeholder: 'Select a font family..',
-	// 			label: 'Font Family',
-	// 			options: [
-	// 				{
-	// 					value: 1,
-	// 					label: 'Montserrat'
-	// 				},
-	// 				{
-	// 					value: 2,
-	// 					label: 'Poppins'
-	// 				}
-	// 			],
-	// 			rules: {
-	// 				required: true
-	// 			}
-	// 		},
-	// 		{
-	// 			name: 'fontSize',
-	// 			type: 'slider',
-	// 			label: 'Font Size',
-	// 			step: 0.05,
-	// 			marks: [
-	// 				{
-	// 					value: 0.75,
-	// 					label: 'sm'
-	// 				},
-	// 				{
-	// 					value: 1,
-	// 					label: 'md'
-	// 				},
-	// 				{
-	// 					value: 2,
-	// 					label: 'lg'
-	// 				}
-	// 			],
-	// 			rules: {
-	// 				min: 0.5,
-	// 				max: 5
-	// 			}
-	// 		},
-	// 		{
-	// 			name: 'fontWeight',
-	// 			type: 'slider',
-	// 			label: 'Font Weight',
-	// 			step: 100,
-	// 			marks: [
-	// 				{
-	// 					value: 200,
-	// 					label: 'sm'
-	// 				},
-	// 				{
-	// 					value: 400,
-	// 					label: 'md'
-	// 				},
-	// 				{
-	// 					value: 600,
-	// 					label: 'lg'
-	// 				}
-	// 			],
-	// 			rules: {
-	// 				min: 200,
-	// 				max: 800
-	// 			}
-	// 		}
-	// 	]
-	// }
+	{
+		name: 'Title',
+		fields: [
+			{
+				name: 'fontFamily',
+				type: 'dropdown',
+				placeholder: 'Select a font family..',
+				label: 'Font Family',
+				options: [
+					{
+						value: 1,
+						label: 'Montserrat'
+					},
+					{
+						value: 2,
+						label: 'Raleway'
+					},
+					{
+						value: 3,
+						label: 'Open Sans'
+					},
+					{
+						value: 4,
+						label: 'Poppins'
+					},
+					{
+						value: 5,
+						label: 'Nunito'
+					}
+				],
+				rules: {
+					required: true
+				}
+			}
+			// {
+			// 	name: 'fontSize',
+			// 	type: 'slider',
+			// 	label: 'Font Size',
+			// 	step: 0.05,
+			// 	marks: [
+			// 		{
+			// 			value: 0.75,
+			// 			label: 'sm'
+			// 		},
+			// 		{
+			// 			value: 1,
+			// 			label: 'md'
+			// 		},
+			// 		{
+			// 			value: 2,
+			// 			label: 'lg'
+			// 		}
+			// 	],
+			// 	rules: {
+			// 		min: 0.5,
+			// 		max: 5
+			// 	}
+			// },
+			// {
+			// 	name: 'fontWeight',
+			// 	type: 'slider',
+			// 	label: 'Font Weight',
+			// 	step: 100,
+			// 	marks: [
+			// 		{
+			// 			value: 200,
+			// 			label: 'sm'
+			// 		},
+			// 		{
+			// 			value: 400,
+			// 			label: 'md'
+			// 		},
+			// 		{
+			// 			value: 600,
+			// 			label: 'lg'
+			// 		}
+			// 	],
+			// 	rules: {
+			// 		min: 200,
+			// 		max: 800
+			// 	}
+			// }
+		]
+	}
 ];
 
 const ModifyComponent: React.FC<Props> = ({ onDismiss }) => {

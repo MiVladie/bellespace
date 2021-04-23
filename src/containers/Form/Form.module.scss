@@ -55,7 +55,7 @@ $toggle: 1.25rem;
 
 			border-bottom: 2px solid $fourth-color;
 
-			* {
+			> * {
 				margin-top: $space-sm;
 
 				&:first-of-type {
