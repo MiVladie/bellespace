@@ -6,10 +6,12 @@ interface Props {
 	className?: string;
 	expanded: boolean;
 	children: React.ReactNode;
+	onTransitionEnd?: () => void;
 }
 
 interface State {
 	height: number | 'auto';
+	overflow: 'visible' | 'hidden';
 	myRef: HTMLElement | null;
 	prevExpanded: boolean;
 }
@@ -17,6 +19,7 @@ interface State {
 class Accordion extends Component<Props, State> {
 	state = {
 		height: this.props.expanded ? 'auto' : 0,
+		overflow: this.props.expanded ? 'visible' : 'hidden',
 		myRef: null,
 		prevExpanded: this.props.expanded
 	} as State;
@@ -34,7 +37,7 @@ class Accordion extends Component<Props, State> {
 
 	componentDidUpdate = (_: Props, prevState: State) => {
 		if (prevState.height === 'auto' && typeof this.state.height === 'number') {
-			setTimeout(() => this.setState({ height: 0 }), 1);
+			setTimeout(() => this.setState({ height: 0, overflow: 'hidden' }), 1);
 		}
 	};
 
@@ -44,18 +47,20 @@ class Accordion extends Component<Props, State> {
 
 	updateAfterTransition = () => {
 		if (this.props.expanded) {
-			this.setState({ height: 'auto' });
+			this.setState({ height: 'auto', overflow: 'visible' });
 		}
+
+		this.props.onTransitionEnd?.();
 	};
 
 	render() {
-		const { height } = this.state;
+		const { height, overflow } = this.state;
 		const { className, children } = this.props;
 
 		return (
 			<section
 				className={classes.Accordion}
-				style={{ height: height }}
+				style={{ height, overflow }}
 				ref={this.setInnerRef}
 				onTransitionEnd={() => this.updateAfterTransition()}>
 				<div className={className}>{children}</div>
