@@ -131,7 +131,7 @@ $offset: calc(#{$space-sm} * 1.5);
 			}
 
 			.Components {
-				margin: $space-xs $space-xs $space-xs calc(#{$offset} + #{$toggle});
+				padding: $space-xs $space-xs $space-xs calc(#{$offset} + #{$toggle});
 
 				overflow: hidden;
 
