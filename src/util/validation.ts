@@ -19,30 +19,35 @@ export const containsErrorsInSet = (form: IValidatable[]): IError => {
 export const containsErrors = (value: string, rules: IRules): string | false => {
 	let error: string | false = false;
 
-	Object.entries(rules).forEach(([key, val]) => {
+	Object.entries(rules).some(([key, val]) => {
 		if (key === 'required' && val && isEmpty(value)) {
 			error = 'This field is required!';
-			return;
+			return true;
 		}
 
 		if (key === 'isEmail' && val && !isValidEmail(value)) {
 			error = 'This is not a valid email address!';
-			return;
+			return true;
 		}
 
 		if (key === 'isPassword' && val && !isValidPassword(value)) {
 			error = 'The password must be between 8 and 15 characters long!';
-			return;
+			return true;
 		}
 
 		if (key === 'isURL' && val && !isValidURL(value)) {
 			error = 'This is not a valid URL!';
-			return;
+			return true;
 		}
 
 		if (key === 'isRoute' && val && !isValidRoute(value)) {
 			error = 'Special characters are not allowed!';
-			return;
+			return true;
+		}
+
+		if (key === 'isHex' && val && !isValidHex(value)) {
+			error = 'This is not a valid color!';
+			return true;
 		}
 
 		if (key === 'custom' && val) {
@@ -50,9 +55,11 @@ export const containsErrors = (value: string, rules: IRules): string | false => 
 
 			if (result) {
 				error = result;
-				return;
+				return true;
 			}
 		}
+
+		return false;
 	});
 
 	return error;
@@ -90,6 +97,12 @@ export const isValidURL = (value: string) => {
 
 export const isValidRoute = (value: string) => {
 	var re = /^[a-zA-Z0-9_.-]*$/;
+
+	return re.test(String(value));
+};
+
+export const isValidHex = (value: string) => {
+	var re = /^[0-9a-fA-F]{8}$|[0-9a-fA-F]{6}$|[0-9a-fA-F]{4}$|[0-9a-fA-F]{3}$/;
 
 	return re.test(String(value));
 };
