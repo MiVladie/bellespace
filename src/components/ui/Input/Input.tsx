@@ -10,6 +10,7 @@ import classes from './Input.module.scss';
 interface Props extends IField {
 	className?: string;
 	onChange: (e: string) => void;
+	onClick?: () => void;
 	onFocus?: () => void;
 	onBlur?: () => void;
 	value: string | number;
@@ -28,6 +29,7 @@ const Input: React.FC<Props> = ({
 	type,
 	placeholder,
 	onChange,
+	onClick,
 	onFocus,
 	onBlur,
 	value,
@@ -76,6 +78,7 @@ const Input: React.FC<Props> = ({
 					className={[classes.Textarea, dark ? classes.Dark : null, error ? classes.Error : null].join(' ')}
 					style={label || prefix ? { width: '100%', padding: 0 } : {}}
 					placeholder={placeholder}
+					onClick={onClick}
 					onChange={(e) => onChange(e.target.value)}
 					onFocus={onFocus}
 					onBlur={onBlur}
@@ -93,6 +96,7 @@ const Input: React.FC<Props> = ({
 					style={label || prefix ? { width: '100%', padding: 0 } : {}}
 					placeholder={placeholder}
 					type={type}
+					onClick={onClick}
 					onChange={(e) => onChange(e.target.value)}
 					onFocus={onFocus}
 					onBlur={onInputBlur}

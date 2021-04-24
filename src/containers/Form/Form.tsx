@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 
 import { AddRounded, RemoveRounded } from '@material-ui/icons';
 import { containsErrors } from 'util/validation';
-import { IAccordion, IDropdown, IError, IField, IValue } from 'interfaces';
+import { IAccordion, IColor, IDropdown, IError, IField, IValue } from 'interfaces';
 
 import Accordion from 'components/ui/Accordion/Accordion';
 import Dropdown from 'components/ui/Dropdown/Dropdown';
 import Slider from 'components/ui/Slider/Slider';
+import Color from 'components/ui/Color/Color';
 import Input from 'components/ui/Input/Input';
 
 import classes from './Form.module.scss';
@@ -47,7 +48,7 @@ const Form: React.FC<Props> = ({ className, data, onChange, onErrors, values, er
 		onChange({ ...values, [name]: value });
 	};
 
-	const onInputBlur = (field: IField | IDropdown) => {
+	const onInputBlur = (field: IField | IDropdown | IColor) => {
 		if (!field.rules) {
 			return;
 		}
@@ -95,6 +96,22 @@ const Form: React.FC<Props> = ({ className, data, onChange, onErrors, values, er
 									options={field.options}
 									onChange={(val) => onInputChange(val, field.name)}
 									value={+values[field.name]}
+									key={field.name}
+								/>
+							) : field.type === 'color' ? (
+								<Color
+									name={field.name}
+									label={field.label}
+									info={field.info}
+									defaultValue={field.defaultValue}
+									placeholder={field.placeholder}
+									presets={field.presets}
+									options={field.options}
+									onFocus={() => onInputFocus(field.name)}
+									onChange={(val) => onInputChange(val, field.name)}
+									onBlur={() => onInputBlur(field)}
+									value={values[field.name] as string}
+									error={errors[field.name]}
 									key={field.name}
 								/>
 							) : (

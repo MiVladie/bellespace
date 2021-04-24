@@ -1,0 +1,48 @@
+@import '../../../assets/styles/colors';
+@import '../../../assets/styles/fonts';
+@import '../../../assets/styles/sizing';
+@import '../../../assets/styles/spacing';
+
+.Picker {
+	width: 100% !important;
+	height: auto !important;
+
+	padding: 0.5rem;
+
+	border-radius: 6px;
+	box-sizing: border-box;
+	background-color: $primary-color;
+
+	.react-colorful__pointer {
+		$size: 1.25rem;
+
+		width: $size;
+		height: $size;
+
+		border-color: $primary-color;
+		box-shadow: 0 0 4px rgba($fifth-color, 0.15);
+	}
+
+	.react-colorful__saturation {
+		height: auto;
+
+		padding-top: 100%;
+
+		border: none;
+		border-radius: 6px;
+
+		margin: 0;
+
+		.react-colorful__saturation {
+			border-radius: 6px;
+		}
+	}
+
+	.react-colorful__hue,
+	.react-colorful__alpha {
+		height: 1.25rem;
+
+		border-radius: 6px;
+		margin-top: 0.5rem;
+	}
+}

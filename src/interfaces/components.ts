@@ -2,7 +2,7 @@ import React from 'react';
 
 export interface IAccordion {
 	name: string;
-	fields: (IField | IDropdown | ISlider)[];
+	fields: (IField | IDropdown | ISlider | IColor)[];
 }
 
 export interface IField {
@@ -11,7 +11,7 @@ export interface IField {
 	placeholder: string;
 	label?: string;
 	info?: React.ReactNode;
-	prefix?: string;
+	prefix?: React.ReactNode;
 	rules?: IRules;
 }
 
@@ -47,6 +47,31 @@ export interface ISlider {
 
 export interface IMark {
 	[key: number]: string;
+}
+
+export interface IColor {
+	name: string;
+	type: 'color';
+	defaultValue?: string;
+	presets: IPreset[];
+	placeholder: string;
+	info?: React.ReactNode;
+	label?: string;
+	options?: IColorOptions;
+	rules?: IColorRules;
+}
+
+export interface IColorOptions {
+	withAlpha?: boolean;
+}
+
+export interface IColorRules extends CommonRules {
+	isHex?: boolean;
+}
+
+export interface IPreset {
+	value: string;
+	label?: string;
 }
 
 export interface ISliderOptions {

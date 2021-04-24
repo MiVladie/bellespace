@@ -83,6 +83,42 @@ const stylesForm: IAccordion[] = [
 				}
 			},
 			{
+				name: 'color',
+				type: 'color',
+				label: 'Color',
+				placeholder: 'Select a color..',
+				defaultValue: '#34495e',
+				presets: [
+					{
+						value: '#ecf0f1',
+						label: 'primary'
+					},
+					{
+						value: '#bdc3c7',
+						label: 'secondary'
+					},
+					{
+						value: '#6b7884',
+						label: 'third'
+					},
+					{
+						value: '#34495e',
+						label: 'fourth'
+					},
+					{
+						value: '#2c3e50',
+						label: 'fifth'
+					}
+				],
+				options: {
+					withAlpha: true
+				},
+				rules: {
+					required: true,
+					isHex: true
+				}
+			},
+			{
 				name: 'fontSize',
 				type: 'slider',
 				label: 'Font Size',
@@ -169,14 +205,26 @@ const ModifyComponent: React.FC<Props> = ({ onDismiss }) => {
 		case 1:
 			heading = 'Modify Content';
 			content = (
-				<Form data={contentForm} onChange={setFields} values={fields} onErrors={setErrors} errors={errors} />
+				<Form
+					data={contentForm}
+					onChange={(newState) => setFields((prevState) => ({ ...prevState, ...newState }))}
+					values={fields}
+					onErrors={setErrors}
+					errors={errors}
+				/>
 			);
 			break;
 
 		case 2:
 			heading = 'Modify Styles';
 			content = (
-				<Form data={stylesForm} onChange={setFields} values={fields} onErrors={setErrors} errors={errors} />
+				<Form
+					data={stylesForm}
+					onChange={(newState) => setFields((prevState) => ({ ...prevState, ...newState }))}
+					values={fields}
+					onErrors={setErrors}
+					errors={errors}
+				/>
 			);
 			break;
 
