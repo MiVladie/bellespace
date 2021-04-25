@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { AuthProvider } from 'context/providers/auth';
 import { ActivityProvider } from 'context/providers/activity';
+import { WebsiteProvider } from 'context/providers/website';
 
 import App from './App';
 
@@ -12,7 +13,9 @@ ReactDOM.render(
 	<Router basename={process.env.PUBLIC_URL}>
 		<AuthProvider>
 			<ActivityProvider>
-				<App />
+				<WebsiteProvider>
+					<App />
+				</WebsiteProvider>
 			</ActivityProvider>
 		</AuthProvider>
 	</Router>,

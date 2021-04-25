@@ -111,7 +111,7 @@ const stylesForm: IAccordion[] = [
 					}
 				],
 				options: {
-					withAlpha: true
+					// withAlpha: true
 				},
 				rules: {
 					required: true,
@@ -134,22 +134,22 @@ const stylesForm: IAccordion[] = [
 					max: 3,
 					withInput: true
 				}
+			},
+			{
+				name: 'fontWeight',
+				type: 'slider',
+				label: 'Font Weight',
+				marks: {
+					200: 'thin',
+					400: 'normal',
+					800: 'bold'
+				},
+				options: {
+					step: 100,
+					min: 100,
+					max: 900
+				}
 			}
-			// {
-			// 	name: 'fontWeight',
-			// 	type: 'slider',
-			// 	label: 'Font Weight',
-			// 	marks: {
-			// 		200: 'thin',
-			// 		400: 'normal',
-			// 		800: 'bold'
-			// 	},
-			// 	options: {
-			// 		step: 100,
-			// 		min: 100,
-			// 		max: 900
-			// 	}
-			// }
 		]
 	}
 ];

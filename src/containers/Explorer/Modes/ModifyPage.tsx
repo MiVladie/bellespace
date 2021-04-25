@@ -8,66 +8,98 @@ import Form from 'containers/Form/Form';
 
 import classes from './Modes.module.scss';
 
+interface Page {
+	name: string;
+	url: string;
+	description?: string;
+}
+
 interface Props {
+	page: Page;
+	pages: Page[];
+	onDelete: () => void;
+	onChange: (fields: Page) => void;
 	onDismiss: () => void;
 }
 
-const form: IAccordion[] = [
-	{
-		name: 'General',
-		fields: [
-			{
-				name: 'name',
-				type: 'text',
-				placeholder: 'About',
-				label: 'Name',
-				info: 'The name of the web page.',
-				rules: {
-					required: true
-				}
-			},
-			{
-				name: 'url',
-				type: 'text',
-				placeholder: 'about',
-				label: 'URL',
-				info: 'The route of the web page. Route will be displayed at the end of the website link.',
-				prefix: '/',
-				rules: {
-					required: true,
-					isRoute: true,
-					custom: (value) => {
-						if (value === 'about' || value === 'home') {
-							return 'The route name is already taken!';
-						}
+const getForm = (pages: Page[]): IAccordion[] => {
+	const takenNames: string[] = pages.map((page) => page.name);
+	const takenUrl: string[] = pages.map((page) => page.url);
 
-						return false;
+	return [
+		{
+			name: 'General',
+			fields: [
+				{
+					name: 'name',
+					type: 'text',
+					placeholder: 'About',
+					label: 'Name',
+					info: 'The name of the web page.',
+					rules: {
+						required: true,
+						custom: (value) => {
+							if (takenNames.includes(value)) {
+								return 'The name is already taken!';
+							}
+
+							return false;
+						}
+					}
+				},
+				{
+					name: 'url',
+					type: 'text',
+					placeholder: 'about',
+					label: 'URL',
+					info: 'The route of the web page. Route will be displayed at the end of the website link.',
+					prefix: '/',
+					rules: {
+						required: true,
+						isRoute: true,
+						custom: (value) => {
+							if (takenUrl.includes(value)) {
+								return 'The route name is already taken!';
+							}
+
+							return false;
+						}
 					}
 				}
-			}
-		]
-	},
-	{
-		name: 'Extra',
-		fields: [
-			{
-				name: 'description',
-				type: 'textarea',
-				placeholder: 'Type something..',
-				label: 'Description'
-			}
-		]
-	}
-];
+			]
+		},
+		{
+			name: 'Extra',
+			fields: [
+				{
+					name: 'description',
+					type: 'textarea',
+					placeholder: 'Type something..',
+					label: 'Description'
+				}
+			]
+		}
+	];
+};
 
-const ModifyPage: React.FC<Props> = ({ onDismiss }) => {
-	const [fields, setFields] = useState<IValue>({});
+const ModifyPage: React.FC<Props> = ({ page, pages, onChange, onDelete, onDismiss }) => {
+	const [fields, setFields] = useState<Page>({
+		name: page.name,
+		url: page.url.replace('/', ''),
+		description: page.description
+	});
 	const [errors, setErrors] = useState<IError>({});
 
 	const [activeBar, setActiveBar] = useState<number>(1);
 
+	const onPageChange = (e: Page) => {
+		setFields(e);
+
+		onChange(e);
+	};
+
 	const onDeletePage = () => {
-		console.log('Deleted.');
+		onDelete();
 	};
 
 	const bars: IBar[] = [
@@ -102,7 +134,15 @@ const ModifyPage: React.FC<Props> = ({ onDismiss }) => {
 
 	switch (activeBar) {
 		case 1:
-			content = <Form data={form} onChange={setFields} values={fields} onErrors={setErrors} errors={errors} />;
+			content = (
+				<Form
+					data={getForm(pages)}
+					onChange={onPageChange}
+					values={fields}
+					onErrors={setErrors}
+					errors={errors}
+				/>
+			);
 			heading = 'Modify Page';
 			break;
 

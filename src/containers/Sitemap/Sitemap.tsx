@@ -1,7 +1,10 @@
 import React, { useContext } from 'react';
 
 import { ActivityContext } from 'context/providers/activity';
-import { Action } from 'context/actions/activity';
+import { WebsiteContext } from 'context/providers/website';
+
+import { Action as ActivityAction } from 'context/actions/activity';
+
 import { AddRounded } from '@material-ui/icons';
 import { IPage } from 'interfaces';
 
@@ -14,62 +17,35 @@ interface Props {
 	readOnly?: boolean;
 }
 
-const data: { name: string; category: string; pages: IPage[] } = {
-	name: 'Ashk Aesthetics',
-	category: 'Beauty Salon',
-	pages: [
-		{
-			id: 1,
-			title: 'Home',
-			components: [
-				{
-					id: 1,
-					name: 'Banner'
-				},
-				{
-					id: 2,
-					name: 'Interstitial'
-				}
-			]
-		},
-		{
-			id: 2,
-			title: 'About',
-			components: [
-				{
-					id: 3,
-					name: 'Banner'
-				}
-			]
-		}
-	]
-};
-
 const Sitemap: React.FC<Props> = ({ readOnly }) => {
-	const { state, dispatch } = useContext(ActivityContext);
+	const { state: stateActivity, dispatch: dispatchActivity } = useContext(ActivityContext);
+	const { state: stateWebsite } = useContext(WebsiteContext);
 
 	const selectPageHandler = (id: number) => {
-		if (state.activePage === id) {
-			dispatch({ type: Action.DELETE_ACTIVE_PAGE });
+		if (stateActivity.activePage === id) {
+			dispatchActivity({ type: ActivityAction.DELETE_ACTIVE_PAGE });
 		} else {
-			dispatch({ type: Action.SET_ACTIVE_PAGE, payload: { activePage: id } });
+			dispatchActivity({ type: ActivityAction.SET_ACTIVE_PAGE, payload: { activePage: id } });
 		}
 	};
 
 	const selectNewPageHandler = () => {
-		dispatch({ type: Action.SET_NEW_PAGE, payload: { newPage: !state.newPage } });
+		dispatchActivity({ type: ActivityAction.SET_NEW_PAGE, payload: { newPage: !stateActivity.newPage } });
 	};
 
 	const selectComponentHandler = (id: number) => {
-		if (state.activeComponent === id) {
-			dispatch({ type: Action.DELETE_ACTIVE_COMPONENT });
+		if (stateActivity.activeComponent === id) {
+			dispatchActivity({ type: ActivityAction.DELETE_ACTIVE_COMPONENT });
 		} else {
-			dispatch({ type: Action.SET_ACTIVE_COMPONENT, payload: { activeComponent: id } });
+			dispatchActivity({ type: ActivityAction.SET_ACTIVE_COMPONENT, payload: { activeComponent: id } });
 		}
 	};
 
 	const selectNewComponentHandler = () => {
-		dispatch({ type: Action.SET_NEW_COMPONENT, payload: { newComponent: !state.newComponent } });
+		dispatchActivity({
+			type: ActivityAction.SET_NEW_COMPONENT,
+			payload: { newComponent: !stateActivity.newComponent }
+		});
 	};
 
 	return (
@@ -78,30 +54,35 @@ const Sitemap: React.FC<Props> = ({ readOnly }) => {
 				<div className={classes.Logo} />
 
 				<div className={classes.Description}>
-					<h1 className={classes.Heading}>{data.name}</h1>
-					<p className={classes.Category}>{data.category}</p>
+					<h1 className={classes.Heading}>{stateWebsite!.name}</h1>
+					<p className={classes.Category}>{stateWebsite!.category}</p>
 				</div>
 
 				<div className={classes.Line} />
 			</div>
 
 			<ul className={classes.Pages}>
-				{data.pages.map((page) => (
+				{stateWebsite!.pages.map((page) => (
 					<li
-						className={[classes.Page, page.id === state.activePage ? classes.SelectedPage : null].join(' ')}
+						className={[
+							classes.Page,
+							page.id === stateActivity.activePage ? classes.SelectedPage : null
+						].join(' ')}
 						key={page.id}>
 						<div className={classes.Wrapper} onClick={() => selectPageHandler(page.id)}>
-							<h2 className={classes.Title}>{page.title}</h2>
+							<h2 className={classes.Title}>{page.name}</h2>
 
 							<span className={classes.Indicator} />
 						</div>
 
-						<Accordion className={classes.Components} expanded={page.id === state.activePage}>
+						<Accordion className={classes.Components} expanded={page.id === stateActivity.activePage}>
 							{page.components.map((component) => (
 								<div
 									className={[
 										classes.Component,
-										component.id === state.activeComponent ? classes.SelectedComponent : null
+										component.id === stateActivity.activeComponent
+											? classes.SelectedComponent
+											: null
 									].join(' ')}
 									onClick={() => selectComponentHandler(component.id)}
 									key={component.id}>
@@ -114,7 +95,7 @@ const Sitemap: React.FC<Props> = ({ readOnly }) => {
 									className={[
 										classes.Component,
 										classes.NewComponent,
-										state.newComponent ? classes.SelectedNewComponent : null
+										stateActivity.newComponent ? classes.SelectedNewComponent : null
 									].join(' ')}
 									onClick={selectNewComponentHandler}>
 									<h3 className={classes.Name}>
@@ -129,7 +110,7 @@ const Sitemap: React.FC<Props> = ({ readOnly }) => {
 
 				{!readOnly && (
 					<li
-						className={[classes.New, state.newPage ? classes.SelectedNewPage : null].join(' ')}
+						className={[classes.New, stateActivity.newPage ? classes.SelectedNewPage : null].join(' ')}
 						onClick={selectNewPageHandler}>
 						<h2 className={classes.Title}>
 							<AddRounded className={classes.Icon} />

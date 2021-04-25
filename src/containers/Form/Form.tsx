@@ -15,9 +15,9 @@ import classes from './Form.module.scss';
 interface Props {
 	className?: string;
 	data: IAccordion[];
-	onChange: (fields: IValue) => void;
+	onChange: React.Dispatch<React.SetStateAction<any>>;
 	onErrors: (errors: IError) => void;
-	values: IValue;
+	values: any;
 	errors: IError;
 }
 

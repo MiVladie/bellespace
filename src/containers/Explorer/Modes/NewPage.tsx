@@ -1,67 +1,93 @@
 import React, { useState } from 'react';
 
 import { AddRounded } from '@material-ui/icons';
-import { IAction, IBar, IError, IValidatable, IValue } from 'interfaces';
+import { IAction, IBar, IError, IValidatable } from 'interfaces';
 import { IAccordion } from 'interfaces';
 import { containsErrorsInSet } from 'util/validation';
 
 import Hierarchy from 'components/Hierarchy/Hierarchy';
 import Form from 'containers/Form/Form';
 
+interface Website {
+	name: string;
+	url: string;
+	description?: string;
+}
+
+interface Page {
+	id: number;
+	name: string;
+	url: string;
+}
+
 interface Props {
+	pages: Page[];
+	onAdd: (fields: Website) => void;
 	onDismiss: () => void;
 }
 
-const form: IAccordion[] = [
-	{
-		name: 'General',
-		fields: [
-			{
-				name: 'name',
-				type: 'text',
-				placeholder: 'About',
-				label: 'Name',
-				info: 'The name of the web page.',
-				rules: {
-					required: true
-				}
-			},
-			{
-				name: 'url',
-				type: 'text',
-				placeholder: 'about',
-				label: 'URL',
-				info: 'The route of the web page. Route will be displayed at the end of the website link.',
-				prefix: '/',
-				rules: {
-					required: true,
-					isRoute: true,
-					custom: (value) => {
-						if (value === 'about' || value === 'home') {
-							return 'The route name is already taken!';
-						}
+const getForm = (pages: Page[]): IAccordion[] => {
+	const takenNames: string[] = pages.map((page) => page.name);
+	const takenUrl: string[] = pages.map((page) => page.url);
 
-						return false;
+	return [
+		{
+			name: 'General',
+			fields: [
+				{
+					name: 'name',
+					type: 'text',
+					placeholder: 'About',
+					label: 'Name',
+					info: 'The name of the web page.',
+					rules: {
+						required: true,
+						custom: (value) => {
+							if (takenNames.includes(value)) {
+								return 'The name is already taken!';
+							}
+
+							return false;
+						}
+					}
+				},
+				{
+					name: 'url',
+					type: 'text',
+					placeholder: 'about',
+					label: 'URL',
+					info: 'The route of the web page. Route will be displayed at the end of the website link.',
+					prefix: '/',
+					rules: {
+						required: true,
+						isRoute: true,
+						custom: (value) => {
+							if (takenUrl.includes(value)) {
+								return 'The route name is already taken!';
+							}
+
+							return false;
+						}
 					}
 				}
-			}
-		]
-	},
-	{
-		name: 'Extra',
-		fields: [
-			{
-				name: 'description',
-				type: 'textarea',
-				placeholder: 'Type something..',
-				label: 'Description'
-			}
-		]
-	}
-];
+			]
+		},
+		{
+			name: 'Extra',
+			fields: [
+				{
+					name: 'description',
+					type: 'textarea',
+					placeholder: 'Type something..',
+					label: 'Description'
+				}
+			]
+		}
+	];
+};
 
-const NewPage: React.FC<Props> = ({ onDismiss }) => {
-	const [fields, setFields] = useState<IValue>({});
+const NewPage: React.FC<Props> = ({ pages, onAdd, onDismiss }) => {
+	const [fields, setFields] = useState<Website>({ name: '', url: '' });
 	const [errors, setErrors] = useState<IError>({});
 
 	const [activeBar, setActiveBar] = useState<number>(1);
@@ -77,19 +103,23 @@ const NewPage: React.FC<Props> = ({ onDismiss }) => {
 			return;
 		}
 
-		console.log({ fields });
+		onAdd(fields);
 	};
 
 	const mapFieldsToValidatable = (): IValidatable[] => {
 		const values: IValidatable[] = [];
 
-		form.forEach((fieldset) => {
-			fieldset.fields.forEach((field) => {
+		for (const fieldset of getForm(pages)) {
+			for (const field of fieldset.fields) {
 				if (field.type !== 'dropdown' && field.type !== 'slider') {
-					values.push({ name: field.name, value: fields[field.name] as string, rules: field.rules });
+					values.push({
+						name: field.name,
+						value: fields[field.name as keyof Website] as string,
+						rules: field.rules
+					});
 				}
-			});
-		});
+			}
+		}
 
 		return values;
 	};
@@ -115,7 +145,9 @@ const NewPage: React.FC<Props> = ({ onDismiss }) => {
 		}
 	];
 
-	const content = <Form data={form} onChange={setFields} values={fields} onErrors={setErrors} errors={errors} />;
+	const content = (
+		<Form data={getForm(pages)} onChange={setFields} values={fields} onErrors={setErrors} errors={errors} />
+	);
 
 	return <Hierarchy heading='New Page' bars={bars} content={content} actions={actions} activeBar={activeBar} />;
 };
