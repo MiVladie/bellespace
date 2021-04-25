@@ -1,9 +1,11 @@
-import { IRules } from 'interfaces/components/input';
-
 export interface IValidatable {
 	name: string;
 	value: string;
-	rules?: IRules;
+	rules?: IRule;
+}
+
+export interface IRule {
+	[key: string]: string | number | Function;
 }
 
 export interface IValue {

@@ -13,3 +13,17 @@
 		}
 	}
 }
+
+@mixin slideIn($time: 0.5s, $from, $to) {
+	animation: moveIn $time 0s forwards;
+
+	@keyframes moveIn {
+		from {
+			transform: translateX($from);
+		}
+
+		to {
+			transform: translateX($to);
+		}
+	}
+}
