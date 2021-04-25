@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 
-import { IUser } from 'interfaces';
+import { IUser } from 'interfaces/auth';
 
 import authReducer, { ActionType } from '../reducers/auth';
 import authInitialState from '../initialstates/auth';

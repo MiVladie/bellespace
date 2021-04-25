@@ -1,4 +1,4 @@
-import { IStructure } from 'interfaces/blueprint';
+import { IStructure } from 'interfaces/website';
 
 const website: IStructure | null = null;
 

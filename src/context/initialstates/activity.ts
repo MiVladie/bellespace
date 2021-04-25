@@ -1,11 +1,6 @@
-interface State {
-	activePage: number | null;
-	activeComponent: number | null;
-	newPage: boolean;
-	newComponent: boolean;
-}
+import { IActivity } from 'interfaces/activity';
 
-const activity: State = {
+const activity: IActivity = {
 	activePage: null,
 	activeComponent: null,
 	newPage: false,

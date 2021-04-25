@@ -1,4 +1,5 @@
-import { IRules, IValidatable, IError } from 'interfaces';
+import { IRules } from 'interfaces/components/input';
+import { IValidatable, IError } from 'interfaces/validaton';
 
 export const containsErrorsInSet = (form: IValidatable[]): IError => {
 	const errors: IError = {};

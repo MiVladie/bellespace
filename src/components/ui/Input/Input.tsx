@@ -1,26 +1,25 @@
 import React from 'react';
 
-import { IField } from 'interfaces';
+import { IField } from 'interfaces/components';
+import { IRules } from 'interfaces/components/input';
 import { HelpOutline } from '@material-ui/icons';
+import { clamp, roundToStep } from 'util/math';
 
 import Tooltip from '../Tooltip/Tooltip';
 
 import classes from './Input.module.scss';
 
-interface Props extends IField {
+interface Props extends IField<string> {
+	type: 'date' | 'textarea' | 'email' | 'number' | 'password' | 'tel' | 'text' | 'time';
+	placeholder: string;
+	prefix?: React.ReactNode;
+	rules?: IRules;
 	className?: string;
-	onChange: (e: string) => void;
-	onClick?: () => void;
-	onFocus?: () => void;
-	onBlur?: () => void;
-	value: string | number;
 	step?: number;
 	min?: number;
 	max?: number;
-	error?: string | null;
 	disabled?: boolean;
 	autoComplete?: boolean;
-	dark?: boolean;
 }
 
 const Input: React.FC<Props> = ({
@@ -29,7 +28,6 @@ const Input: React.FC<Props> = ({
 	type,
 	placeholder,
 	onChange,
-	onClick,
 	onFocus,
 	onBlur,
 	value,
@@ -46,20 +44,14 @@ const Input: React.FC<Props> = ({
 }) => {
 	const onInputBlur = () => {
 		if (type === 'number') {
-			let result = value;
+			let result = +value;
 
-			if (min && +value < min) {
-				result = min.toString();
-			}
-
-			if (max && +value > max) {
-				result = max.toString();
+			if (min != null || max != null) {
+				result = clamp(result, { min, max });
 			}
 
 			if (step) {
-				let inv = 1.0 / step;
-
-				result = (Math.round(+value * inv) / inv).toString();
+				result = roundToStep(result, step);
 			}
 
 			onChange(result.toString());
@@ -78,7 +70,6 @@ const Input: React.FC<Props> = ({
 					className={[classes.Textarea, dark ? classes.Dark : null, error ? classes.Error : null].join(' ')}
 					style={label || prefix ? { width: '100%', padding: 0 } : {}}
 					placeholder={placeholder}
-					onClick={onClick}
 					onChange={(e) => onChange(e.target.value)}
 					onFocus={onFocus}
 					onBlur={onBlur}
@@ -96,7 +87,6 @@ const Input: React.FC<Props> = ({
 					style={label || prefix ? { width: '100%', padding: 0 } : {}}
 					placeholder={placeholder}
 					type={type}
-					onClick={onClick}
 					onChange={(e) => onChange(e.target.value)}
 					onFocus={onFocus}
 					onBlur={onInputBlur}

@@ -1,5 +1,3 @@
-import React from 'react';
-
 export interface IAction {
 	id: number;
 	name: string;

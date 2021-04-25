@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 
 import { AuthContext } from 'context/providers/auth';
-import { ICredentials, IUser } from 'interfaces';
+import { ICredentials, IUser } from 'interfaces/auth';
 import { Action } from 'context/actions/auth';
 import { useHistory } from 'react-router-dom';
 

@@ -54,5 +54,4 @@ export interface IAttribute {
 	value: any;
 	rules?: any;
 	options?: any;
-	defaultValue?: any;
 }

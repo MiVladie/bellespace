@@ -7,12 +7,12 @@ import { Action as ActivityAction } from 'context/actions/activity';
 import { Action as WebsiteAction } from 'context/actions/website';
 
 import { Helmet } from 'react-helmet';
+import { IStructure } from 'interfaces/website';
 
 import Sitemap from 'containers/Sitemap/Sitemap';
 import Explorer from 'containers/Explorer/Explorer';
 
 import classes from './Project.module.scss';
-import { IStructure } from 'interfaces/blueprint';
 
 const Project: React.FC = () => {
 	const [loading, setLoading] = useState<boolean>(true);
@@ -67,7 +67,7 @@ const Project: React.FC = () => {
 	return (
 		<div className={classes.Project}>
 			<Helmet>
-				<title>{stateWebsite?.name || 'Loading'} | Bellespace</title>
+				<title>{stateWebsite!.name} | Bellespace</title>
 			</Helmet>
 
 			<Sitemap />

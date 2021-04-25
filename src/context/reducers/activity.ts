@@ -1,6 +1,6 @@
 import { Reducer } from 'react';
 
-import { IUser } from 'interfaces';
+import { IActivity } from 'interfaces/activity';
 import { Action } from 'context/actions/activity';
 
 export type ActionType =
@@ -11,7 +11,7 @@ export type ActionType =
 	| { type: Action.DELETE_ACTIVE_PAGE }
 	| { type: Action.DELETE_ACTIVE_COMPONENT };
 
-const fn: Reducer<any, ActionType> = (state: IUser, action: ActionType) => {
+const fn: Reducer<any, ActionType> = (state: IActivity, action: ActionType) => {
 	switch (action.type) {
 		case Action.SET_ACTIVE_PAGE:
 			return {

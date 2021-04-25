@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { useHistory } from 'react-router-dom';
-import { IProject } from 'interfaces';
+import { IProject } from 'interfaces/components/project';
 import { Helmet } from 'react-helmet';
 
 import Gallery from 'containers/Gallery/Gallery';

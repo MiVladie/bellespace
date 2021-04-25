@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom';
-import { ICredentials } from 'interfaces';
+import { ICredentials } from 'interfaces/auth';
 import { areSameValues, isEmpty, isValidEmail, isValidPassword } from 'util/validation';
 
 import Input from 'components/ui/Input/Input';
@@ -137,7 +137,7 @@ const Auth: React.FC<Props> = ({ type, onSubmit, loading, message }) => {
 							name='email'
 							placeholder='Your Email..'
 							type='email'
-							onChange={setEmail}
+							onChange={(e: string) => setEmail(e)}
 							onFocus={() => setError((prevState) => ({ ...prevState, email: null }))}
 							onBlur={() => validateField('email', email)}
 							value={email}

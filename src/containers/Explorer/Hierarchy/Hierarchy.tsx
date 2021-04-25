@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IAction, IBar } from 'interfaces/activities';
+import { IAction, IBar } from 'interfaces/hierarchy';
 
 import Button from 'components/ui/Button/Button';
 

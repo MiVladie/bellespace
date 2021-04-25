@@ -4,7 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { AuthContext } from 'context/providers/auth';
 import { Action } from 'context/actions/auth';
 import { Helmet } from 'react-helmet';
-import { IUser } from 'interfaces';
+import { IUser } from 'interfaces/auth';
 
 import Layout from 'hoc/Layout/Layout';
 

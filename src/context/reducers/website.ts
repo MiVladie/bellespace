@@ -1,6 +1,6 @@
 import { Reducer } from 'react';
 
-import { IStructure, IPage, IStyle, IComponent } from 'interfaces/blueprint';
+import { IStructure, IPage, IStyle, IComponent } from 'interfaces/website';
 import { Action } from 'context/actions/website';
 
 export type ActionType =

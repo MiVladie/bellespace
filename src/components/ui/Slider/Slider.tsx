@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import { IMark, ISliderOptions } from 'interfaces';
+import { IMark, IOptions } from 'interfaces/components/slider';
 import { HelpOutline } from '@material-ui/icons';
+import { IField } from 'interfaces/components';
 
 import Dragger from 'rc-slider';
 import Tooltip from 'components/ui/Tooltip/Tooltip';
@@ -12,69 +13,53 @@ import './Dragger.scss';
 
 import classes from './Slider.module.scss';
 
-interface Props {
-	name: string;
-	defaultValue?: number;
-	label?: string;
-	info?: React.ReactNode;
+interface Props extends IField<number> {
 	marks?: IMark;
-	options?: ISliderOptions;
-	onChange: (value: number) => void;
-	value: number;
-	dark?: boolean;
+	options?: IOptions;
 }
 
-const Slider: React.FC<Props> = ({ name, defaultValue, label, info, marks, options, onChange, value, dark }) => {
-	useEffect(() => {
-		if (defaultValue != null) {
-			onChange(defaultValue);
-		}
-	}, []);
+const Slider: React.FC<Props> = ({ name, label, info, marks, options, onChange, value, dark }) => (
+	<div className={classes.Slider} style={marks && { paddingBottom: '0.75rem' }}>
+		{label && (
+			<label className={classes.Label} htmlFor={name}>
+				{label}
+				{info && (
+					<span className={classes.Info}>
+						<HelpOutline />
 
-	return (
-		<div className={classes.Slider} style={marks && { paddingBottom: '0.75rem' }}>
-			{label && (
-				<label className={classes.Label} htmlFor={name}>
-					{label}
-					{info && (
-						<span className={classes.Info}>
-							<HelpOutline />
+						<Tooltip className={classes.Tooltip}>{info}</Tooltip>
+					</span>
+				)}
+			</label>
+		)}
 
-							<Tooltip className={classes.Tooltip}>{info}</Tooltip>
-						</span>
-					)}
-				</label>
-			)}
+		<div className={classes.Wrapper}>
+			<Dragger
+				className={['Dragger', dark ? 'Dark' : null].join(' ')}
+				marks={marks}
+				min={options?.min}
+				max={options?.max}
+				step={options?.step}
+				onChange={onChange}
+				value={value}
+			/>
 
-			<div className={classes.Wrapper}>
-				<Dragger
-					className={['Dragger', dark ? 'Dark' : null].join(' ')}
-					defaultValue={defaultValue || options?.min}
-					marks={marks}
+			{options?.withInput && (
+				<Input
+					className={classes.Input}
+					name='number'
+					type='number'
 					min={options?.min}
 					max={options?.max}
 					step={options?.step}
-					onChange={onChange}
-					value={value}
+					placeholder={options?.min.toString() || '2'}
+					onChange={(val) => onChange(+val)}
+					value={value.toString()}
+					dark={dark}
 				/>
-
-				{options?.withInput && (
-					<Input
-						className={classes.Input}
-						name='number'
-						type='number'
-						min={options?.min}
-						max={options?.max}
-						step={options?.step}
-						placeholder={defaultValue?.toString() || options?.min.toString() || '2'}
-						onChange={(val) => onChange(+val)}
-						value={value || (defaultValue ?? 0)}
-						dark={dark}
-					/>
-				)}
-			</div>
+			)}
 		</div>
-	);
-};
+	</div>
+);
 
 export default Slider;

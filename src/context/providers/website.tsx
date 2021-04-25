@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 
-import { IStructure } from 'interfaces/blueprint';
+import { IStructure } from 'interfaces/website';
 
 import websiteReducer, { ActionType } from '../reducers/website';
 import websiteInitialState from '../initialstates/website';

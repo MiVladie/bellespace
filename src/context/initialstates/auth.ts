@@ -1,4 +1,4 @@
-import { IUser } from 'interfaces';
+import { IUser } from 'interfaces/auth';
 
 interface State {
 	user: IUser | null;

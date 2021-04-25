@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { IPreset, IColorOptions } from 'interfaces';
+import { IPreset, IOptions } from 'interfaces/components/color';
 import { RgbStringColorPicker, RgbaStringColorPicker } from 'react-colorful';
 import { HexToRGBA, RGBAToHex } from 'util/colors';
+import { IField } from 'interfaces/components';
 
 import Input from 'components/ui/Input/Input';
 import Tooltip from '../Tooltip/Tooltip';
@@ -11,29 +12,18 @@ import './Picker.scss';
 
 import classes from './Color.module.scss';
 
-interface Props {
-	name: string;
-	defaultValue?: string;
+interface Props extends IField<string> {
 	presets: IPreset[];
 	placeholder: string;
-	info?: React.ReactNode;
-	label?: string;
-	options?: IColorOptions;
-	onChange: (value: string) => void;
-	onFocus?: () => void;
-	onBlur?: () => void;
-	value: string;
-	error?: string | null;
-	dark?: boolean;
+	options?: IOptions;
 }
 
 const Color: React.FC<Props> = ({
 	name,
-	defaultValue,
-	presets,
 	label,
 	info,
 	placeholder,
+	presets,
 	options,
 	onFocus,
 	onChange,
@@ -46,12 +36,6 @@ const Color: React.FC<Props> = ({
 	const [canUpdate, setCanUpdate] = useState<boolean>(true);
 
 	const node = useRef<HTMLDivElement>(null);
-
-	useEffect(() => {
-		if (defaultValue) {
-			onColorChange(defaultValue);
-		}
-	}, []);
 
 	useEffect(() => {
 		document.addEventListener('mousedown', closeEvent);

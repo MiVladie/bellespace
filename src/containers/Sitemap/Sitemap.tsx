@@ -6,7 +6,6 @@ import { WebsiteContext } from 'context/providers/website';
 import { Action as ActivityAction } from 'context/actions/activity';
 
 import { AddRounded } from '@material-ui/icons';
-import { IPage } from 'interfaces';
 
 import Accordion from 'components/ui/Accordion/Accordion';
 import Sidebar from 'hoc/Sidebar/Sidebar';

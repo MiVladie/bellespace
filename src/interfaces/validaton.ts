@@ -1,4 +1,4 @@
-import { IRules } from 'interfaces';
+import { IRules } from 'interfaces/components/input';
 
 export interface IValidatable {
 	name: string;

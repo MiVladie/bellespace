@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 import { AuthContext } from 'context/providers/auth';
-import { ICredentials, IUser } from 'interfaces';
+import { ICredentials, IUser } from 'interfaces/auth';
 import { useHistory } from 'react-router-dom';
 import { Action } from 'context/actions/auth';
 import { Helmet } from 'react-helmet';

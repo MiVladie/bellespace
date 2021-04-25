@@ -1,6 +1,6 @@
 import { Reducer } from 'react';
 
-import { IUser } from 'interfaces';
+import { IUser } from 'interfaces/auth';
 import { Action } from 'context/actions/auth';
 
 export type ActionType =

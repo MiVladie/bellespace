@@ -1,25 +1,17 @@
 import React, { useEffect, useState, useRef } from 'react';
 
 import { ExpandMoreRounded, HelpOutline } from '@material-ui/icons';
-import { IOption } from 'interfaces';
+import { IOption } from 'interfaces/components/dropdown';
+import { IField } from 'interfaces/components';
 
 import Accordion from '../Accordion/Accordion';
 import Tooltip from '../Tooltip/Tooltip';
 
 import classes from './Dropdown.module.scss';
 
-interface Props {
-	name: string;
+interface Props extends IField<number> {
 	options: IOption[];
 	placeholder: string;
-	info?: React.ReactNode;
-	label?: string;
-	onChange: (value: number) => void;
-	onFocus?: () => void;
-	onBlur?: () => void;
-	value: number;
-	error?: string | null;
-	dark?: boolean;
 }
 
 const Dropdown: React.FC<Props> = ({

@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { IProject } from 'interfaces';
+import { IProject } from 'interfaces/components/project';
 import { AddRounded } from '@material-ui/icons';
 
 import Project from 'components/Project/Project';
+import Skeleton from 'components/Project/Skeleton';
 
 import classes from './Gallery.module.scss';
-import Skeleton from 'components/Project/Skeleton';
 
 interface Props {
 	data: IProject[];
@@ -17,25 +17,23 @@ interface Props {
 	dark?: boolean;
 }
 
-const Gallery: React.FC<Props> = ({ data, onClick, onNew, number = 3, loading, dark }) => {
-	return (
-		<div className={classes.Gallery}>
-			{loading
-				? new Array(number).fill(undefined).map((_, index) => <Skeleton key={index} dark={dark} />)
-				: data.map((project) => (
-						<Project
-							className={classes.Project}
-							key={project.id || project.name}
-							name={project.name}
-							src={project.src}
-							onClick={() => onClick(project.id)}
-							dark={dark}
-						/>
-				  ))}
+const Gallery: React.FC<Props> = ({ data, onClick, onNew, number = 3, loading, dark }) => (
+	<div className={classes.Gallery}>
+		{loading
+			? new Array(number).fill(undefined).map((_, index) => <Skeleton key={index} dark={dark} />)
+			: data.map((project) => (
+					<Project
+						className={classes.Project}
+						key={project.id || project.name}
+						name={project.name}
+						src={project.src}
+						onClick={() => onClick(project.id)}
+						dark={dark}
+					/>
+			  ))}
 
-			{onNew && !loading && <Project name='Create New Project..' icon={<AddRounded />} onClick={() => onNew()} />}
-		</div>
-	);
-};
+		{onNew && !loading && <Project name='Create New Project..' icon={<AddRounded />} onClick={() => onNew()} />}
+	</div>
+);
 
 export default Gallery;
