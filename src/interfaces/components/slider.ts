@@ -1,3 +1,10 @@
+import { IField } from '.';
+
+export interface ISlider extends IField<number> {
+	marks?: IMark;
+	options?: IOptions;
+}
+
 export interface IMark {
 	[key: number]: string;
 }

@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { IPreset, IOptions } from 'interfaces/components/color';
+import { IColor } from 'interfaces/components/color';
 import { RgbStringColorPicker, RgbaStringColorPicker } from 'react-colorful';
 import { HexToRGBA, RGBAToHex } from 'util/colors';
-import { IField } from 'interfaces/components';
 
 import Input from 'components/ui/Input/Input';
 import Tooltip from '../Tooltip/Tooltip';
@@ -12,13 +11,7 @@ import './Picker.scss';
 
 import classes from './Color.module.scss';
 
-interface Props extends IField<string> {
-	presets: IPreset[];
-	placeholder: string;
-	options?: IOptions;
-}
-
-const Color: React.FC<Props> = ({
+const Color: React.FC<IColor> = ({
 	name,
 	label,
 	info,

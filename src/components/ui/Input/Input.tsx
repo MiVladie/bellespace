@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { IField } from 'interfaces/components';
-import { IRules } from 'interfaces/components/input';
+import { IInput } from 'interfaces/components/input';
 import { HelpOutline } from '@material-ui/icons';
 import { clamp, roundToStep } from 'util/math';
 
@@ -9,20 +8,7 @@ import Tooltip from '../Tooltip/Tooltip';
 
 import classes from './Input.module.scss';
 
-interface Props extends IField<string> {
-	type: 'date' | 'textarea' | 'email' | 'number' | 'password' | 'tel' | 'text' | 'time';
-	placeholder: string;
-	prefix?: React.ReactNode;
-	rules?: IRules;
-	className?: string;
-	step?: number;
-	min?: number;
-	max?: number;
-	disabled?: boolean;
-	autoComplete?: boolean;
-}
-
-const Input: React.FC<Props> = ({
+const Input: React.FC<IInput> = ({
 	className,
 	name,
 	type,

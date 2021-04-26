@@ -40,7 +40,7 @@ const Project: React.FC = () => {
 				{
 					id: 1,
 					name: 'Home',
-					url: '/',
+					url: '',
 					components: [
 						{
 							id: 1,
