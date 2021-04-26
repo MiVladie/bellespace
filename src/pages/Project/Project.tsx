@@ -38,7 +38,7 @@ const Project: React.FC = () => {
 			category: 'Beauty Salon',
 			pages: [
 				{
-					id: Math.random(),
+					id: 1,
 					name: 'Home',
 					url: '/',
 					components: [
