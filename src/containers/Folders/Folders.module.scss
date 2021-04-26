@@ -1,0 +1,79 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/fonts';
+@import '../../assets/styles/sizing';
+@import '../../assets/styles/spacing';
+
+$toggle: 1.25rem;
+
+.Folders {
+	width: 100%;
+
+	.Folder {
+		width: 100%;
+
+		&:last-child {
+			.Content {
+				border-bottom: none;
+			}
+		}
+
+		.Section {
+			width: 100%;
+			height: $space-xl;
+
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			border-bottom: 2px solid $fourth-color;
+			box-sizing: border-box;
+
+			padding: 0 $toggle;
+
+			transition: all 0.15s;
+			cursor: pointer;
+
+			&:active {
+				background-color: $fourth-color;
+			}
+
+			.Name {
+				font-family: $secondary-font;
+				font-size: $size-md;
+				font-weight: 600;
+
+				color: $primary-color;
+			}
+
+			svg {
+				color: $primary-color;
+			}
+		}
+
+		.Content {
+			padding: $space-sm $toggle;
+
+			border-bottom: 2px solid $fourth-color;
+
+			> * {
+				margin-top: $space-sm;
+
+				&:first-of-type {
+					margin-top: 0;
+				}
+			}
+		}
+	}
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.Folders {
+		.Folder {
+			.Section {
+				&:hover {
+					background-color: $fourth-color;
+				}
+			}
+		}
+	}
+}
