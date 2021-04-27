@@ -1,23 +1,36 @@
 import React, { useContext, useEffect, useState } from 'react';
 
 import { IPage } from 'interfaces/website';
-import { IBar } from 'interfaces/hierarchy';
+import { IAction, IBar } from 'interfaces/hierarchy';
 import { TError } from 'interfaces/validaton';
+import { Action } from 'context/actions/website';
 import { IFolder } from 'interfaces/components/folder';
 import { WebsiteContext } from 'context/providers/website';
-import { SettingsRounded } from '@material-ui/icons';
-import { Action } from 'context/actions/website';
+import { DeleteRounded, SettingsRounded } from '@material-ui/icons';
 
 import Hierarchy from 'containers/Explorer/Hierarchy/Hierarchy';
 import Folders from 'containers/Folders/Folders';
 
+import classes from '../Explorer.module.scss';
+
+interface IHeading {
+	bar: number;
+}
+
 interface IContent {
+	bar: number;
 	pageId: number;
 	pages: IPage[];
 	setFields: (e: IForm) => void;
 	setErrors: (e: TError<IForm>) => void;
 	fields: IForm;
 	errors: TError<IForm>;
+}
+
+interface IActions {
+	bar: number;
+	onDelete: () => void;
+	onDismiss: () => void;
 }
 
 interface IForm {
@@ -28,6 +41,7 @@ interface IForm {
 
 interface Props {
 	pageId: number;
+	onDismiss: () => void;
 }
 
 const getBars = (onClick: (id: number) => void): IBar[] => {
@@ -36,15 +50,20 @@ const getBars = (onClick: (id: number) => void): IBar[] => {
 			id: 1,
 			icon: <SettingsRounded />,
 			onClick: () => onClick(1)
+		},
+		{
+			id: 2,
+			icon: <DeleteRounded />,
+			onClick: () => onClick(2)
 		}
 	];
 };
 
-const getContent = ({ pageId, pages, setFields, setErrors, fields, errors }: IContent): React.ReactNode => {
+const getContent = ({ bar, pageId, pages, setFields, setErrors, fields, errors }: IContent): React.ReactNode => {
 	const takenNames = pages.filter((page) => page.id !== pageId).map((page) => page.name);
 	const takenRoutes = pages.filter((page) => page.id !== pageId).map((page) => page.route);
 
-	const data: IFolder[] = [
+	const modifyData: IFolder[] = [
 		{
 			name: 'General',
 			fields: [
@@ -103,19 +122,71 @@ const getContent = ({ pageId, pages, setFields, setErrors, fields, errors }: ICo
 		}
 	];
 
-	return (
-		<Folders
-			data={data}
-			onValues={setFields}
-			onErrors={setErrors}
-			values={fields}
-			errors={errors}
-			instantValidation
-		/>
-	);
+	switch (bar) {
+		case 1:
+			return (
+				<Folders
+					data={modifyData}
+					onValues={setFields}
+					onErrors={setErrors}
+					values={fields}
+					errors={errors}
+					instantValidation
+				/>
+			);
+
+		case 2:
+			return (
+				<div className={classes.Wrapper}>
+					<h2 className={classes.Heading}>
+						Are you sure you want to delete this page? This action <b>cannot</b> be undone.
+					</h2>
+				</div>
+			);
+
+		default:
+			throw new Error('Could not identify the active bar!');
+	}
 };
 
-const ModifyPage: React.FC<Props> = ({ pageId }) => {
+const getActions = ({ bar, onDelete, onDismiss }: IActions): IAction[] | null => {
+	switch (bar) {
+		case 1:
+			return null;
+
+		case 2:
+			return [
+				{
+					id: 1,
+					name: 'Delete',
+					onClick: onDelete
+				},
+				{
+					id: 2,
+					name: 'Cancel',
+					onClick: onDismiss
+				}
+			];
+
+		default:
+			throw new Error('Could not identify the active bar!');
+	}
+};
+
+const getHeading = ({ bar }: IHeading): string => {
+	switch (bar) {
+		case 1:
+			return 'Modify Page';
+
+		case 2:
+			return 'Delete Page';
+
+		default:
+			throw new Error('Could not identify the active bar!');
+	}
+};
+
+const ModifyPage: React.FC<Props> = ({ pageId, onDismiss }) => {
 	const [fields, setFields] = useState<IForm>({ name: '', route: '' });
 	const [errors, setErrors] = useState<TError<IForm>>({});
 
@@ -168,12 +239,27 @@ const ModifyPage: React.FC<Props> = ({ pageId }) => {
 		});
 	};
 
+	const deletePage = () => {
+		onDismiss();
+
+		dispatch({ type: Action.DELETE_PAGE, payload: { pageId: pageId } });
+	};
+
 	return (
 		<Hierarchy
-			heading='Modify Page'
+			heading={getHeading({ bar: active })}
 			activeBar={active}
-			content={getContent({ pageId: pageId, pages: state!.pages, setFields, setErrors, fields, errors })}
+			content={getContent({
+				bar: active,
+				pageId: pageId,
+				pages: state!.pages,
+				setFields,
+				setErrors,
+				fields,
+				errors
+			})}
 			bars={getBars(setActive)}
+			actions={getActions({ bar: active, onDelete: deletePage, onDismiss })}
 		/>
 	);
 };
