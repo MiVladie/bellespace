@@ -233,8 +233,6 @@ const ModifyPage: React.FC<Props> = ({ pageId, onDismiss }) => {
 			throw new Error('Could not identify an active page!');
 		}
 
-		setPage(activePage);
-
 		const newFields: IForm = {
 			name: activePage.name,
 			route: activePage.route,
@@ -242,7 +240,9 @@ const ModifyPage: React.FC<Props> = ({ pageId, onDismiss }) => {
 		};
 
 		setFields(newFields);
+		setPage(activePage);
 		setErrors({});
+		setActive(1);
 	};
 
 	const updateFields = () => {
