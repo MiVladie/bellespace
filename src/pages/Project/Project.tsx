@@ -41,6 +41,12 @@ const Project: React.FC = () => {
 					id: 1,
 					name: 'Home',
 					route: '',
+					options: {
+						disableNameModification: true,
+						disableRouteModification: true,
+						disableDeletion: true,
+						position: 'top'
+					},
 					components: [
 						{
 							id: 1,

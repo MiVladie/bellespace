@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 
-import { IPage } from 'interfaces/website';
+import { IPage, IPageOptions } from 'interfaces/website';
 import { IAction, IBar } from 'interfaces/hierarchy';
 import { TError } from 'interfaces/validaton';
 import { Action } from 'context/actions/website';
@@ -25,12 +25,18 @@ interface IContent {
 	setErrors: (e: TError<IForm>) => void;
 	fields: IForm;
 	errors: TError<IForm>;
+	options?: IPageOptions;
 }
 
 interface IActions {
 	bar: number;
 	onDelete: () => void;
 	onDismiss: () => void;
+}
+
+interface IBars {
+	onClick: (id: number) => void;
+	options?: IPageOptions;
 }
 
 interface IForm {
@@ -44,22 +50,36 @@ interface Props {
 	onDismiss: () => void;
 }
 
-const getBars = (onClick: (id: number) => void): IBar[] => {
-	return [
+const getBars = ({ onClick, options }: IBars): IBar[] => {
+	const bars: IBar[] = [
 		{
 			id: 1,
 			icon: <SettingsRounded />,
 			onClick: () => onClick(1)
-		},
-		{
+		}
+	];
+
+	if (!options?.disableDeletion) {
+		bars.push({
 			id: 2,
 			icon: <DeleteRounded />,
 			onClick: () => onClick(2)
-		}
-	];
+		});
+	}
+
+	return bars;
 };
 
-const getContent = ({ bar, pageId, pages, setFields, setErrors, fields, errors }: IContent): React.ReactNode => {
+const getContent = ({
+	bar,
+	pageId,
+	pages,
+	setFields,
+	setErrors,
+	fields,
+	errors,
+	options
+}: IContent): React.ReactNode => {
 	const takenNames = pages.filter((page) => page.id !== pageId).map((page) => page.name);
 	const takenRoutes = pages.filter((page) => page.id !== pageId).map((page) => page.route);
 
@@ -70,9 +90,10 @@ const getContent = ({ bar, pageId, pages, setFields, setErrors, fields, errors }
 				{
 					name: 'name',
 					type: 'text',
-					placeholder: 'About',
+					placeholder: options?.disableNameModification ? '' : 'About',
 					label: 'Name',
 					info: 'The name of the webpage.',
+					disabled: options?.disableNameModification,
 					rules: {
 						required: true,
 						custom: (value) => {
@@ -89,10 +110,11 @@ const getContent = ({ bar, pageId, pages, setFields, setErrors, fields, errors }
 				{
 					name: 'route',
 					type: 'text',
-					placeholder: 'about',
+					placeholder: options?.disableRouteModification ? '' : 'about',
 					label: 'Route',
 					info: 'The route of the web page. Route will be displayed at the end of the website link.',
 					prefix: '/',
+					disabled: options?.disableRouteModification,
 					rules: {
 						required: true,
 						isRoute: true,
@@ -190,25 +212,28 @@ const getHeading = ({ bar }: IHeading): string => {
 const ModifyPage: React.FC<Props> = ({ pageId, onDismiss }) => {
 	const [fields, setFields] = useState<IForm>({ name: '', route: '' });
 	const [errors, setErrors] = useState<TError<IForm>>({});
+	const [page, setPage] = useState<IPage>();
 
 	const [active, setActive] = useState<number>(1);
 
 	const { state, dispatch } = useContext(WebsiteContext);
 
 	useEffect(() => {
-		populateInitialFields();
-	}, []);
+		initializeContent();
+	}, [pageId]);
 
 	useEffect(() => {
 		updateFields();
 	}, [fields]);
 
-	const populateInitialFields = () => {
+	const initializeContent = () => {
 		const activePage: IPage | undefined = state!.pages.find((page) => page.id === pageId);
 
 		if (!activePage) {
 			throw new Error('Could not identify an active page!');
 		}
+
+		setPage(activePage);
 
 		const newFields: IForm = {
 			name: activePage.name,
@@ -217,6 +242,7 @@ const ModifyPage: React.FC<Props> = ({ pageId, onDismiss }) => {
 		};
 
 		setFields(newFields);
+		setErrors({});
 	};
 
 	const updateFields = () => {
@@ -257,9 +283,10 @@ const ModifyPage: React.FC<Props> = ({ pageId, onDismiss }) => {
 				setFields,
 				setErrors,
 				fields,
-				errors
+				errors,
+				options: page?.options
 			})}
-			bars={getBars(setActive)}
+			bars={getBars({ onClick: setActive, options: page?.options })}
 			actions={getActions({ bar: active, onDelete: deletePage, onDismiss })}
 		/>
 	);
