@@ -81,6 +81,7 @@ const getContent = ({ pages, setFields, setErrors, fields, errors }: IContent): 
 					prefix: '/',
 					rules: {
 						required: true,
+						isRoute: true,
 						custom: (value) => {
 							if (takenRoutes.includes(value)) {
 								return 'The route name is already taken!';

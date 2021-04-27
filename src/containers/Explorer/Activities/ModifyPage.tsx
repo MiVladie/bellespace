@@ -95,6 +95,7 @@ const getContent = ({ bar, pageId, pages, setFields, setErrors, fields, errors }
 					prefix: '/',
 					rules: {
 						required: true,
+						isRoute: true,
 						custom: (value) => {
 							if (takenRoutes.includes(value)) {
 								return 'The route name is already taken!';
