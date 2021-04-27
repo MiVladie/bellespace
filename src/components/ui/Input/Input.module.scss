@@ -86,6 +86,10 @@
 				transition: color 0.15s;
 			}
 
+			&:disabled {
+				color: $secondary-color;
+			}
+
 			&:-webkit-autofill::first-line {
 				font-family: $secondary-font;
 				color: $primary-color;
@@ -119,6 +123,10 @@
 				&::placeholder {
 					color: $fourth-color;
 				}
+			}
+
+			&:disabled {
+				color: $third-color;
 			}
 
 			&:-webkit-autofill::first-line {
