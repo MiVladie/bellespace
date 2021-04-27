@@ -1,6 +1,8 @@
 import { IField } from '.';
+import { ICommonRules } from 'interfaces/validaton';
 
 export interface ISlider extends IField<number> {
+	rules?: ICommonRules<number>;
 	marks?: IMark;
 	options?: IOptions;
 }

@@ -1,9 +1,5 @@
 import { useState } from 'react';
 
-import { IColor } from 'interfaces/components/color';
-import { IInput } from 'interfaces/components/input';
-import { ISlider } from 'interfaces/components/slider';
-import { IDropdown } from 'interfaces/components/dropdown';
 import { IFolder, TField } from 'interfaces/components/folder';
 import { AddRounded, RemoveRounded } from '@material-ui/icons';
 import { containsErrors } from 'util/validation';
@@ -19,13 +15,14 @@ import classes from './Folders.module.scss';
 
 type Props<T, U> = {
 	data: IFolder[];
-	onChange: (e: T) => void;
+	onValues: (e: T) => void;
 	onErrors: (e: U) => void;
 	values: T;
 	errors: U;
+	instantValidation?: boolean;
 };
 
-const Folders = <T, U>({ data, onErrors, errors }: Props<T, U>) => {
+const Folders = <T, U>({ data, onValues, onErrors, values, errors, instantValidation }: Props<T, U>) => {
 	const [open, setOpen] = useState<number[]>([0]);
 
 	const isOpen = (id: number) => {
@@ -42,7 +39,11 @@ const Folders = <T, U>({ data, onErrors, errors }: Props<T, U>) => {
 		setOpen((prevState) => [...prevState, id]);
 	};
 
-	const onFocus = (field: IInput | IDropdown | IColor) => {
+	const onFocus = (field: TField) => {
+		if (instantValidation) {
+			return;
+		}
+
 		if (field.name in errors) {
 			const newErrors = { ...errors };
 
@@ -52,37 +53,90 @@ const Folders = <T, U>({ data, onErrors, errors }: Props<T, U>) => {
 		}
 	};
 
-	const onBlur = (field: IInput) => {
+	const onChange = <X,>(field: TField, e: X) => {
+		if (instantValidation) {
+			validateField<X>(field, e);
+		}
+
+		onValues({ ...values, [field.name]: e });
+	};
+
+	const onBlur = (field: TField) => {
+		if (instantValidation) {
+			return;
+		}
+
+		if (field.name in values) {
+			validateField(field, values[field.name as keyof T]);
+		}
+	};
+
+	const validateField = <Y,>(field: TField, value: Y) => {
+		// Return if no rules defined
 		if (!field.rules) {
 			return;
 		}
 
-		const error = containsErrors(field.value, field.rules);
+		// Check for errors
+		const error = containsErrors<Y>(value, field.rules);
 
 		if (error) {
+			// Register error
 			onErrors({ ...errors, [field.name]: error });
+		} else if (field.name in errors) {
+			// Remove error
+			const newErrors = { ...errors };
+
+			delete newErrors[field.name as keyof U];
+
+			onErrors(newErrors);
 		}
 	};
 
-	const getComponentByType = ({ type, ...rest }: TField) => {
-		switch (type) {
+	const getComponentByType = (field: TField) => {
+		switch (field.type) {
 			case 'color':
-				return <Color {...(rest as IColor)} key={rest.name} />;
+				return (
+					<Color
+						{...field}
+						onFocus={() => field.onFocus?.() || onFocus(field)}
+						onChange={(e) => field.onChange?.(e) || onChange<string>(field, e)}
+						onBlur={() => field.onBlur?.() || onBlur(field)}
+						key={field.name}
+					/>
+				);
 
 			case 'dropdown':
-				return <Dropdown {...(rest as IDropdown)} key={rest.name} />;
+				return (
+					<Dropdown
+						{...field}
+						onFocus={() => field.onFocus?.() || onFocus(field)}
+						onChange={(e) => field.onChange?.(e) || onChange<number>(field, e)}
+						onBlur={() => field.onBlur?.() || onBlur(field)}
+						key={field.name}
+					/>
+				);
 
 			case 'slider':
-				return <Slider {...(rest as ISlider)} key={rest.name} />;
+				return (
+					<Slider
+						{...field}
+						onFocus={() => field.onFocus?.() || onFocus(field)}
+						onChange={(e) => field.onChange?.(e) || onChange<number>(field, e)}
+						onBlur={() => field.onBlur?.() || onBlur(field)}
+						key={field.name}
+					/>
+				);
 
 			default:
 				return (
 					<Input
-						{...(rest as IInput)}
-						type={type}
-						onFocus={() => onFocus(rest as IInput)}
-						onBlur={() => onBlur(rest as IInput)}
-						key={rest.name}
+						{...field}
+						type={field.type}
+						onFocus={() => onFocus(field)}
+						onChange={(e) => onChange<string>(field, e)}
+						onBlur={() => onBlur(field)}
+						key={field.name}
 					/>
 				);
 		}

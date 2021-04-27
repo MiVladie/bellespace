@@ -1,4 +1,5 @@
-import { ICommonRules, IField } from '.';
+import { IField } from '.';
+import { ICommonRules } from 'interfaces/validaton';
 
 export interface IInput extends IField<string> {
 	type: 'text' | 'textarea' | 'email' | 'tel' | 'number' | 'password';

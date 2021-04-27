@@ -2,6 +2,7 @@
 @import '../../../assets/styles/fonts';
 @import '../../../assets/styles/sizing';
 @import '../../../assets/styles/spacing';
+@import '../../../assets/styles/animations';
 
 .Slider {
 	width: 100%;
@@ -57,5 +58,18 @@
 				padding: 0;
 			}
 		}
+	}
+
+	.Message {
+		display: inline-block;
+
+		font-family: $secondary-font;
+		font-size: $size-xs;
+
+		color: $danger-color;
+
+		margin: $space-xs 0 0 $space-xs;
+
+		@include popUp;
 	}
 }

@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 
+import { TError } from 'interfaces/validaton';
 import { IAction, IBar } from 'interfaces/hierarchy';
 import { Action } from 'context/actions/website';
 import { WebsiteContext } from 'context/providers/website';
@@ -13,13 +14,13 @@ import Folders from 'containers/Folders/Folders';
 interface IContent {
 	pages: IPage[];
 	setFields: (e: IForm) => void;
-	setErrors: (e: IError) => void;
+	setErrors: (e: TError<IForm>) => void;
 	fields: IForm;
-	errors: IError;
+	errors: TError<IForm>;
 }
 
 interface IActions {
-	errors: IError;
+	errors: TError<IForm>;
 	onSubmit: () => void;
 	onDismiss: () => void;
 }
@@ -29,10 +30,6 @@ interface IForm {
 	route: string;
 	description?: string;
 }
-
-type IError = {
-	[key in keyof IForm]?: string;
-};
 
 interface Props {
 	onDismiss: () => void;
@@ -50,7 +47,7 @@ const getBars = (onClick: (id: number) => void): IBar[] => {
 
 const getContent = ({ pages, setFields, setErrors, fields, errors }: IContent): React.ReactNode => {
 	const takenNames = pages.map((page) => page.name);
-	const takenRoutes = pages.map((page) => page.url);
+	const takenRoutes = pages.map((page) => page.route);
 
 	const data: IFolder[] = [
 		{
@@ -61,7 +58,7 @@ const getContent = ({ pages, setFields, setErrors, fields, errors }: IContent): 
 					type: 'text',
 					placeholder: 'About',
 					label: 'Name',
-					info: 'The name of the webpage',
+					info: "The name of the webpage. Name will be displayed in the browser's tab",
 					rules: {
 						required: true,
 						custom: (value) => {
@@ -72,7 +69,6 @@ const getContent = ({ pages, setFields, setErrors, fields, errors }: IContent): 
 							return false;
 						}
 					},
-					onChange: (e: string) => setFields({ ...fields, name: e }),
 					value: fields.name,
 					error: errors.name
 				},
@@ -93,7 +89,6 @@ const getContent = ({ pages, setFields, setErrors, fields, errors }: IContent): 
 							return false;
 						}
 					},
-					onChange: (e: string) => setFields({ ...fields, route: e }),
 					value: fields.route,
 					error: errors.route
 				}
@@ -107,14 +102,13 @@ const getContent = ({ pages, setFields, setErrors, fields, errors }: IContent): 
 					type: 'textarea',
 					placeholder: 'Type something..',
 					label: 'Description',
-					onChange: (e: string) => setFields({ ...fields, description: e }),
 					value: fields.description || ''
 				}
 			]
 		}
 	];
 
-	return <Folders data={data} onChange={setFields} onErrors={setErrors} values={fields} errors={errors} />;
+	return <Folders data={data} onValues={setFields} onErrors={setErrors} values={fields} errors={errors} />;
 };
 
 const getActions = ({ errors, onSubmit, onDismiss }: IActions): IAction[] => {
@@ -135,7 +129,7 @@ const getActions = ({ errors, onSubmit, onDismiss }: IActions): IAction[] => {
 
 const NewPage: React.FC<Props> = ({ onDismiss }) => {
 	const [fields, setFields] = useState<IForm>({ name: '', route: '' });
-	const [errors, setErrors] = useState<IError>({});
+	const [errors, setErrors] = useState<TError<IForm>>({});
 
 	const [active, setActive] = useState<number>(1);
 
@@ -145,7 +139,7 @@ const NewPage: React.FC<Props> = ({ onDismiss }) => {
 		const page: IPage = {
 			id: Math.random(),
 			name: fields.name,
-			url: fields.route,
+			route: fields.route,
 			description: fields.description,
 			components: []
 		};

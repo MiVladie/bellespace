@@ -12,7 +12,19 @@ import './Dragger.scss';
 
 import classes from './Slider.module.scss';
 
-const Slider: React.FC<ISlider> = ({ name, label, info, marks, options, onChange, value, dark }) => (
+const Slider: React.FC<ISlider> = ({
+	name,
+	label,
+	info,
+	marks,
+	options,
+	onFocus,
+	onChange,
+	onBlur,
+	value,
+	error,
+	dark
+}) => (
 	<div className={classes.Slider} style={marks && { paddingBottom: '0.75rem' }}>
 		{label && (
 			<label className={classes.Label} htmlFor={name}>
@@ -34,7 +46,9 @@ const Slider: React.FC<ISlider> = ({ name, label, info, marks, options, onChange
 				min={options?.min}
 				max={options?.max}
 				step={options?.step}
+				onFocus={onFocus}
 				onChange={onChange}
+				onBlur={onBlur}
 				value={value}
 			/>
 
@@ -47,12 +61,16 @@ const Slider: React.FC<ISlider> = ({ name, label, info, marks, options, onChange
 					max={options?.max}
 					step={options?.step}
 					placeholder={options?.min.toString() || '2'}
-					onChange={(val) => onChange(+val)}
+					onFocus={onFocus}
+					onChange={(val) => onChange?.(+val)}
+					onBlur={onBlur}
 					value={value.toString()}
 					dark={dark}
 				/>
 			)}
 		</div>
+
+		{error && <small className={classes.Message}>{error}</small>}
 	</div>
 );
 

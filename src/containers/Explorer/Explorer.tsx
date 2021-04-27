@@ -23,7 +23,7 @@ const Explorer: React.FC = () => {
 		} else if (state.activeComponent) {
 			return <ModifyComponent />;
 		} else if (state.activePage) {
-			return <ModifyPage />;
+			return <ModifyPage pageId={state.activePage} />;
 		}
 	};
 

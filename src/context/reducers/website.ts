@@ -8,7 +8,7 @@ export type ActionType =
 	| { type: Action.ADD_PAGE; payload: { page: IPage } }
 	| { type: Action.ADD_COMPONENT; payload: { pageId: number; component: IComponent } }
 	| { type: Action.UPDATE_WEBSITE; payload: { name: string } }
-	| { type: Action.UPDATE_PAGE; payload: { pageId: number; name: string; url: string; description?: string } }
+	| { type: Action.UPDATE_PAGE; payload: { pageId: number; name?: string; route?: string; description?: string } }
 	| { type: Action.UPDATE_COMPONENT; payload: { pageId: number; componentId: number; field: string; value: any } }
 	| {
 			type: Action.UPDATE_STYLE;
@@ -71,9 +71,10 @@ const fn: Reducer<any, ActionType> = (state: IStructure, action: ActionType) => 
 				throw new Error('Could not establish the page!');
 			}
 
-			newPages[updatedPageIndex].name = action.payload.name;
-			newPages[updatedPageIndex].url = action.payload.url;
-			newPages[updatedPageIndex].description = action.payload.description;
+			newPages[updatedPageIndex] = {
+				...newPages[updatedPageIndex],
+				...action.payload
+			};
 
 			return {
 				...state,

@@ -9,7 +9,7 @@ export interface IStructure {
 export interface IPage {
 	id: number;
 	name: string;
-	url: string;
+	route: string;
 	description?: string;
 	components: IComponent[];
 }

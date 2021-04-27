@@ -40,7 +40,7 @@ const Input: React.FC<IInput> = ({
 				result = roundToStep(result, step);
 			}
 
-			onChange(result.toString());
+			onChange?.(result.toString());
 		}
 
 		onBlur?.();
@@ -56,7 +56,7 @@ const Input: React.FC<IInput> = ({
 					className={[classes.Textarea, dark ? classes.Dark : null, error ? classes.Error : null].join(' ')}
 					style={label || prefix ? { width: '100%', padding: 0 } : {}}
 					placeholder={placeholder}
-					onChange={(e) => onChange(e.target.value)}
+					onChange={(e) => onChange?.(e.target.value)}
 					onFocus={onFocus}
 					onBlur={onBlur}
 					value={value}
@@ -73,7 +73,7 @@ const Input: React.FC<IInput> = ({
 					style={label || prefix ? { width: '100%', padding: 0 } : {}}
 					placeholder={placeholder}
 					type={type}
-					onChange={(e) => onChange(e.target.value)}
+					onChange={(e) => onChange?.(e.target.value)}
 					onFocus={onFocus}
 					onBlur={onInputBlur}
 					value={value}

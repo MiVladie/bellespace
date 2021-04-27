@@ -91,7 +91,7 @@ const Dropdown: React.FC<IDropdown> = ({
 									)}
 									onClick={() => {
 										setOpen(false);
-										onChange(option.value);
+										onChange?.(option.value);
 									}}
 									key={option.value}>
 									<span className={classes.Label}>{option.label}</span>

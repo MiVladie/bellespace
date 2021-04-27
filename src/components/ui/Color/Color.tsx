@@ -50,7 +50,7 @@ const Color: React.FC<IColor> = ({
 	};
 
 	const onColorChange = (value: string) => {
-		if (!canUpdate) {
+		if (!canUpdate || !onChange) {
 			return;
 		}
 
