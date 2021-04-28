@@ -11,6 +11,7 @@ import { IStructure } from 'interfaces/website';
 
 import Sitemap from 'containers/Sitemap/Sitemap';
 import Explorer from 'containers/Explorer/Explorer';
+import Loader from 'containers/Loader/Loader';
 
 import classes from './Project.module.scss';
 
@@ -50,7 +51,8 @@ const Project: React.FC = () => {
 					components: [
 						{
 							id: 1,
-							name: 'Banner',
+							componentId: 8,
+							name: 'Banner (Full Width)',
 							content: {
 								title: 'hey'
 							}
@@ -67,7 +69,7 @@ const Project: React.FC = () => {
 	};
 
 	if (loading) {
-		return null;
+		return <Loader style={{ height: '100vh' }} />;
 	}
 
 	return (

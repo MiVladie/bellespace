@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react';
 
 import { TError } from 'interfaces/validaton';
-import { IAction, IBar } from 'interfaces/hierarchy';
 import { Action } from 'context/actions/website';
+import { IAction, IBar } from 'interfaces/hierarchy';
 import { WebsiteContext } from 'context/providers/website';
 import { IFolder } from 'interfaces/components/folder';
+import { identifyErrors } from 'util/validation';
 import { AddRounded } from '@material-ui/icons';
 import { IPage } from 'interfaces/website';
 
@@ -13,10 +14,6 @@ import Folders from 'containers/Folders/Folders';
 
 interface IContent {
 	pages: IPage[];
-	setFields: (e: IForm) => void;
-	setErrors: (e: TError<IForm>) => void;
-	fields: IForm;
-	errors: TError<IForm>;
 }
 
 interface IActions {
@@ -45,73 +42,6 @@ const getBars = (onClick: (id: number) => void): IBar[] => {
 	];
 };
 
-const getContent = ({ pages, setFields, setErrors, fields, errors }: IContent): React.ReactNode => {
-	const takenNames = pages.map((page) => page.name);
-	const takenRoutes = pages.map((page) => page.route);
-
-	const data: IFolder[] = [
-		{
-			name: 'General',
-			fields: [
-				{
-					name: 'name',
-					type: 'text',
-					placeholder: 'About',
-					label: 'Name',
-					info: "The name of the webpage. Name will be displayed in the browser's tab",
-					rules: {
-						required: true,
-						custom: (value) => {
-							if (takenNames.includes(value)) {
-								return 'The name is already taken!';
-							}
-
-							return false;
-						}
-					},
-					value: fields.name,
-					error: errors.name
-				},
-				{
-					name: 'route',
-					type: 'text',
-					placeholder: 'about',
-					label: 'Route',
-					info: 'The route of the web page. Route will be displayed at the end of the website link.',
-					prefix: '/',
-					rules: {
-						required: true,
-						isRoute: true,
-						custom: (value) => {
-							if (takenRoutes.includes(value)) {
-								return 'The route name is already taken!';
-							}
-
-							return false;
-						}
-					},
-					value: fields.route,
-					error: errors.route
-				}
-			]
-		},
-		{
-			name: 'Extra',
-			fields: [
-				{
-					name: 'description',
-					type: 'textarea',
-					placeholder: 'Type something..',
-					label: 'Description',
-					value: fields.description || ''
-				}
-			]
-		}
-	];
-
-	return <Folders data={data} onValues={setFields} onErrors={setErrors} values={fields} errors={errors} />;
-};
-
 const getActions = ({ errors, onSubmit, onDismiss }: IActions): IAction[] => {
 	return [
 		{
@@ -136,7 +66,96 @@ const NewPage: React.FC<Props> = ({ onDismiss }) => {
 
 	const { state, dispatch } = useContext(WebsiteContext);
 
+	const getContent = ({ pages }: IContent): IFolder[] => {
+		const takenNames = pages.map((page) => page.name);
+		const takenRoutes = pages.map((page) => page.route);
+
+		return [
+			{
+				name: 'General',
+				fields: [
+					{
+						name: 'name',
+						type: 'text',
+						placeholder: 'About',
+						label: 'Name',
+						info: "The name of the webpage. Name will be displayed in the browser's tab",
+						rules: {
+							required: true,
+							custom: (value) => {
+								if (takenNames.includes(value)) {
+									return 'The name is already taken!';
+								}
+
+								return false;
+							}
+						},
+						value: fields.name,
+						error: errors.name
+					},
+					{
+						name: 'route',
+						type: 'text',
+						placeholder: 'about',
+						label: 'Route',
+						info: 'The route of the web page. Route will be displayed at the end of the website link.',
+						prefix: '/',
+						rules: {
+							required: true,
+							isRoute: true,
+							custom: (value) => {
+								if (takenRoutes.includes(value)) {
+									return 'The route name is already taken!';
+								}
+
+								return false;
+							}
+						},
+						value: fields.route,
+						error: errors.route
+					}
+				]
+			},
+			{
+				name: 'Extra',
+				fields: [
+					{
+						name: 'description',
+						type: 'textarea',
+						placeholder: 'Type something..',
+						label: 'Description',
+						value: fields.description || ''
+					}
+				]
+			}
+		];
+	};
+
 	const onSubmit = () => {
+		const validatableFields = [];
+
+		const folders = getContent({ pages: state!.pages });
+
+		for (const folder of folders) {
+			for (const field of folder.fields) {
+				if (field.rules) {
+					validatableFields.push({
+						name: field.name,
+						rules: field.rules,
+						value: fields[field.name as keyof IForm]
+					});
+				}
+			}
+		}
+
+		const newErrors = identifyErrors(validatableFields);
+
+		if (Object.keys(newErrors).length) {
+			setErrors(newErrors);
+
+			return;
+		}
+
 		const page: IPage = {
 			id: Math.random(),
 			name: fields.name,
@@ -145,16 +164,24 @@ const NewPage: React.FC<Props> = ({ onDismiss }) => {
 			components: []
 		};
 
-		onDismiss();
-
 		dispatch({ type: Action.ADD_PAGE, payload: { page } });
+
+		onDismiss();
 	};
 
 	return (
 		<Hierarchy
 			heading='New Page'
 			activeBar={active}
-			content={getContent({ pages: state!.pages, setFields, setErrors, fields, errors })}
+			content={
+				<Folders
+					data={getContent({ pages: state!.pages })}
+					onValues={setFields}
+					onErrors={setErrors}
+					values={fields}
+					errors={errors}
+				/>
+			}
 			bars={getBars(setActive)}
 			actions={getActions({ errors, onSubmit, onDismiss })}
 		/>

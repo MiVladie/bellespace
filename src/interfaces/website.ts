@@ -25,6 +25,7 @@ export interface IPageOptions {
 
 export interface IComponent {
 	id: number;
+	componentId: number;
 	name: string;
 	content: IContent;
 }

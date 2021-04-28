@@ -275,9 +275,9 @@ const ModifyPage: React.FC<Props> = ({ pageId, onDismiss }) => {
 	};
 
 	const deletePage = () => {
-		onDismiss();
-
 		dispatch({ type: Action.DELETE_PAGE, payload: { pageId: pageId } });
+
+		onDismiss();
 	};
 
 	return (

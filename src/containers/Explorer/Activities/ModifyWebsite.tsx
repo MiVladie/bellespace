@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import { IBar } from 'interfaces/hierarchy';
 import { TError } from 'interfaces/validaton';
-import { CATEGORIES } from 'constants/website';
+import { WEBSITE_CATEGORIES } from 'constants/website';
 import { Action } from 'context/actions/website';
 import { IFolder } from 'interfaces/components/folder';
 import { WebsiteContext } from 'context/providers/website';
@@ -64,7 +64,7 @@ const getContent = ({ setFields, setErrors, fields, errors }: IContent): React.R
 					placeholder: 'Select a category..',
 					label: 'Category',
 					info: 'The category of your project.',
-					options: CATEGORIES,
+					options: WEBSITE_CATEGORIES,
 					rules: {
 						required: true
 					},

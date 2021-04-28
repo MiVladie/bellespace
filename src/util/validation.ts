@@ -18,6 +18,20 @@
 // 	return errors;
 // };
 
+export const identifyErrors = (fields: { name: string; value: any; rules: any }[]) => {
+	let errors = {};
+
+	for (let field of fields) {
+		const error = containsErrors<typeof field.value>(field.value, field.rules);
+
+		if (error) {
+			errors = { ...errors, [field.name]: error };
+		}
+	}
+
+	return errors;
+};
+
 export const containsErrors = <T>(value: T, rules: object): string | false => {
 	let error: string | false = false;
 

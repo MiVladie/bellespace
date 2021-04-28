@@ -16,7 +16,7 @@ const Explorer: React.FC = () => {
 
 	const establishActivity = () => {
 		if (state.newComponent) {
-			return <NewComponent />;
+			return <NewComponent pageId={state.activePage!} onDismiss={onDismiss} />;
 		} else if (state.newPage) {
 			return <NewPage onDismiss={onDismiss} />;
 		} else if (state.activeComponent) {
