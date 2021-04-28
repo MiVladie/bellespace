@@ -15,7 +15,7 @@ export const CATEGORIES: IOption[] = [
 	},
 	{
 		value: 4,
-		label: 'Cars & Transportaion'
+		label: 'Cars & Transportation'
 	},
 	{
 		value: 5,
@@ -39,7 +39,7 @@ export const CATEGORIES: IOption[] = [
 	},
 	{
 		value: 10,
-		label: 'Medicice & Science'
+		label: 'Medicine & Science'
 	},
 	{
 		value: 11,
