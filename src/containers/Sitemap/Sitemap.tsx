@@ -5,6 +5,7 @@ import { WebsiteContext } from 'context/providers/website';
 
 import { Action as ActivityAction } from 'context/actions/activity';
 
+import { CATEGORIES } from 'constants/website';
 import { AddRounded } from '@material-ui/icons';
 
 import Accordion from 'components/ui/Accordion/Accordion';
@@ -15,6 +16,16 @@ import classes from './Sitemap.module.scss';
 interface Props {
 	readOnly?: boolean;
 }
+
+const getCategory = (id: number): string => {
+	const category = CATEGORIES.find((category) => category.value === id);
+
+	if (!category) {
+		throw new Error('Could not find a category!');
+	}
+
+	return category.label;
+};
 
 const Sitemap: React.FC<Props> = ({ readOnly }) => {
 	const { state: stateActivity, dispatch: dispatchActivity } = useContext(ActivityContext);
@@ -54,7 +65,7 @@ const Sitemap: React.FC<Props> = ({ readOnly }) => {
 
 				<div className={classes.Description}>
 					<h1 className={classes.Heading}>{stateWebsite!.name}</h1>
-					<p className={classes.Category}>{stateWebsite!.category}</p>
+					<p className={classes.Category}>{getCategory(stateWebsite!.category)}</p>
 				</div>
 
 				<div className={classes.Line} />

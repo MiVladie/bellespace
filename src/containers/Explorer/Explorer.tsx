@@ -7,13 +7,12 @@ import NewPage from './Activities/NewPage';
 import NewComponent from './Activities/NewComponent';
 import ModifyComponent from './Activities/ModifyComponent';
 import ModifyPage from './Activities/ModifyPage';
+import ModifyWebsite from './Activities/ModifyWebsite';
 
 import Sidebar from 'hoc/Sidebar/Sidebar';
 
 const Explorer: React.FC = () => {
 	const { state, dispatch } = useContext(ActivityContext);
-
-	const isVisible = state.newPage || state.activePage != null;
 
 	const establishActivity = () => {
 		if (state.newComponent) {
@@ -24,6 +23,8 @@ const Explorer: React.FC = () => {
 			return <ModifyComponent />;
 		} else if (state.activePage) {
 			return <ModifyPage pageId={state.activePage} onDismiss={onDismiss} />;
+		} else {
+			return <ModifyWebsite />;
 		}
 	};
 
@@ -39,11 +40,7 @@ const Explorer: React.FC = () => {
 		}
 	};
 
-	return (
-		<Sidebar visible={isVisible} reverse>
-			{establishActivity()}
-		</Sidebar>
-	);
+	return <Sidebar reverse>{establishActivity()}</Sidebar>;
 };
 
 export default Explorer;

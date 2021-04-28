@@ -1,7 +1,8 @@
 export interface IStructure {
 	id: number;
 	name: string;
-	category: string;
+	category: number;
+	description?: string;
 	pages: IPage[];
 	styles: IStyle[];
 }

@@ -62,10 +62,6 @@ const Folders = <T, U>({ data, onValues, onErrors, values, errors, instantValida
 	};
 
 	const onBlur = (field: TField) => {
-		if (instantValidation) {
-			return;
-		}
-
 		if (field.name in values) {
 			validateField(field, values[field.name as keyof T]);
 		}
@@ -111,7 +107,7 @@ const Folders = <T, U>({ data, onValues, onErrors, values, errors, instantValida
 					<Dropdown
 						{...field}
 						onFocus={() => field.onFocus?.() || onFocus(field)}
-						onChange={(e) => field.onChange?.(e) || onChange<number>(field, e)}
+						onChange={(e) => field.onChange?.(e) || onChange<number | null>(field, e)}
 						onBlur={() => field.onBlur?.() || onBlur(field)}
 						key={field.name}
 					/>

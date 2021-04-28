@@ -7,7 +7,7 @@ export type ActionType =
 	| { type: Action.SET_WEBSITE; payload: IStructure }
 	| { type: Action.ADD_PAGE; payload: { page: IPage } }
 	| { type: Action.ADD_COMPONENT; payload: { pageId: number; component: IComponent } }
-	| { type: Action.UPDATE_WEBSITE; payload: { name: string } }
+	| { type: Action.UPDATE_WEBSITE; payload: { name?: string; category?: number; description?: string } }
 	| { type: Action.UPDATE_PAGE; payload: { pageId: number; name?: string; route?: string; description?: string } }
 	| { type: Action.UPDATE_COMPONENT; payload: { pageId: number; componentId: number; field: string; value: any } }
 	| {
@@ -60,7 +60,7 @@ const fn: Reducer<any, ActionType> = (state: IStructure, action: ActionType) => 
 		case Action.UPDATE_WEBSITE:
 			return {
 				...state,
-				name: action.payload.name
+				...action.payload
 			};
 
 		case Action.UPDATE_PAGE:

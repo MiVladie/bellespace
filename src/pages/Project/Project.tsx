@@ -34,8 +34,8 @@ const Project: React.FC = () => {
 	const fetchData = () => {
 		const website: IStructure = {
 			id: 1,
-			name: 'Ashk Aesthetics',
-			category: 'Beauty Salon',
+			name: '🌼 Ashk Aesthetics 🌸',
+			category: 6,
 			pages: [
 				{
 					id: 1,
