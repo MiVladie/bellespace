@@ -12,6 +12,8 @@ import Hierarchy from 'containers/Explorer/Hierarchy/Hierarchy';
 import Folders from 'containers/Folders/Folders';
 
 import classes from '../Explorer.module.scss';
+import useDidUpdateEffect from 'hooks/render';
+import { hasChanged } from 'util/validation';
 
 interface IHeading {
 	bar: number;
@@ -222,12 +224,12 @@ const ModifyPage: React.FC<Props> = ({ pageId, onDismiss }) => {
 		initializeContent();
 	}, [pageId]);
 
-	useEffect(() => {
+	useDidUpdateEffect(() => {
 		updateFields();
 	}, [fields]);
 
 	const initializeContent = () => {
-		const activePage: IPage | undefined = state!.pages.find((page) => page.id === pageId);
+		const activePage: IPage = state!.pages.find((page) => page.id === pageId)!;
 
 		if (!activePage) {
 			throw new Error('Could not identify an active page!');
@@ -246,6 +248,12 @@ const ModifyPage: React.FC<Props> = ({ pageId, onDismiss }) => {
 	};
 
 	const updateFields = () => {
+		const activePage: IPage = state!.pages.find((page) => page.id === pageId)!;
+
+		if (!hasChanged(['name', 'route', 'description'], activePage, fields)) {
+			return;
+		}
+
 		// Initializing updated fields
 		const data: TError<IForm> = {};
 

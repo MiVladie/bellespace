@@ -122,3 +122,7 @@ export const isValidHex = (value: string): boolean => {
 
 	return re.test(String(value));
 };
+
+export const hasChanged = (keys: string[], original: any, updated: any): boolean => {
+	return keys.some((key) => original[key] !== updated[key]);
+};

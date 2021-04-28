@@ -58,6 +58,8 @@ const Sitemap: React.FC<Props> = ({ readOnly }) => {
 		});
 	};
 
+	console.log('re-render');
+
 	return (
 		<Sidebar className={classes.Sitemap}>
 			<div className={classes.Info}>

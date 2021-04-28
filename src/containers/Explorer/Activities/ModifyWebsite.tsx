@@ -8,8 +8,11 @@ import { IFolder } from 'interfaces/components/folder';
 import { WebsiteContext } from 'context/providers/website';
 import { SettingsRounded } from '@material-ui/icons';
 
+import useDidUpdateEffect from 'hooks/render';
+
 import Hierarchy from 'containers/Explorer/Hierarchy/Hierarchy';
 import Folders from 'containers/Folders/Folders';
+import { hasChanged } from 'util/validation';
 
 interface IContent {
 	setFields: (e: IForm) => void;
@@ -109,7 +112,7 @@ const ModifyPage: React.FC = () => {
 		initializeContent();
 	}, []);
 
-	useEffect(() => {
+	useDidUpdateEffect(() => {
 		updateFields();
 	}, [fields]);
 
@@ -127,6 +130,10 @@ const ModifyPage: React.FC = () => {
 	const updateFields = () => {
 		// Initializing updated fields
 		const data: IForm = { ...fields };
+
+		if (!hasChanged(['name', 'category', 'description'], state, data)) {
+			return;
+		}
 
 		// Assigning all of the fields without errors
 		Object.keys(fields).forEach((key) => {
