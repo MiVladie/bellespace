@@ -1,13 +1,25 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 
+import { getComponentById } from 'library';
 import { Action } from 'context/actions/website';
 import { IAction, IBar } from 'interfaces/hierarchy';
+import { IFolder } from 'interfaces/components/folder';
 import { WebsiteContext } from 'context/providers/website';
 import { DeleteRounded, FormatPaintRounded, TextFieldsRounded } from '@material-ui/icons';
 
+import Folders from 'containers/Folders/Folders';
 import Hierarchy from 'containers/Explorer/Hierarchy/Hierarchy';
+import useDidUpdateEffect from 'hooks/render';
 
 import classes from '../Explorer.module.scss';
+
+interface IField {
+	[key: string]: any;
+}
+
+interface IError {
+	[key: string]: string;
+}
 
 interface Props {
 	pageId: number;
@@ -16,9 +28,41 @@ interface Props {
 }
 
 const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
+	const [fields, setFields] = useState<IField>({});
+	const [errors, setErrors] = useState<IError>({});
+
+	const [typeId, setTypeId] = useState<number>();
+	const [contentStructure, setContentStructure] = useState<IFolder[]>([]);
+	const [styleStructure, setStyleStructure] = useState<IFolder[]>([]);
+
 	const [active, setActive] = useState<number>(1);
 
 	const { state, dispatch } = useContext(WebsiteContext);
+
+	useEffect(() => {
+		initializeContent();
+	}, []);
+
+	const initializeContent = () => {
+		const stateComponent = state!.pages
+			.find((page) => page.id === pageId)
+			?.components.find((component) => component.id === componentId);
+
+		if (!stateComponent) {
+			throw new Error('Could not establish the state component!');
+		}
+
+		const bulkComponent = getComponentById(stateComponent.componentId);
+
+		if (!bulkComponent) {
+			throw new Error('Could not establish the bulk component!');
+		}
+
+		setTypeId(bulkComponent.id);
+
+		setContentStructure(bulkComponent.content);
+		setStyleStructure(bulkComponent.style);
+	};
 
 	const getHeader = useCallback((): string => {
 		switch (active) {
@@ -59,10 +103,26 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 	const getContent = (): React.ReactNode => {
 		switch (active) {
 			case 1:
-				return null;
+				return (
+					<Folders
+						data={contentStructure}
+						onValues={setFields}
+						onErrors={setErrors}
+						values={fields}
+						errors={errors}
+					/>
+				);
 
 			case 2:
-				return null;
+				return (
+					<Folders
+						data={styleStructure}
+						onValues={setFields}
+						onErrors={setErrors}
+						values={fields}
+						errors={errors}
+					/>
+				);
 
 			case 3:
 				return (
