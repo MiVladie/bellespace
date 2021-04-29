@@ -1,5 +1,6 @@
-import { IOption } from 'interfaces/components/dropdown';
 import { IContent } from 'interfaces/website';
+import { IOption } from 'interfaces/components/dropdown';
+import { IFolder } from 'interfaces/components/folder';
 
 import {
 	CollectionsRounded,
@@ -10,12 +11,15 @@ import {
 	PaymentRounded,
 	WebRounded
 } from '@material-ui/icons';
+import * as FullWidth from 'library/Banner/FullWidth/FullWidth';
 
 interface IItem {
 	id: number;
 	categoryId: number;
 	name: string;
-	content: IContent;
+	defaultContent?: IContent;
+	content: IFolder[];
+	style: IFolder[];
 }
 
 export const WEBSITE_CATEGORIES: IOption[] = [
@@ -140,78 +144,104 @@ export const COMPONENTS: IItem[] = [
 		id: 1,
 		categoryId: 1,
 		name: 'Text Centered',
-		content: {}
+		defaultContent: {},
+		content: [],
+		style: []
 	},
 	{
 		id: 2,
 		categoryId: 1,
 		name: 'Left Align',
-		content: {}
+		defaultContent: {},
+		content: [],
+		style: []
 	},
 	{
 		id: 3,
 		categoryId: 1,
 		name: 'Right Align',
-		content: {}
+		defaultContent: {},
+		content: [],
+		style: []
 	},
 	{
 		id: 4,
 		categoryId: 1,
 		name: 'Logo Centered',
-		content: {}
+		defaultContent: {},
+		content: [],
+		style: []
 	},
 	{
 		id: 5,
 		categoryId: 1,
 		name: 'Sticky List',
-		content: {}
+		defaultContent: {},
+		content: [],
+		style: []
 	},
 	{
 		id: 6,
 		categoryId: 1,
-		name: 'Content Stretched',
-		content: {}
+		name: 'defaultContent Stretched',
+		defaultContent: {},
+		content: [],
+		style: []
 	},
 	{
 		id: 7,
 		categoryId: 1,
 		name: 'With Call to Action',
-		content: {}
+		defaultContent: {},
+		content: [],
+		style: []
 	},
 	{
 		id: 8,
 		categoryId: 2,
 		name: 'Full Width',
-		content: {}
+		defaultContent: FullWidth.defaultContent,
+		content: FullWidth.Content,
+		style: FullWidth.Styles
 	},
 	{
 		id: 9,
 		categoryId: 3,
 		name: 'Informational',
-		content: {}
+		defaultContent: {},
+		content: [],
+		style: []
 	},
 	{
 		id: 10,
 		categoryId: 4,
 		name: 'With Discounts',
-		content: {}
+		defaultContent: {},
+		content: [],
+		style: []
 	},
 	{
 		id: 11,
 		categoryId: 5,
 		name: 'Grid',
-		content: {}
+		defaultContent: {},
+		content: [],
+		style: []
 	},
 	{
 		id: 12,
 		categoryId: 6,
 		name: 'Text Centered',
-		content: {}
+		defaultContent: {},
+		content: [],
+		style: []
 	},
 	{
 		id: 13,
 		categoryId: 7,
 		name: 'Small',
-		content: {}
+		defaultContent: {},
+		content: [],
+		style: []
 	}
 ];

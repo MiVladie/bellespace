@@ -20,7 +20,9 @@ const Explorer: React.FC = () => {
 		} else if (state.newPage) {
 			return <NewPage onDismiss={onDismiss} />;
 		} else if (state.activeComponent) {
-			return <ModifyComponent />;
+			return (
+				<ModifyComponent pageId={state.activePage!} componentId={state.activeComponent} onDismiss={onDismiss} />
+			);
 		} else if (state.activePage) {
 			return <ModifyPage pageId={state.activePage} onDismiss={onDismiss} />;
 		} else {

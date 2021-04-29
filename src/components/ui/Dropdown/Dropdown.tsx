@@ -74,7 +74,7 @@ const Dropdown: React.FC<IDropdown> = ({
 						{selectedLabel ? (
 							<span className={classes.Name}>{selectedLabel}</span>
 						) : (
-							<span className={classes.Placeholder}>{placeholder}</span>
+							<span className={classes.Placeholder}>{placeholder || 'Select the option..'}</span>
 						)}
 
 						<ExpandMoreRounded className={[classes.Icon, open ? classes.Open : null].join(' ')} />

@@ -2,7 +2,7 @@ import { IField } from '.';
 import { ICommonRules } from 'interfaces/validaton';
 
 export interface IColor extends IField<string> {
-	placeholder: string;
+	placeholder?: string;
 	rules?: ICommonRules<string>;
 	presets?: IPreset[];
 	options?: IOptions;

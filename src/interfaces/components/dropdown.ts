@@ -3,7 +3,7 @@ import { ICommonRules } from 'interfaces/validaton';
 
 export interface IDropdown extends IField<number | null> {
 	options: IOption[];
-	placeholder: string;
+	placeholder?: string;
 	rules?: ICommonRules<number>;
 }
 

@@ -64,7 +64,7 @@ const Slider: React.FC<ISlider> = ({
 					onFocus={onFocus}
 					onChange={(val) => onChange?.(+val)}
 					onBlur={onBlur}
-					value={value.toString()}
+					value={value?.toString()}
 					dark={dark}
 				/>
 			)}

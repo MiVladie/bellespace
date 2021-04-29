@@ -82,7 +82,7 @@ const Color: React.FC<IColor> = ({
 						<div className={classes.Preview} style={{ backgroundColor: value || '' }} />#
 					</div>
 				}
-				placeholder={placeholder}
+				placeholder={placeholder || 'Choose a color..'}
 				onFocus={onColorFocus}
 				onChange={(val) => onColorChange(`#${val}`)}
 				value={value?.replace('#', '') || ''}

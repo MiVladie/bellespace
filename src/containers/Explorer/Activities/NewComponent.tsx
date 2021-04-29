@@ -78,7 +78,7 @@ const NewComponent: React.FC<Props> = ({ pageId, onDismiss }) => {
 			id: Math.random(),
 			componentId: bulkComponent.id,
 			name: `${bulkCategory.label} (${bulkComponent.name})`,
-			content: bulkComponent.content
+			content: bulkComponent.defaultContent || {}
 		};
 
 		dispatch({ type: Action.ADD_COMPONENT, payload: { pageId, component } });

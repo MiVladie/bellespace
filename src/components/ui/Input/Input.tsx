@@ -29,7 +29,7 @@ const Input: React.FC<IInput> = ({
 	dark
 }) => {
 	const onInputBlur = () => {
-		if (type === 'number') {
+		if (type === 'number' && value != null) {
 			let result = +value;
 
 			if (min != null || max != null) {
@@ -55,7 +55,7 @@ const Input: React.FC<IInput> = ({
 					name={name}
 					className={[classes.Textarea, dark ? classes.Dark : null, error ? classes.Error : null].join(' ')}
 					style={label || prefix ? { width: '100%', padding: 0 } : {}}
-					placeholder={placeholder}
+					placeholder={placeholder || 'Type something..'}
 					onChange={(e) => onChange?.(e.target.value)}
 					onFocus={onFocus}
 					onBlur={onBlur}
@@ -71,7 +71,7 @@ const Input: React.FC<IInput> = ({
 					name={name}
 					className={classes.Input}
 					style={label || prefix ? { width: '100%', padding: 0 } : {}}
-					placeholder={placeholder}
+					placeholder={placeholder || 'Type something..'}
 					type={type}
 					onChange={(e) => onChange?.(e.target.value)}
 					onFocus={onFocus}

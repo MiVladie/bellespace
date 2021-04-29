@@ -3,7 +3,7 @@ import { ICommonRules } from 'interfaces/validaton';
 
 export interface IInput extends IField<string> {
 	type: 'text' | 'textarea' | 'email' | 'tel' | 'number' | 'password';
-	placeholder: string;
+	placeholder?: string;
 	prefix?: React.ReactNode;
 	rules?: IRules;
 	className?: string;

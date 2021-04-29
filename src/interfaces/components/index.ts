@@ -5,7 +5,7 @@ export interface IField<T> {
 	onChange?: (value: T) => void;
 	onFocus?: () => void;
 	onBlur?: () => void;
-	value: T;
+	value?: T;
 	error?: string | null;
 	dark?: boolean;
 }
