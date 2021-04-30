@@ -54,9 +54,7 @@ const getContent = ({ setFields, setErrors, fields, errors }: IContent): React.R
 					info: 'The name of your project.',
 					rules: {
 						required: true
-					},
-					value: fields.name,
-					error: errors.name
+					}
 				},
 				{
 					name: 'category',
@@ -67,9 +65,7 @@ const getContent = ({ setFields, setErrors, fields, errors }: IContent): React.R
 					options: WEBSITE_CATEGORIES,
 					rules: {
 						required: true
-					},
-					value: fields.category || null,
-					error: errors.category
+					}
 				}
 			]
 		},
@@ -80,9 +76,7 @@ const getContent = ({ setFields, setErrors, fields, errors }: IContent): React.R
 					name: 'description',
 					type: 'textarea',
 					placeholder: 'Type something..',
-					label: 'Description',
-					value: fields.description || '',
-					error: errors.description
+					label: 'Description'
 				}
 			]
 		}

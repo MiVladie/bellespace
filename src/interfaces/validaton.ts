@@ -13,6 +13,14 @@ export interface ICommonRules<T> {
 	custom?: (value: T) => string | false;
 }
 
+export interface IFillable<T> {
+	[key: string]: T;
+}
+
+export interface IErrorable {
+	[key: string]: string;
+}
+
 export type TError<T> = {
 	[key in keyof T]?: string;
 };

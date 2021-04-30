@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { IFolder, TField } from 'interfaces/components/folder';
 import { AddRounded, RemoveRounded } from '@material-ui/icons';
+import { IFolder, TField } from 'interfaces/components/folder';
+import { IErrorable, IFillable } from 'interfaces/validaton';
 import { containsErrors } from 'util/validation';
 
 import Accordion from 'components/ui/Accordion/Accordion';
@@ -22,8 +23,19 @@ type Props<T, U> = {
 	instantValidation?: boolean;
 };
 
-const Folders = <T, U>({ data, onValues, onErrors, values, errors, instantValidation }: Props<T, U>) => {
+const Folders = <T extends IFillable<any>, U extends IErrorable>({
+	data,
+	onValues,
+	onErrors,
+	values,
+	errors,
+	instantValidation
+}: Props<T, U>) => {
 	const [open, setOpen] = useState<number[]>([0]);
+
+	useEffect(() => {
+		setOpen([0]);
+	}, [data]);
 
 	const isOpen = (id: number) => {
 		return open.includes(id);
@@ -98,6 +110,8 @@ const Folders = <T, U>({ data, onValues, onErrors, values, errors, instantValida
 						onFocus={() => field.onFocus?.() || onFocus(field)}
 						onChange={(e) => field.onChange?.(e) || onChange<string>(field, e)}
 						onBlur={() => field.onBlur?.() || onBlur(field)}
+						value={values[field.name] || ''}
+						error={errors[field.name]}
 						key={field.name}
 					/>
 				);
@@ -109,6 +123,8 @@ const Folders = <T, U>({ data, onValues, onErrors, values, errors, instantValida
 						onFocus={() => field.onFocus?.() || onFocus(field)}
 						onChange={(e) => field.onChange?.(e) || onChange<number | null>(field, e)}
 						onBlur={() => field.onBlur?.() || onBlur(field)}
+						value={values[field.name] || null}
+						error={errors[field.name]}
 						key={field.name}
 					/>
 				);
@@ -120,6 +136,8 @@ const Folders = <T, U>({ data, onValues, onErrors, values, errors, instantValida
 						onFocus={() => field.onFocus?.() || onFocus(field)}
 						onChange={(e) => field.onChange?.(e) || onChange<number>(field, e)}
 						onBlur={() => field.onBlur?.() || onBlur(field)}
+						value={values[field.name] || ''}
+						error={errors[field.name]}
 						key={field.name}
 					/>
 				);
@@ -132,6 +150,8 @@ const Folders = <T, U>({ data, onValues, onErrors, values, errors, instantValida
 						onFocus={() => onFocus(field)}
 						onChange={(e) => onChange<string>(field, e)}
 						onBlur={() => onBlur(field)}
+						value={values[field.name] || ''}
+						error={errors[field.name]}
 						key={field.name}
 					/>
 				);

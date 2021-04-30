@@ -1,23 +1,3 @@
-// import { IRule } from 'interfaces/validaton';
-
-// import { IValidatable, IError } from 'interfaces/validaton';
-
-// export const containsErrorsInSet = (form: IValidatable[]): IError => {
-// 	const errors: IError = {};
-
-// 	for (const field of form) {
-// 		if (field.rules) {
-// 			const result = containsErrors(field.value, field.rules);
-
-// 			if (result) {
-// 				errors[field.name] = result;
-// 			}
-// 		}
-// 	}
-
-// 	return errors;
-// };
-
 export const identifyErrors = (fields: { name: string; value: any; rules: any }[]) => {
 	let errors = {};
 

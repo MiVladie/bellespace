@@ -1,6 +1,7 @@
 import { Reducer } from 'react';
 
 import { IStructure, IPage, IStyle, IComponent } from 'interfaces/website';
+import { IFillable } from 'interfaces/validaton';
 import { Action } from 'context/actions/website';
 
 export type ActionType =
@@ -9,7 +10,10 @@ export type ActionType =
 	| { type: Action.ADD_COMPONENT; payload: { pageId: number; component: IComponent } }
 	| { type: Action.UPDATE_WEBSITE; payload: { name?: string; category?: number; description?: string } }
 	| { type: Action.UPDATE_PAGE; payload: { pageId: number; name?: string; route?: string; description?: string } }
-	| { type: Action.UPDATE_COMPONENT; payload: { pageId: number; componentId: number; field: string; value: any } }
+	| {
+			type: Action.UPDATE_COMPONENT;
+			payload: { pageId: number; componentId: number; fields: IFillable<any> };
+	  }
 	| {
 			type: Action.UPDATE_STYLE;
 			payload: { componentId: number; propertyId: number; attributeId: number; value: any };
@@ -93,8 +97,10 @@ const fn: Reducer<any, ActionType> = (state: IStructure, action: ActionType) => 
 				(c) => c.id === action.payload.componentId
 			);
 
-			newPages[updatedPageIndex].components[updatedComponentIndex].content[action.payload.field] =
-				action.payload.value;
+			newPages[updatedPageIndex].components[updatedComponentIndex].content = {
+				...newPages[updatedPageIndex].components[updatedComponentIndex].content,
+				...action.payload.fields
+			};
 
 			return {
 				...state,

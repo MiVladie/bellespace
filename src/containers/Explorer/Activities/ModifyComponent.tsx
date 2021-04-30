@@ -6,6 +6,7 @@ import { IAction, IBar } from 'interfaces/hierarchy';
 import { IFolder } from 'interfaces/components/folder';
 import { WebsiteContext } from 'context/providers/website';
 import { DeleteRounded, FormatPaintRounded, TextFieldsRounded } from '@material-ui/icons';
+import { hasChanged } from 'util/validation';
 
 import Folders from 'containers/Folders/Folders';
 import Hierarchy from 'containers/Explorer/Hierarchy/Hierarchy';
@@ -32,8 +33,7 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 	const [errors, setErrors] = useState<IError>({});
 
 	const [typeId, setTypeId] = useState<number>();
-	const [contentStructure, setContentStructure] = useState<IFolder[]>([]);
-	const [styleStructure, setStyleStructure] = useState<IFolder[]>([]);
+	const [structure, setStructure] = useState<IFolder[]>([]);
 
 	const [active, setActive] = useState<number>(1);
 
@@ -41,7 +41,11 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 
 	useEffect(() => {
 		initializeContent();
-	}, []);
+	}, [active]);
+
+	useDidUpdateEffect(() => {
+		updateFields();
+	}, [fields]);
 
 	const initializeContent = () => {
 		const stateComponent = state!.pages
@@ -58,10 +62,72 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 			throw new Error('Could not establish the bulk component!');
 		}
 
-		setTypeId(bulkComponent.id);
+		// const stateStyles = state!.styles.find((style) => style.componentId === bulkComponent.id);
 
-		setContentStructure(bulkComponent.content);
-		setStyleStructure(bulkComponent.style);
+		// if (!stateStyles) {
+		// 	throw new Error('Could not establish the state styles!');
+		// }
+
+		switch (active) {
+			case 1:
+				setFields(stateComponent.content);
+				setStructure(bulkComponent.content);
+				break;
+
+			case 2:
+				setFields({} /*stateStyles?.properties*/);
+				setStructure(bulkComponent.style);
+				break;
+
+			default:
+				break;
+		}
+
+		setTypeId(bulkComponent.id);
+	};
+
+	const updateFields = () => {
+		// Initializing updated fields
+		const localFields = { ...fields };
+
+		const stateComponent = state!.pages
+			.find((page) => page.id === pageId)
+			?.components.find((component) => component.id === componentId);
+
+		if (!stateComponent) {
+			throw new Error('Could not establish the state component!');
+		}
+
+		const keys: string[] = [];
+
+		for (const folder of structure) {
+			for (const field of folder.fields) {
+				keys.push(field.name);
+			}
+		}
+
+		if (!hasChanged(keys, stateComponent.content, localFields)) {
+			return;
+		}
+
+		// Assigning all of the fields without errors
+		Object.keys(fields).forEach((key) => {
+			if (key in errors) {
+				delete localFields[key];
+			}
+		});
+
+		// Saving to the global store
+		dispatch({
+			type: Action.UPDATE_COMPONENT,
+			payload: {
+				pageId: pageId,
+				componentId: componentId,
+				fields: {
+					...localFields
+				}
+			}
+		});
 	};
 
 	const getHeader = useCallback((): string => {
@@ -101,41 +167,26 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 	}, []);
 
 	const getContent = (): React.ReactNode => {
-		switch (active) {
-			case 1:
-				return (
-					<Folders
-						data={contentStructure}
-						onValues={setFields}
-						onErrors={setErrors}
-						values={fields}
-						errors={errors}
-					/>
-				);
-
-			case 2:
-				return (
-					<Folders
-						data={styleStructure}
-						onValues={setFields}
-						onErrors={setErrors}
-						values={fields}
-						errors={errors}
-					/>
-				);
-
-			case 3:
-				return (
-					<div className={classes.Wrapper}>
-						<h3 className={classes.Heading}>
-							Are you sure you want to delete this component? This action <b>cannot</b> be undone.
-						</h3>
-					</div>
-				);
-
-			default:
-				throw new Error('Could not identify the active bar!');
+		if (active === 3) {
+			return (
+				<div className={classes.Wrapper}>
+					<h3 className={classes.Heading}>
+						Are you sure you want to delete this component? This action <b>cannot</b> be undone.
+					</h3>
+				</div>
+			);
 		}
+
+		return (
+			<Folders
+				data={structure}
+				onValues={setFields}
+				onErrors={setErrors}
+				values={fields}
+				errors={errors}
+				instantValidation
+			/>
+		);
 	};
 
 	const getActions = useCallback((): IAction[] | null => {

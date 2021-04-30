@@ -54,7 +54,17 @@ const Project: React.FC = () => {
 							componentId: 8,
 							name: 'Banner (Full Width)',
 							content: {
-								title: 'hey'
+								image:
+									'https://images.pexels.com/photos/2906458/pexels-photo-2906458.jpeg?auto=compress&cs=tinysrgb&h=1080&w=1920',
+								imageAlt: 'Woman standing next to the tree',
+								title: 'Invest in your brows, it is the crown you never take off',
+								description:
+									'Come and discover your oasis. It has never been easier to take a break from stress and the harmful factors that surround you every day!',
+								linkLeftText: 'View Services',
+								linkLeftTo: 'services',
+								linkRightText: 'Book Now',
+								linkRightTo: 'https://letscomit.com/',
+								scrollTo: 'introduction'
 							}
 						}
 					]

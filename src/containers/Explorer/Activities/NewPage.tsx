@@ -89,9 +89,7 @@ const NewPage: React.FC<Props> = ({ onDismiss }) => {
 
 								return false;
 							}
-						},
-						value: fields.name,
-						error: errors.name
+						}
 					},
 					{
 						name: 'route',
@@ -110,9 +108,7 @@ const NewPage: React.FC<Props> = ({ onDismiss }) => {
 
 								return false;
 							}
-						},
-						value: fields.route,
-						error: errors.route
+						}
 					}
 				]
 			},
@@ -123,8 +119,7 @@ const NewPage: React.FC<Props> = ({ onDismiss }) => {
 						name: 'description',
 						type: 'textarea',
 						placeholder: 'Type something..',
-						label: 'Description',
-						value: fields.description || ''
+						label: 'Description'
 					}
 				]
 			}

@@ -13,7 +13,7 @@ export const defaultContent: IContent = {
 	description:
 		'Come and discover your oasis. It has never been easier to take a break from stress and the harmful factors that surround you every day!',
 	linkLeftText: 'View Services',
-	linkLeftTo: '/services',
+	linkLeftTo: 'services',
 	linkRightText: 'Book Now',
 	linkRightTo: 'https://letscomit.com/',
 	scrollTo: 'introduction'
@@ -61,7 +61,7 @@ export const Content: IFolder[] = [
 			{
 				name: 'linkRightText',
 				type: 'text',
-				label: 'RIght Button Text'
+				label: 'Right Button Text'
 			},
 			{
 				name: 'linkRightTo',
@@ -87,7 +87,7 @@ export const Content: IFolder[] = [
 				name: 'imageAlt',
 				type: 'text',
 				info:
-					'This will be displayed as a fallback, in case the image will fail to load. It also this helps to improve SEO.',
+					'This will be displayed as a fallback, in case the image will fail to load. It also helps to improve SEO.',
 				label: 'Image Alt'
 			}
 		]
@@ -111,13 +111,18 @@ export const Styles: IFolder[] = [
 				options: {
 					min: 1,
 					max: 7,
-					step: 0.25
+					step: 0.25,
+					withInput: true
 				}
 			},
 			{
 				name: 'color',
 				type: 'color',
-				label: 'Color'
+				label: 'Color',
+				rules: {
+					required: true,
+					isHex: true
+				}
 			}
 		]
 	},
@@ -137,13 +142,18 @@ export const Styles: IFolder[] = [
 				options: {
 					min: 0.8,
 					max: 3,
-					step: 0.1
+					step: 0.1,
+					withInput: true
 				}
 			},
 			{
 				name: 'color',
 				type: 'color',
-				label: 'Color'
+				label: 'Color',
+				rules: {
+					required: true,
+					isHex: true
+				}
 			}
 		]
 	},
@@ -157,7 +167,8 @@ export const Styles: IFolder[] = [
 				options: {
 					min: 2,
 					max: 7,
-					step: 0.2
+					step: 0.2,
+					withInput: true
 				}
 			},
 			{
@@ -167,7 +178,8 @@ export const Styles: IFolder[] = [
 				options: {
 					min: 0.5,
 					max: 4,
-					step: 0.25
+					step: 0.25,
+					withInput: true
 				}
 			},
 			{
@@ -176,6 +188,10 @@ export const Styles: IFolder[] = [
 				label: 'Color',
 				options: {
 					withAlpha: true
+				},
+				rules: {
+					required: true,
+					isHex: true
 				}
 			}
 		]

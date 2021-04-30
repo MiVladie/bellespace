@@ -3,9 +3,13 @@ import { ICommonRules } from 'interfaces/validaton';
 
 export interface IColor extends IField<string> {
 	placeholder?: string;
-	rules?: ICommonRules<string>;
+	rules?: IRules;
 	presets?: IPreset[];
 	options?: IOptions;
+}
+
+export interface IRules extends ICommonRules<string> {
+	isHex?: boolean;
 }
 
 export interface IPreset {
