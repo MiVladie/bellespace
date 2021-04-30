@@ -32,7 +32,6 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 	const [fields, setFields] = useState<IField>({});
 	const [errors, setErrors] = useState<IError>({});
 
-	const [typeId, setTypeId] = useState<number>();
 	const [structure, setStructure] = useState<IFolder[]>([]);
 
 	const [active, setActive] = useState<number>(1);
@@ -62,12 +61,6 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 			throw new Error('Could not establish the bulk component!');
 		}
 
-		// const stateStyles = state!.styles.find((style) => style.componentId === bulkComponent.id);
-
-		// if (!stateStyles) {
-		// 	throw new Error('Could not establish the state styles!');
-		// }
-
 		switch (active) {
 			case 1:
 				setFields(stateComponent.content);
@@ -83,7 +76,7 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 				break;
 		}
 
-		setTypeId(bulkComponent.id);
+		setErrors({});
 	};
 
 	const updateFields = () => {
