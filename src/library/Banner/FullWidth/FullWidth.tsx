@@ -97,6 +97,7 @@ export const Content: IFolder[] = [
 export const Styles: IFolder[] = [
 	{
 		name: 'Title',
+		category: 'title',
 		fields: [
 			{
 				name: 'fontFamily',
@@ -128,6 +129,7 @@ export const Styles: IFolder[] = [
 	},
 	{
 		name: 'Description',
+		category: 'description',
 		fields: [
 			{
 				name: 'fontFamily',
@@ -159,6 +161,7 @@ export const Styles: IFolder[] = [
 	},
 	{
 		name: 'Line',
+		category: 'line',
 		fields: [
 			{
 				name: 'width',
@@ -208,8 +211,8 @@ export const Styles: IFolder[] = [
 
 export interface IStyles {
 	title?: CSSProperties;
-	line?: CSSProperties;
 	description?: CSSProperties;
+	line?: CSSProperties;
 	buttonLeft?: CSSProperties;
 	buttonRight?: CSSProperties;
 }

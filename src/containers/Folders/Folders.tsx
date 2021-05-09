@@ -65,18 +65,32 @@ const Folders = <T extends IFillable<any>, U extends IErrorable>({
 		}
 	};
 
-	const onChange = <X,>(field: TField, e: X) => {
+	const onChange = <X,>(field: TField, e: X, folder?: string) => {
 		if (instantValidation) {
 			validateField<X>(field, e);
+		}
+
+		if (folder) {
+			onValues({ ...values, [folder]: { ...values[folder], [field.name]: e } });
+
+			return;
 		}
 
 		onValues({ ...values, [field.name]: e });
 	};
 
-	const onBlur = (field: TField) => {
-		if (field.name in values) {
-			validateField(field, values[field.name as keyof T]);
+	const onBlur = (field: TField, folder?: string) => {
+		if (!(field.name in values)) {
+			return;
 		}
+
+		if (folder) {
+			validateField(field, values[folder][field.name as keyof T]);
+
+			return;
+		}
+
+		validateField(field, values[field.name as keyof T]);
 	};
 
 	const validateField = <Y,>(field: TField, value: Y) => {
@@ -101,16 +115,16 @@ const Folders = <T extends IFillable<any>, U extends IErrorable>({
 		}
 	};
 
-	const getComponentByType = (field: TField) => {
+	const getComponentByType = (field: TField, folder?: string) => {
 		switch (field.type) {
 			case 'color':
 				return (
 					<Color
 						{...field}
 						onFocus={() => field.onFocus?.() || onFocus(field)}
-						onChange={(e) => field.onChange?.(e) || onChange<string>(field, e)}
-						onBlur={() => field.onBlur?.() || onBlur(field)}
-						value={values[field.name] || ''}
+						onChange={(e) => field.onChange?.(e) || onChange<string>(field, e, folder)}
+						onBlur={() => field.onBlur?.() || onBlur(field, folder)}
+						value={(folder ? values[folder]?.[field.name] : values[field.name]) || ''}
 						error={errors[field.name]}
 						key={field.name}
 					/>
@@ -121,9 +135,9 @@ const Folders = <T extends IFillable<any>, U extends IErrorable>({
 					<Dropdown
 						{...field}
 						onFocus={() => field.onFocus?.() || onFocus(field)}
-						onChange={(e) => field.onChange?.(e) || onChange<number | null>(field, e)}
-						onBlur={() => field.onBlur?.() || onBlur(field)}
-						value={values[field.name] || null}
+						onChange={(e) => field.onChange?.(e) || onChange<number | null>(field, e, folder)}
+						onBlur={() => field.onBlur?.() || onBlur(field, folder)}
+						value={(folder ? values[folder]?.[field.name] : values[field.name]) || null}
 						error={errors[field.name]}
 						key={field.name}
 					/>
@@ -134,9 +148,9 @@ const Folders = <T extends IFillable<any>, U extends IErrorable>({
 					<Slider
 						{...field}
 						onFocus={() => field.onFocus?.() || onFocus(field)}
-						onChange={(e) => field.onChange?.(e) || onChange<number>(field, e)}
-						onBlur={() => field.onBlur?.() || onBlur(field)}
-						value={values[field.name] || ''}
+						onChange={(e) => field.onChange?.(e) || onChange<number>(field, e, folder)}
+						onBlur={() => field.onBlur?.() || onBlur(field, folder)}
+						value={(folder ? values[folder]?.[field.name] : values[field.name]) || ''}
 						error={errors[field.name]}
 						key={field.name}
 					/>
@@ -148,9 +162,9 @@ const Folders = <T extends IFillable<any>, U extends IErrorable>({
 						{...field}
 						type={field.type}
 						onFocus={() => onFocus(field)}
-						onChange={(e) => onChange<string>(field, e)}
-						onBlur={() => onBlur(field)}
-						value={values[field.name] || ''}
+						onChange={(e) => onChange<string>(field, e, folder)}
+						onBlur={() => onBlur(field, folder)}
+						value={(folder ? values[folder]?.[field.name] : values[field.name]) || ''}
 						error={errors[field.name]}
 						key={field.name}
 					/>
@@ -169,7 +183,7 @@ const Folders = <T extends IFillable<any>, U extends IErrorable>({
 					</div>
 
 					<Accordion className={classes.Content} expanded={isOpen(index)}>
-						{item.fields.map((field) => getComponentByType(field))}
+						{item.fields.map((field) => getComponentByType(field, item.category))}
 					</Accordion>
 				</li>
 			))}

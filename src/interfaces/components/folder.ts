@@ -5,6 +5,7 @@ import { ISlider } from './slider';
 
 export interface IFolder {
 	name: string;
+	category?: string;
 	fields: TField[];
 }
 
