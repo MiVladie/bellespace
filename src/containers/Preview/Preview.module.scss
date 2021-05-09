@@ -1,0 +1,15 @@
+@import '../../assets/styles/colors';
+@import '../../assets/styles/fonts';
+@import '../../assets/styles/sizing';
+@import '../../assets/styles/spacing';
+
+$toggle: 1.25rem;
+
+.Preview {
+	width: calc(100% - #{$toggle} * 2);
+	height: 100vh;
+
+	margin: 0 auto;
+
+	overflow-y: auto;
+}

@@ -8,7 +8,7 @@ import { IProperty } from 'interfaces/website';
 import classes from './FullWidth.module.scss';
 
 export const defaultContent: IContent = {
-	image: 'https://images.pexels.com/photos/2906458/pexels-photo-2906458.jpeg?auto=compress&cs=tinysrgb&h=1080&w=1920',
+	image: 'https://images.pexels.com/photos/7631690/pexels-photo-7631690.jpeg',
 	imageAlt: 'Woman standing next to the tree',
 	title: 'Invest in your brows, it is the crown you never take off',
 	description:
@@ -103,7 +103,7 @@ export const defaultStyles: IProperty = {
 	},
 	description: {
 		fontFamily: 1,
-		fontSize: 3,
+		fontSize: 1.5,
 		color: '#ffffff'
 	},
 	line: {
@@ -217,11 +217,20 @@ export const Styles: IFolder[] = [
 ];
 
 export interface IStyles {
-	title?: CSSProperties;
-	description?: CSSProperties;
-	line?: CSSProperties;
-	buttonLeft?: CSSProperties;
-	buttonRight?: CSSProperties;
+	title: {
+		fontFamily: number;
+		fontSize: number;
+		color: string;
+	};
+	description: {
+		fontFamily: number;
+		fontSize: number;
+		color: string;
+	};
+	line: {
+		width: number;
+		backgroundColor: string;
+	};
 }
 
 export interface IContent {
@@ -264,28 +273,48 @@ const FullWidth: React.FC<IContent> = ({
 			</div>
 
 			<div className={classes.Wrapper}>
-				<h1 className={classes.Title} style={styles?.title}>
+				<h1
+					className={classes.Title}
+					style={
+						styles?.title && {
+							fontFamily: FONT_FAMILIES.find((font) => font.value === styles.title.fontFamily)!.label,
+							fontSize: styles.title.fontSize + 'rem',
+							color: styles.title.color
+						}
+					}>
 					{title}
 				</h1>
-				<div className={classes.Line} style={styles?.line} />
-				<p className={classes.Description} style={styles?.description}>
+				<div
+					className={classes.Line}
+					style={
+						styles?.line && {
+							width: styles.line.width + 'rem',
+							backgroundColor: styles.line.backgroundColor
+						}
+					}
+				/>
+				<p
+					className={classes.Description}
+					style={
+						styles?.description && {
+							fontFamily: FONT_FAMILIES.find((font) => font.value === styles.description.fontFamily)!
+								.label,
+							fontSize: styles.description.fontSize + 'rem',
+							color: styles.description.color
+						}
+					}>
 					{description}
 				</p>
 			</div>
 
 			<div className={classes.Links}>
 				{linkLeftText && linkLeftTo && (
-					<Link className={classes.Left} to={'/' + linkLeftTo} style={styles?.buttonLeft}>
+					<Link className={classes.Left} to={'/' + linkLeftTo}>
 						{linkLeftText}
 					</Link>
 				)}
 				{linkRightText && linkRightTo && (
-					<a
-						className={classes.Right}
-						href={linkRightTo}
-						style={styles?.buttonRight}
-						target='_blank'
-						rel='noopener noreferrer'>
+					<a className={classes.Right} href={linkRightTo} target='_blank' rel='noopener noreferrer'>
 						{linkRightText}
 					</a>
 				)}

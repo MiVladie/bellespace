@@ -12,6 +12,7 @@ import { IStructure } from 'interfaces/website';
 import * as FullWidth from 'library/Banner/FullWidth/FullWidth';
 
 import Sitemap from 'containers/Sitemap/Sitemap';
+import Preview from 'containers/Preview/Preview';
 import Explorer from 'containers/Explorer/Explorer';
 import Loader from 'containers/Loader/Loader';
 
@@ -83,6 +84,7 @@ const Project: React.FC = () => {
 				<title>{stateWebsite!.name} | Bellespace</title>
 			</Helmet>
 
+			<Preview />
 			<Sitemap />
 			<Explorer />
 		</div>

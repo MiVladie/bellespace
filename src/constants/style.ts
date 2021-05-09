@@ -20,5 +20,9 @@ export const FONT_FAMILIES: IOption[] = [
 	{
 		value: 5,
 		label: 'Raleway'
+	},
+	{
+		value: 6,
+		label: 'Poppins'
 	}
 ];

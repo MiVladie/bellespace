@@ -21,6 +21,7 @@ interface IItem {
 	defaultStyle: IProperty;
 	content: IFolder[];
 	style: IFolder[];
+	default: any;
 }
 
 export const WEBSITE_CATEGORIES: IOption[] = [
@@ -148,7 +149,8 @@ export const COMPONENTS: IItem[] = [
 		defaultContent: {},
 		defaultStyle: {},
 		content: [],
-		style: []
+		style: [],
+		default: null
 	},
 	{
 		id: 2,
@@ -157,7 +159,8 @@ export const COMPONENTS: IItem[] = [
 		defaultContent: {},
 		defaultStyle: {},
 		content: [],
-		style: []
+		style: [],
+		default: null
 	},
 	{
 		id: 3,
@@ -166,7 +169,8 @@ export const COMPONENTS: IItem[] = [
 		defaultContent: {},
 		defaultStyle: {},
 		content: [],
-		style: []
+		style: [],
+		default: null
 	},
 	{
 		id: 4,
@@ -175,7 +179,8 @@ export const COMPONENTS: IItem[] = [
 		defaultContent: {},
 		defaultStyle: {},
 		content: [],
-		style: []
+		style: [],
+		default: null
 	},
 	{
 		id: 5,
@@ -184,7 +189,8 @@ export const COMPONENTS: IItem[] = [
 		defaultContent: {},
 		defaultStyle: {},
 		content: [],
-		style: []
+		style: [],
+		default: null
 	},
 	{
 		id: 6,
@@ -193,7 +199,8 @@ export const COMPONENTS: IItem[] = [
 		defaultContent: {},
 		defaultStyle: {},
 		content: [],
-		style: []
+		style: [],
+		default: null
 	},
 	{
 		id: 7,
@@ -202,7 +209,8 @@ export const COMPONENTS: IItem[] = [
 		defaultContent: {},
 		defaultStyle: {},
 		content: [],
-		style: []
+		style: [],
+		default: null
 	},
 	{
 		id: 8,
@@ -211,7 +219,8 @@ export const COMPONENTS: IItem[] = [
 		defaultContent: FullWidth.defaultContent,
 		content: FullWidth.Content,
 		defaultStyle: FullWidth.defaultStyles,
-		style: FullWidth.Styles
+		style: FullWidth.Styles,
+		default: FullWidth.default
 	},
 	{
 		id: 9,
@@ -220,7 +229,8 @@ export const COMPONENTS: IItem[] = [
 		defaultContent: {},
 		defaultStyle: {},
 		content: [],
-		style: []
+		style: [],
+		default: null
 	},
 	{
 		id: 10,
@@ -229,7 +239,8 @@ export const COMPONENTS: IItem[] = [
 		defaultContent: {},
 		defaultStyle: {},
 		content: [],
-		style: []
+		style: [],
+		default: null
 	},
 	{
 		id: 11,
@@ -238,7 +249,8 @@ export const COMPONENTS: IItem[] = [
 		defaultContent: {},
 		defaultStyle: {},
 		content: [],
-		style: []
+		style: [],
+		default: null
 	},
 	{
 		id: 12,
@@ -247,7 +259,8 @@ export const COMPONENTS: IItem[] = [
 		defaultContent: {},
 		defaultStyle: {},
 		content: [],
-		style: []
+		style: [],
+		default: null
 	},
 	{
 		id: 13,
@@ -256,6 +269,7 @@ export const COMPONENTS: IItem[] = [
 		defaultContent: {},
 		defaultStyle: {},
 		content: [],
-		style: []
+		style: [],
+		default: null
 	}
 ];
