@@ -15,7 +15,7 @@ import useDidUpdateEffect from 'hooks/render';
 import classes from '../Explorer.module.scss';
 
 interface IField {
-	[key: string]: any;
+	[key: string]: string | number | { [key: string]: string | number };
 }
 
 interface IError {

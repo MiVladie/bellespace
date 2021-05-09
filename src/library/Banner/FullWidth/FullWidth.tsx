@@ -94,6 +94,23 @@ export const Content: IFolder[] = [
 	}
 ];
 
+export const defaultStyles: IStyle = {
+	title: {
+		fontFamily: 1,
+		fontSize: 4.5,
+		color: '#ffffff'
+	},
+	description: {
+		fontFamily: 1,
+		fontSize: 3,
+		color: '#ffffff'
+	},
+	line: {
+		width: 5,
+		backgroundColor: '#ffffff'
+	}
+};
+
 export const Styles: IFolder[] = [
 	{
 		name: 'Title',
@@ -175,17 +192,6 @@ export const Styles: IFolder[] = [
 				}
 			},
 			{
-				name: 'height',
-				type: 'slider',
-				label: 'Height',
-				options: {
-					min: 0.5,
-					max: 4,
-					step: 0.25,
-					withInput: true
-				}
-			},
-			{
 				name: 'backgroundColor',
 				type: 'color',
 				label: 'Color',
@@ -229,6 +235,23 @@ export interface IContent {
 	linkRightText?: string;
 	scrollTo?: string;
 	styles?: IStyles;
+}
+
+export interface IStyle {
+	title: {
+		fontFamily: number;
+		fontSize: number;
+		color: string;
+	};
+	description: {
+		fontFamily: number;
+		fontSize: number;
+		color: string;
+	};
+	line: {
+		width: number;
+		backgroundColor: string;
+	};
 }
 
 const FullWidth: React.FC<IContent> = ({

@@ -8,6 +8,7 @@ export type ActionType =
 	| { type: Action.SET_WEBSITE; payload: IStructure }
 	| { type: Action.ADD_PAGE; payload: { page: IPage } }
 	| { type: Action.ADD_COMPONENT; payload: { pageId: number; component: IComponent } }
+	| { type: Action.ADD_STYLE; payload: IStyle }
 	| { type: Action.UPDATE_WEBSITE; payload: { name?: string; category?: number; description?: string } }
 	| { type: Action.UPDATE_PAGE; payload: { pageId: number; name?: string; route?: string; description?: string } }
 	| {
@@ -59,6 +60,18 @@ const fn: Reducer<any, ActionType> = (state: IStructure, action: ActionType) => 
 			return {
 				...state,
 				pages: newPages
+			};
+
+		case Action.ADD_STYLE:
+			if (state.styles.map((style) => style.componentId).includes(action.payload.componentId)) {
+				throw new Error('Styling for this component already exists!');
+			}
+
+			newStyles = [...state.styles, action.payload];
+
+			return {
+				...state,
+				styles: newStyles
 			};
 
 		case Action.UPDATE_WEBSITE:
@@ -160,9 +173,28 @@ const fn: Reducer<any, ActionType> = (state: IStructure, action: ActionType) => 
 
 			newPages[updatedPageIndex].components = newComponents;
 
+			newStyles = [...state.styles];
+
+			let occurances = 0;
+
+			for (const page of newPages) {
+				for (const component of page.components) {
+					if (component.componentId === action.payload.componentId) {
+						occurances++;
+						break;
+					}
+				}
+
+				if (occurances) {
+					newStyles = newStyles.filter((style) => style.componentId !== action.payload.componentId);
+					break;
+				}
+			}
+
 			return {
 				...state,
-				pages: newPages
+				pages: newPages,
+				styles: newStyles
 			};
 
 		default:
