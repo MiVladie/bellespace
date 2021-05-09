@@ -9,6 +9,8 @@ import { Action as WebsiteAction } from 'context/actions/website';
 import { Helmet } from 'react-helmet';
 import { IStructure } from 'interfaces/website';
 
+import * as FullWidth from 'library/Banner/FullWidth/FullWidth';
+
 import Sitemap from 'containers/Sitemap/Sitemap';
 import Explorer from 'containers/Explorer/Explorer';
 import Loader from 'containers/Loader/Loader';
@@ -53,24 +55,17 @@ const Project: React.FC = () => {
 							id: 1,
 							componentId: 8,
 							name: 'Banner (Full Width)',
-							content: {
-								image:
-									'https://images.pexels.com/photos/2906458/pexels-photo-2906458.jpeg?auto=compress&cs=tinysrgb&h=1080&w=1920',
-								imageAlt: 'Woman standing next to the tree',
-								title: 'Invest in your brows, it is the crown you never take off',
-								description:
-									'Come and discover your oasis. It has never been easier to take a break from stress and the harmful factors that surround you every day!',
-								linkLeftText: 'View Services',
-								linkLeftTo: 'services',
-								linkRightText: 'Book Now',
-								linkRightTo: 'https://letscomit.com/',
-								scrollTo: 'introduction'
-							}
+							content: FullWidth.defaultContent
 						}
 					]
 				}
 			],
-			styles: []
+			styles: [
+				{
+					componentId: 8,
+					properties: FullWidth.defaultStyles
+				}
+			]
 		};
 
 		dispatchWebsite({ type: WebsiteAction.SET_WEBSITE, payload: website });

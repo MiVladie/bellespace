@@ -3,6 +3,7 @@ import React, { CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import { IFolder } from 'interfaces/components/folder';
 import { FONT_FAMILIES } from 'constants/style';
+import { IProperty } from 'interfaces/website';
 
 import classes from './FullWidth.module.scss';
 
@@ -94,7 +95,7 @@ export const Content: IFolder[] = [
 	}
 ];
 
-export const defaultStyles: IStyle = {
+export const defaultStyles: IProperty = {
 	title: {
 		fontFamily: 1,
 		fontSize: 4.5,
@@ -235,23 +236,6 @@ export interface IContent {
 	linkRightText?: string;
 	scrollTo?: string;
 	styles?: IStyles;
-}
-
-export interface IStyle {
-	title: {
-		fontFamily: number;
-		fontSize: number;
-		color: string;
-	};
-	description: {
-		fontFamily: number;
-		fontSize: number;
-		color: string;
-	};
-	line: {
-		width: number;
-		backgroundColor: string;
-	};
 }
 
 const FullWidth: React.FC<IContent> = ({

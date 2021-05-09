@@ -13,6 +13,7 @@ import Hierarchy from 'containers/Explorer/Hierarchy/Hierarchy';
 import useDidUpdateEffect from 'hooks/render';
 
 import classes from '../Explorer.module.scss';
+import { IProperty } from 'interfaces/website';
 
 interface IField {
 	[key: string]: string | number | { [key: string]: string | number };
@@ -40,10 +41,14 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 
 	useEffect(() => {
 		initializeContent();
-	}, [active]);
+	}, [active, componentId]);
 
 	useDidUpdateEffect(() => {
-		updateFields();
+		if (active === 1) {
+			updateContentFields();
+		} else {
+			updateStyleFields();
+		}
 	}, [fields]);
 
 	const initializeContent = () => {
@@ -61,6 +66,12 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 			throw new Error('Could not establish the bulk component!');
 		}
 
+		const stateStyles = state!.styles.find((style) => style.componentId === bulkComponent.id);
+
+		if (!stateStyles) {
+			throw new Error('Could not establish the default styles!');
+		}
+
 		switch (active) {
 			case 1:
 				setFields(stateComponent.content);
@@ -68,7 +79,7 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 				break;
 
 			case 2:
-				setFields({} /*stateStyles?.properties*/);
+				setFields(stateStyles.properties);
 				setStructure(bulkComponent.style);
 				break;
 
@@ -79,7 +90,7 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 		setErrors({});
 	};
 
-	const updateFields = () => {
+	const updateContentFields = () => {
 		// Initializing updated fields
 		const localFields = { ...fields };
 
@@ -119,6 +130,25 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 				fields: {
 					...localFields
 				}
+			}
+		});
+	};
+
+	const updateStyleFields = () => {
+		const stateComponent = state!.pages
+			.find((page) => page.id === pageId)
+			?.components.find((component) => component.id === componentId);
+
+		if (!stateComponent) {
+			throw new Error('Could not establish the state component!');
+		}
+
+		// Saving to the global store
+		dispatch({
+			type: Action.UPDATE_STYLE,
+			payload: {
+				componentId: stateComponent.componentId,
+				properties: fields as IProperty
 			}
 		});
 	};
@@ -210,7 +240,18 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 	}, [active]);
 
 	const onDelete = () => {
-		dispatch({ type: Action.DELETE_COMPONENT, payload: { pageId, componentId } });
+		const stateComponent = state!.pages
+			.find((page) => page.id === pageId)
+			?.components.find((component) => component.id === componentId);
+
+		if (!stateComponent) {
+			throw new Error('Could not establish the state component!');
+		}
+
+		dispatch({
+			type: Action.DELETE_COMPONENT,
+			payload: { pageId, id: componentId, componentId: stateComponent!.componentId }
+		});
 
 		onDismiss();
 	};

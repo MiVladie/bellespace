@@ -36,32 +36,11 @@ export interface IContent {
 
 export interface IStyle {
 	componentId: number;
-	properties: IProperty[];
+	properties: IProperty;
 }
 
 export interface IProperty {
-	id: number;
-	heading: string;
-	attributes: IAttribute[];
-}
-
-export interface IAttribute {
-	id: number;
-	name: string;
-	attribute: string;
-	type:
-		| 'date'
-		| 'textarea'
-		| 'email'
-		| 'number'
-		| 'password'
-		| 'tel'
-		| 'text'
-		| 'time'
-		| 'dropdown'
-		| 'slider'
-		| 'color';
-	value: any;
-	rules?: any;
-	options?: any;
+	[key: string]: {
+		[key: string]: string | number;
+	};
 }

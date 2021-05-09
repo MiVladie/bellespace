@@ -7,8 +7,7 @@ import { Action } from 'context/actions/website';
 export type ActionType =
 	| { type: Action.SET_WEBSITE; payload: IStructure }
 	| { type: Action.ADD_PAGE; payload: { page: IPage } }
-	| { type: Action.ADD_COMPONENT; payload: { pageId: number; component: IComponent } }
-	| { type: Action.ADD_STYLE; payload: IStyle }
+	| { type: Action.ADD_COMPONENT; payload: { pageId: number; component: IComponent; style: IStyle } }
 	| { type: Action.UPDATE_WEBSITE; payload: { name?: string; category?: number; description?: string } }
 	| { type: Action.UPDATE_PAGE; payload: { pageId: number; name?: string; route?: string; description?: string } }
 	| {
@@ -17,11 +16,11 @@ export type ActionType =
 	  }
 	| {
 			type: Action.UPDATE_STYLE;
-			payload: { componentId: number; propertyId: number; attributeId: number; value: any };
+			payload: IStyle;
 	  }
 	| { type: Action.DELETE_WEBSITE }
 	| { type: Action.DELETE_PAGE; payload: { pageId: number } }
-	| { type: Action.DELETE_COMPONENT; payload: { pageId: number; componentId: number } };
+	| { type: Action.DELETE_COMPONENT; payload: { pageId: number; id: number; componentId: number } };
 
 const fn: Reducer<any, ActionType> = (state: IStructure, action: ActionType) => {
 	let newPages: IPage[];
@@ -30,8 +29,6 @@ const fn: Reducer<any, ActionType> = (state: IStructure, action: ActionType) => 
 
 	let newStyles: IStyle[];
 	let updatedStyleIndex: number;
-	let updatedPropertyIndex: number;
-	let updatedAttributeIndex: number;
 
 	let newComponents: IComponent[];
 
@@ -57,20 +54,15 @@ const fn: Reducer<any, ActionType> = (state: IStructure, action: ActionType) => 
 
 			newPages[updatedPageIndex].components.push(action.payload.component);
 
-			return {
-				...state,
-				pages: newPages
-			};
+			newStyles = [...state.styles];
 
-		case Action.ADD_STYLE:
-			if (state.styles.map((style) => style.componentId).includes(action.payload.componentId)) {
-				throw new Error('Styling for this component already exists!');
+			if (!state.styles.map((style) => style.componentId).includes(action.payload.component.componentId)) {
+				newStyles.push(action.payload.style);
 			}
 
-			newStyles = [...state.styles, action.payload];
-
 			return {
 				...state,
+				pages: newPages,
 				styles: newStyles
 			};
 
@@ -128,24 +120,7 @@ const fn: Reducer<any, ActionType> = (state: IStructure, action: ActionType) => 
 				throw new Error('Could not establish the component!');
 			}
 
-			updatedAttributeIndex = newStyles[updatedStyleIndex].properties.findIndex(
-				(p) => p.id === action.payload.attributeId
-			);
-
-			if (updatedAttributeIndex === -1) {
-				throw new Error('Could not establish the attribute!');
-			}
-
-			updatedPropertyIndex = newStyles[updatedStyleIndex].properties[updatedAttributeIndex].attributes.findIndex(
-				(a) => a.id === action.payload.propertyId
-			);
-
-			if (updatedPropertyIndex === -1) {
-				throw new Error('Could not establish the property!');
-			}
-
-			newStyles[updatedStyleIndex].properties[updatedAttributeIndex].attributes[updatedPropertyIndex].value =
-				action.payload.value;
+			newStyles[updatedStyleIndex].properties = action.payload.properties;
 
 			return {
 				...state,
@@ -169,7 +144,7 @@ const fn: Reducer<any, ActionType> = (state: IStructure, action: ActionType) => 
 				throw new Error('Could not establish the page!');
 			}
 
-			newComponents = newPages[updatedPageIndex].components.filter((c) => c.id !== action.payload.componentId);
+			newComponents = newPages[updatedPageIndex].components.filter((c) => c.id !== action.payload.id);
 
 			newPages[updatedPageIndex].components = newComponents;
 
@@ -185,7 +160,7 @@ const fn: Reducer<any, ActionType> = (state: IStructure, action: ActionType) => 
 					}
 				}
 
-				if (occurances) {
+				if (!occurances) {
 					newStyles = newStyles.filter((style) => style.componentId !== action.payload.componentId);
 					break;
 				}

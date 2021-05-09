@@ -1,4 +1,4 @@
-import { IContent } from 'interfaces/website';
+import { IContent, IProperty } from 'interfaces/website';
 import { IOption } from 'interfaces/components/dropdown';
 import { IFolder } from 'interfaces/components/folder';
 
@@ -18,6 +18,7 @@ interface IItem {
 	categoryId: number;
 	name: string;
 	defaultContent?: IContent;
+	defaultStyle: IProperty;
 	content: IFolder[];
 	style: IFolder[];
 }
@@ -145,6 +146,7 @@ export const COMPONENTS: IItem[] = [
 		categoryId: 1,
 		name: 'Text Centered',
 		defaultContent: {},
+		defaultStyle: {},
 		content: [],
 		style: []
 	},
@@ -153,6 +155,7 @@ export const COMPONENTS: IItem[] = [
 		categoryId: 1,
 		name: 'Left Align',
 		defaultContent: {},
+		defaultStyle: {},
 		content: [],
 		style: []
 	},
@@ -161,6 +164,7 @@ export const COMPONENTS: IItem[] = [
 		categoryId: 1,
 		name: 'Right Align',
 		defaultContent: {},
+		defaultStyle: {},
 		content: [],
 		style: []
 	},
@@ -169,6 +173,7 @@ export const COMPONENTS: IItem[] = [
 		categoryId: 1,
 		name: 'Logo Centered',
 		defaultContent: {},
+		defaultStyle: {},
 		content: [],
 		style: []
 	},
@@ -177,6 +182,7 @@ export const COMPONENTS: IItem[] = [
 		categoryId: 1,
 		name: 'Sticky List',
 		defaultContent: {},
+		defaultStyle: {},
 		content: [],
 		style: []
 	},
@@ -185,6 +191,7 @@ export const COMPONENTS: IItem[] = [
 		categoryId: 1,
 		name: 'defaultContent Stretched',
 		defaultContent: {},
+		defaultStyle: {},
 		content: [],
 		style: []
 	},
@@ -193,6 +200,7 @@ export const COMPONENTS: IItem[] = [
 		categoryId: 1,
 		name: 'With Call to Action',
 		defaultContent: {},
+		defaultStyle: {},
 		content: [],
 		style: []
 	},
@@ -202,6 +210,7 @@ export const COMPONENTS: IItem[] = [
 		name: 'Full Width',
 		defaultContent: FullWidth.defaultContent,
 		content: FullWidth.Content,
+		defaultStyle: FullWidth.defaultStyles,
 		style: FullWidth.Styles
 	},
 	{
@@ -209,6 +218,7 @@ export const COMPONENTS: IItem[] = [
 		categoryId: 3,
 		name: 'Informational',
 		defaultContent: {},
+		defaultStyle: {},
 		content: [],
 		style: []
 	},
@@ -217,6 +227,7 @@ export const COMPONENTS: IItem[] = [
 		categoryId: 4,
 		name: 'With Discounts',
 		defaultContent: {},
+		defaultStyle: {},
 		content: [],
 		style: []
 	},
@@ -225,6 +236,7 @@ export const COMPONENTS: IItem[] = [
 		categoryId: 5,
 		name: 'Grid',
 		defaultContent: {},
+		defaultStyle: {},
 		content: [],
 		style: []
 	},
@@ -233,6 +245,7 @@ export const COMPONENTS: IItem[] = [
 		categoryId: 6,
 		name: 'Text Centered',
 		defaultContent: {},
+		defaultStyle: {},
 		content: [],
 		style: []
 	},
@@ -241,6 +254,7 @@ export const COMPONENTS: IItem[] = [
 		categoryId: 7,
 		name: 'Small',
 		defaultContent: {},
+		defaultStyle: {},
 		content: [],
 		style: []
 	}

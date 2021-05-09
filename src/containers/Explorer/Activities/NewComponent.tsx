@@ -10,7 +10,7 @@ import Hierarchy from 'containers/Explorer/Hierarchy/Hierarchy';
 import Components from 'containers/Components/Components';
 
 import classes from '../Explorer.module.scss';
-import { IComponent } from 'interfaces/website';
+import { IComponent, IStyle } from 'interfaces/website';
 
 interface IActions {
 	selected: number | null;
@@ -81,7 +81,12 @@ const NewComponent: React.FC<Props> = ({ pageId, onDismiss }) => {
 			content: bulkComponent.defaultContent || {}
 		};
 
-		dispatch({ type: Action.ADD_COMPONENT, payload: { pageId, component } });
+		const style: IStyle = {
+			componentId: bulkComponent.id,
+			properties: bulkComponent.defaultStyle
+		};
+
+		dispatch({ type: Action.ADD_COMPONENT, payload: { pageId, component, style } });
 
 		onDismiss();
 	};
