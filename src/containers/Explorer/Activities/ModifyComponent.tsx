@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 
 import { getComponentById } from 'library';
+import { IProperty } from 'interfaces/website';
 import { Action } from 'context/actions/website';
 import { IAction, IBar } from 'interfaces/hierarchy';
 import { IFolder } from 'interfaces/components/folder';
@@ -10,10 +11,10 @@ import { hasChanged } from 'util/validation';
 
 import Folders from 'containers/Folders/Folders';
 import Hierarchy from 'containers/Explorer/Hierarchy/Hierarchy';
-import useDidUpdateEffect from 'hooks/render';
+import useDidUpdateEffect from 'hooks/userDidUpdateEffect';
+import useDebounce from 'hooks/useDebounce';
 
 import classes from '../Explorer.module.scss';
-import { IProperty } from 'interfaces/website';
 
 interface IField {
 	[key: string]: string | number | { [key: string]: string | number };
@@ -30,7 +31,7 @@ interface Props {
 }
 
 const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
-	const [fields, setFields] = useState<IField>({});
+	const [debouncedFields, fields, setFields] = useDebounce<IField>({}, 250);
 	const [errors, setErrors] = useState<IError>({});
 
 	const [structure, setStructure] = useState<IFolder[]>([]);
@@ -49,7 +50,7 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 		} else {
 			updateStyleFields();
 		}
-	}, [fields]);
+	}, [debouncedFields]);
 
 	const initializeContent = () => {
 		const stateComponent = state!.pages

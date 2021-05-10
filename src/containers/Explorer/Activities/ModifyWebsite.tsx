@@ -8,7 +8,7 @@ import { IFolder } from 'interfaces/components/folder';
 import { WebsiteContext } from 'context/providers/website';
 import { SettingsRounded } from '@material-ui/icons';
 
-import useDidUpdateEffect from 'hooks/render';
+import useDidUpdateEffect from 'hooks/userDidUpdateEffect';
 
 import Hierarchy from 'containers/Explorer/Hierarchy/Hierarchy';
 import Folders from 'containers/Folders/Folders';

@@ -7,13 +7,13 @@ import { Action } from 'context/actions/website';
 import { IFolder } from 'interfaces/components/folder';
 import { WebsiteContext } from 'context/providers/website';
 import { DeleteRounded, SettingsRounded } from '@material-ui/icons';
+import { hasChanged } from 'util/validation';
 
 import Hierarchy from 'containers/Explorer/Hierarchy/Hierarchy';
+import useDidUpdateEffect from 'hooks/userDidUpdateEffect';
 import Folders from 'containers/Folders/Folders';
 
 import classes from '../Explorer.module.scss';
-import useDidUpdateEffect from 'hooks/render';
-import { hasChanged } from 'util/validation';
 
 interface IHeading {
 	bar: number;
