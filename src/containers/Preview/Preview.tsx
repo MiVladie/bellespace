@@ -37,7 +37,7 @@ const Preview: React.FC = () => {
 		}
 
 		renderComponents(active);
-	}, [stateWebsite?.pages]);
+	}, [stateWebsite?.pages, stateWebsite?.styles]);
 
 	const renderComponents = async (active: number, load?: boolean) => {
 		if (load) {

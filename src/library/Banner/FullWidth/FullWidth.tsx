@@ -11,7 +11,7 @@ export const defaultContent: IContent = {
 	image:
 		'https://images.pexels.com/photos/6930438/pexels-photo-6930438.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
 	imageAlt: 'Woman standing next to the tree',
-	title: 'Invest in your brows, it is the crown you never take off',
+	title: 'Invest in your brows, it is your crown',
 	description:
 		'Come and discover your oasis. It has never been easier to take a break from stress and the harmful factors that surround you every day!',
 	linkLeftText: 'View Services',
