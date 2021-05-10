@@ -8,7 +8,8 @@ import { IProperty } from 'interfaces/website';
 import classes from './FullWidth.module.scss';
 
 export const defaultContent: IContent = {
-	image: 'https://images.pexels.com/photos/7631690/pexels-photo-7631690.jpeg',
+	image:
+		'https://images.pexels.com/photos/6930438/pexels-photo-6930438.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
 	imageAlt: 'Woman standing next to the tree',
 	title: 'Invest in your brows, it is the crown you never take off',
 	description:
