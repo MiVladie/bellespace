@@ -39,6 +39,15 @@ export const Content: IFolder[] = [
 				rules: {
 					required: true
 				}
+			},
+			{
+				name: 'image',
+				type: 'text',
+				label: 'Image',
+				rules: {
+					required: true,
+					isURL: true
+				}
 			}
 		]
 	},
