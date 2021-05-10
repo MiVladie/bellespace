@@ -39,7 +39,7 @@ const Preview: React.FC = () => {
 				const content = component.content;
 				const styles = stateWebsite!.styles.find((style) => style.componentId === component.componentId)!;
 
-				return <bulkComponent.default {...content} styles={styles.properties} />;
+				return <bulkComponent.default {...content} styles={styles.properties} key={component.id} />;
 			});
 	};
 

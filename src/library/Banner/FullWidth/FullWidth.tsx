@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom';
 import { IFolder } from 'interfaces/components/folder';
@@ -109,6 +109,22 @@ export const defaultStyles: IProperty = {
 	line: {
 		width: 5,
 		backgroundColor: '#ffffff'
+	},
+	buttonLeft: {
+		fontFamily: 1,
+		width: 11,
+		height: 3.25,
+		borderWidth: 2,
+		color: '#fff',
+		textHoverColor: '#000'
+	},
+	buttonRight: {
+		fontFamily: 1,
+		width: 11,
+		height: 3.25,
+		borderWidth: 2,
+		color: '#fff',
+		textHoverColor: '#000'
 	}
 };
 
@@ -205,15 +221,133 @@ export const Styles: IFolder[] = [
 				}
 			}
 		]
+	},
+	{
+		name: 'Button Left',
+		category: 'buttonLeft',
+		fields: [
+			{
+				name: 'fontFamily',
+				type: 'dropdown',
+				label: 'Font Family',
+				options: FONT_FAMILIES
+			},
+			{
+				name: 'width',
+				type: 'slider',
+				label: 'Width',
+				options: {
+					min: 8,
+					max: 14,
+					step: 0.25,
+					withInput: true
+				}
+			},
+			{
+				name: 'height',
+				type: 'slider',
+				label: 'Height',
+				options: {
+					min: 2,
+					max: 4,
+					step: 0.25,
+					withInput: true
+				}
+			},
+			{
+				name: 'borderWidth',
+				type: 'slider',
+				label: 'Thickness',
+				options: {
+					min: 0.5,
+					max: 4,
+					step: 0.25,
+					withInput: true
+				}
+			},
+			{
+				name: 'color',
+				type: 'color',
+				label: 'Color',
+				rules: {
+					required: true,
+					isHex: true
+				}
+			},
+			{
+				name: 'textHoverColor',
+				type: 'color',
+				label: 'Text Color',
+				rules: {
+					required: true,
+					isHex: true
+				}
+			}
+		]
+	},
+	{
+		name: 'Button Right',
+		category: 'buttonRight',
+		fields: [
+			{
+				name: 'fontFamily',
+				type: 'dropdown',
+				label: 'Font Family',
+				options: FONT_FAMILIES
+			},
+			{
+				name: 'width',
+				type: 'slider',
+				label: 'Width',
+				options: {
+					min: 8,
+					max: 14,
+					step: 0.25,
+					withInput: true
+				}
+			},
+			{
+				name: 'height',
+				type: 'slider',
+				label: 'Height',
+				options: {
+					min: 2,
+					max: 4,
+					step: 0.25,
+					withInput: true
+				}
+			},
+			{
+				name: 'borderWidth',
+				type: 'slider',
+				label: 'Thickness',
+				options: {
+					min: 0.5,
+					max: 4,
+					step: 0.25,
+					withInput: true
+				}
+			},
+			{
+				name: 'color',
+				type: 'color',
+				label: 'Color',
+				rules: {
+					required: true,
+					isHex: true
+				}
+			},
+			{
+				name: 'textHoverColor',
+				type: 'color',
+				label: 'Text Color',
+				rules: {
+					required: true,
+					isHex: true
+				}
+			}
+		]
 	}
-	// {
-	// 	name: 'Button Left',
-	// 	fields: []
-	// },
-	// {
-	// 	name: 'Button Right',
-	// 	fields: []
-	// }
 ];
 
 export interface IStyles {
@@ -230,6 +364,22 @@ export interface IStyles {
 	line: {
 		width: number;
 		backgroundColor: string;
+	};
+	buttonLeft: {
+		fontFamily: number;
+		width: number;
+		height: number;
+		borderWidth: number;
+		color: string;
+		textHoverColor: string;
+	};
+	buttonRight: {
+		fontFamily: number;
+		width: number;
+		height: number;
+		borderWidth: number;
+		color: string;
+		textHoverColor: string;
 	};
 }
 
@@ -260,10 +410,91 @@ const FullWidth: React.FC<IContent> = ({
 	scrollTo,
 	styles
 }) => {
+	const [hovered, setHovered] = useState<'left' | 'right'>();
+
 	const scrollHandler = () => {
 		if (scrollTo && document.getElementById(scrollTo) != null) {
 			document.getElementById(scrollTo)!.scrollIntoView({ behavior: 'smooth' });
 		}
+	};
+
+	const getStyles = (key: keyof IStyles) => {
+		if (!styles || !(key in styles)) {
+			return {};
+		}
+
+		let customStyles = {};
+
+		switch (key) {
+			case 'title':
+				customStyles = {
+					fontFamily: FONT_FAMILIES.find((font) => font.value === styles.title.fontFamily)!.label,
+					fontSize: styles.title.fontSize + 'rem',
+					color: styles.title.color
+				};
+				break;
+
+			case 'description':
+				customStyles = {
+					fontFamily: FONT_FAMILIES.find((font) => font.value === styles.description.fontFamily)!.label,
+					fontSize: styles.description.fontSize + 'rem',
+					color: styles.description.color
+				};
+				break;
+
+			case 'line':
+				customStyles = {
+					width: styles.line.width + 'rem',
+					backgroundColor: styles.line.backgroundColor
+				};
+				break;
+
+			case 'buttonLeft':
+				customStyles = {
+					fontFamily: FONT_FAMILIES.find((font) => font.value === styles.buttonLeft.fontFamily)!.label,
+					width: styles.buttonLeft.width + 'rem',
+					height: styles.buttonLeft.height + 'rem',
+					lineHeight: styles.buttonLeft.height + 'rem',
+					borderWidth: styles.buttonLeft.borderWidth + 'px',
+					borderColor: styles.buttonLeft.color,
+					color: styles.buttonLeft.color
+				};
+
+				if (hovered === 'left') {
+					customStyles = {
+						...customStyles,
+						backgroundColor: styles.buttonLeft.color,
+						color: styles.buttonLeft.textHoverColor
+					};
+				}
+				break;
+
+			case 'buttonRight':
+				customStyles = {
+					fontFamily: FONT_FAMILIES.find((font) => font.value === styles.buttonRight.fontFamily)!.label,
+					width: styles.buttonRight.width + 'rem',
+					height: styles.buttonRight.height + 'rem',
+					lineHeight: styles.buttonRight.height + 'rem',
+					borderWidth: styles.buttonRight.borderWidth + 'px',
+					backgroundColor: styles.buttonRight.color,
+					borderColor: styles.buttonRight.color,
+					color: styles.buttonRight.textHoverColor
+				};
+
+				if (hovered === 'right') {
+					customStyles = {
+						...customStyles,
+						backgroundColor: 'transparent',
+						color: styles.buttonRight.color
+					};
+				}
+				break;
+
+			default:
+				throw new Error('Could not establish style key!');
+		}
+
+		return customStyles;
 	};
 
 	return (
@@ -273,48 +504,36 @@ const FullWidth: React.FC<IContent> = ({
 			</div>
 
 			<div className={classes.Wrapper}>
-				<h1
-					className={classes.Title}
-					style={
-						styles?.title && {
-							fontFamily: FONT_FAMILIES.find((font) => font.value === styles.title.fontFamily)!.label,
-							fontSize: styles.title.fontSize + 'rem',
-							color: styles.title.color
-						}
-					}>
+				<h1 className={classes.Title} style={getStyles('title')}>
 					{title}
 				</h1>
-				<div
-					className={classes.Line}
-					style={
-						styles?.line && {
-							width: styles.line.width + 'rem',
-							backgroundColor: styles.line.backgroundColor
-						}
-					}
-				/>
-				<p
-					className={classes.Description}
-					style={
-						styles?.description && {
-							fontFamily: FONT_FAMILIES.find((font) => font.value === styles.description.fontFamily)!
-								.label,
-							fontSize: styles.description.fontSize + 'rem',
-							color: styles.description.color
-						}
-					}>
+
+				<div className={classes.Line} style={getStyles('line')} />
+
+				<p className={classes.Description} style={getStyles('description')}>
 					{description}
 				</p>
 			</div>
 
 			<div className={classes.Links}>
 				{linkLeftText && linkLeftTo && (
-					<Link className={classes.Left} to={'/' + linkLeftTo}>
+					<Link
+						className={[classes.Left].join(' ')}
+						to={'/' + linkLeftTo}
+						onMouseEnter={() => setHovered('left')}
+						onMouseLeave={() => setHovered(undefined)}
+						style={getStyles('buttonLeft')}>
 						{linkLeftText}
 					</Link>
 				)}
 				{linkRightText && linkRightTo && (
-					<a className={classes.Right} href={linkRightTo} target='_blank' rel='noopener noreferrer'>
+					<a
+						className={classes.Right}
+						href={linkRightTo}
+						onMouseEnter={() => setHovered('right')}
+						onMouseLeave={() => setHovered(undefined)}
+						target='__blank'
+						style={getStyles('buttonRight')}>
 						{linkRightText}
 					</a>
 				)}

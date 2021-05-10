@@ -102,9 +102,9 @@ $tundora: #444444;
 			opacity: 0;
 			animation: fadeIn 0.75s 0.5s ease-out forwards;
 
-			// Non-Styling
+			border: 2px solid white;
 
-			display: block;
+			// Non-Styling
 
 			line-height: 3.25em;
 
@@ -116,29 +116,18 @@ $tundora: #444444;
 
 		.Left {
 			color: white;
-			border: 2px solid white;
 
 			// Non-Styling
 
 			margin-bottom: 1em;
-
-			&:hover {
-				background-color: white;
-				color: $tundora;
-			}
 		}
 
 		.Right {
 			color: $tundora;
-			border: 2px solid white;
+
 			margin-bottom: 1em;
 
 			background-color: white;
-
-			&:hover {
-				background-color: transparent;
-				color: white;
-			}
 		}
 	}
 
