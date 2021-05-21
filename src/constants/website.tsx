@@ -1,4 +1,4 @@
-import { IContent, IProperty } from 'interfaces/website';
+import { IContent, IStyle } from 'interfaces/website';
 import { IOption } from 'interfaces/components/dropdown';
 import { IFolder } from 'interfaces/components/folder';
 
@@ -14,11 +14,11 @@ import {
 import * as FullWidth from 'library/Banner/FullWidth/FullWidth';
 
 interface IItem {
-	id: number;
+	id: string;
 	categoryId: number;
 	name: string;
 	defaultContent?: IContent;
-	defaultStyle: IProperty;
+	defaultStyle: IStyle;
 	content: IFolder[];
 	style: IFolder[];
 	default: any;
@@ -143,7 +143,7 @@ export const COMPONENT_CATEGORIES = [
 
 export const COMPONENTS: IItem[] = [
 	{
-		id: 1,
+		id: '1',
 		categoryId: 1,
 		name: 'Text Centered',
 		defaultContent: {},
@@ -153,7 +153,7 @@ export const COMPONENTS: IItem[] = [
 		default: null
 	},
 	{
-		id: 2,
+		id: '2',
 		categoryId: 1,
 		name: 'Left Align',
 		defaultContent: {},
@@ -163,7 +163,7 @@ export const COMPONENTS: IItem[] = [
 		default: null
 	},
 	{
-		id: 3,
+		id: '3',
 		categoryId: 1,
 		name: 'Right Align',
 		defaultContent: {},
@@ -173,7 +173,7 @@ export const COMPONENTS: IItem[] = [
 		default: null
 	},
 	{
-		id: 4,
+		id: '4',
 		categoryId: 1,
 		name: 'Logo Centered',
 		defaultContent: {},
@@ -183,7 +183,7 @@ export const COMPONENTS: IItem[] = [
 		default: null
 	},
 	{
-		id: 5,
+		id: '5',
 		categoryId: 1,
 		name: 'Sticky List',
 		defaultContent: {},
@@ -193,7 +193,7 @@ export const COMPONENTS: IItem[] = [
 		default: null
 	},
 	{
-		id: 6,
+		id: '6',
 		categoryId: 1,
 		name: 'defaultContent Stretched',
 		defaultContent: {},
@@ -203,7 +203,7 @@ export const COMPONENTS: IItem[] = [
 		default: null
 	},
 	{
-		id: 7,
+		id: '7',
 		categoryId: 1,
 		name: 'With Call to Action',
 		defaultContent: {},
@@ -213,7 +213,7 @@ export const COMPONENTS: IItem[] = [
 		default: null
 	},
 	{
-		id: 8,
+		id: '8',
 		categoryId: 2,
 		name: 'Full Width',
 		defaultContent: FullWidth.defaultContent,
@@ -223,7 +223,7 @@ export const COMPONENTS: IItem[] = [
 		default: FullWidth.default
 	},
 	{
-		id: 9,
+		id: '9',
 		categoryId: 3,
 		name: 'Informational',
 		defaultContent: {},
@@ -233,7 +233,7 @@ export const COMPONENTS: IItem[] = [
 		default: null
 	},
 	{
-		id: 10,
+		id: '10',
 		categoryId: 4,
 		name: 'With Discounts',
 		defaultContent: {},
@@ -243,7 +243,7 @@ export const COMPONENTS: IItem[] = [
 		default: null
 	},
 	{
-		id: 11,
+		id: '11',
 		categoryId: 5,
 		name: 'Grid',
 		defaultContent: {},
@@ -253,7 +253,7 @@ export const COMPONENTS: IItem[] = [
 		default: null
 	},
 	{
-		id: 12,
+		id: '12',
 		categoryId: 6,
 		name: 'Text Centered',
 		defaultContent: {},
@@ -263,7 +263,7 @@ export const COMPONENTS: IItem[] = [
 		default: null
 	},
 	{
-		id: 13,
+		id: '13',
 		categoryId: 7,
 		name: 'Small',
 		defaultContent: {},

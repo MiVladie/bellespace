@@ -31,7 +31,7 @@ const Sitemap: React.FC<Props> = ({ readOnly }) => {
 	const { state: stateActivity, dispatch: dispatchActivity } = useContext(ActivityContext);
 	const { state: stateWebsite } = useContext(WebsiteContext);
 
-	const selectPageHandler = (id: number) => {
+	const selectPageHandler = (id: string) => {
 		if (stateActivity.activePage === id) {
 			dispatchActivity({ type: ActivityAction.DELETE_ACTIVE_PAGE });
 		} else {
@@ -43,7 +43,7 @@ const Sitemap: React.FC<Props> = ({ readOnly }) => {
 		dispatchActivity({ type: ActivityAction.SET_NEW_PAGE, payload: { newPage: !stateActivity.newPage } });
 	};
 
-	const selectComponentHandler = (id: number) => {
+	const selectComponentHandler = (id: string) => {
 		if (stateActivity.activeComponent === id) {
 			dispatchActivity({ type: ActivityAction.DELETE_ACTIVE_COMPONENT });
 		} else {
@@ -72,31 +72,28 @@ const Sitemap: React.FC<Props> = ({ readOnly }) => {
 			</div>
 
 			<ul className={classes.Pages}>
-				{stateWebsite!.pages.map((page) => (
+				{Object.keys(stateWebsite!.pages).map((pKey) => (
 					<li
-						className={[
-							classes.Page,
-							page.id === stateActivity.activePage ? classes.SelectedPage : null
-						].join(' ')}
-						key={page.id}>
-						<div className={classes.Wrapper} onClick={() => selectPageHandler(page.id)}>
-							<h2 className={classes.Title}>{page.name}</h2>
+						className={[classes.Page, pKey === stateActivity.activePage ? classes.SelectedPage : null].join(
+							' '
+						)}
+						key={pKey}>
+						<div className={classes.Wrapper} onClick={() => selectPageHandler(pKey)}>
+							<h2 className={classes.Title}>{stateWebsite!.pages[pKey].name}</h2>
 
 							<span className={classes.Indicator} />
 						</div>
 
-						<Accordion className={classes.Components} expanded={page.id === stateActivity.activePage}>
-							{page.components.map((component) => (
+						<Accordion className={classes.Components} expanded={pKey === stateActivity.activePage}>
+							{Object.keys(stateWebsite!.pages[pKey].components).map((cKey) => (
 								<div
 									className={[
 										classes.Component,
-										component.id === stateActivity.activeComponent
-											? classes.SelectedComponent
-											: null
+										cKey === stateActivity.activeComponent ? classes.SelectedComponent : null
 									].join(' ')}
-									onClick={() => selectComponentHandler(component.id)}
-									key={component.id}>
-									<h3 className={classes.Name}>{component.name}</h3>
+									onClick={() => selectComponentHandler(cKey)}
+									key={cKey}>
+									<h3 className={classes.Name}>{stateWebsite!.pages[pKey].components[cKey].name}</h3>
 								</div>
 							))}
 

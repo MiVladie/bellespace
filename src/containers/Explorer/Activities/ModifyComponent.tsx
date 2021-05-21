@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 
 import { getComponentById } from 'library';
-import { IProperty } from 'interfaces/website';
+import { IStyle } from 'interfaces/website';
 import { Action } from 'context/actions/website';
 import { IAction, IBar } from 'interfaces/hierarchy';
 import { IFolder } from 'interfaces/components/folder';
@@ -25,13 +25,13 @@ interface IError {
 }
 
 interface Props {
-	pageId: number;
-	componentId: number;
+	pageId: string;
+	componentId: string;
 	onDismiss: () => void;
 }
 
 const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
-	const [debouncedFields, fields, setFields] = useDebounce<IField>({}, 250);
+	const [debouncedFields, fields, setFields] = useDebounce<IField>({}, 0);
 	const [errors, setErrors] = useState<IError>({});
 
 	const [structure, setStructure] = useState<IFolder[]>([]);
@@ -53,21 +53,17 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 	}, [debouncedFields]);
 
 	const initializeContent = () => {
-		const stateComponent = state!.pages
-			.find((page) => page.id === pageId)
-			?.components.find((component) => component.id === componentId);
-
-		if (!stateComponent) {
-			throw new Error('Could not establish the state component!');
-		}
-
-		const bulkComponent = getComponentById(stateComponent.componentId);
+		const bulkComponent = getComponentById(state!.pages[pageId].components[componentId].id);
 
 		if (!bulkComponent) {
 			throw new Error('Could not establish the bulk component!');
 		}
 
-		const stateStyles = state!.styles.find((style) => style.componentId === bulkComponent.id);
+		const stateStyles = state!.styles[bulkComponent.id];
+
+		console.log(state!.styles);
+		console.log(bulkComponent.id);
+		console.log(stateStyles);
 
 		if (!stateStyles) {
 			throw new Error('Could not establish the default styles!');
@@ -75,12 +71,12 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 
 		switch (active) {
 			case 1:
-				setFields(stateComponent.content);
+				setFields(state!.pages[pageId].components[componentId].content);
 				setStructure(bulkComponent.content);
 				break;
 
 			case 2:
-				setFields(stateStyles.properties);
+				setFields(stateStyles);
 				setStructure(bulkComponent.style);
 				break;
 
@@ -95,14 +91,6 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 		// Initializing updated fields
 		const localFields = { ...fields };
 
-		const stateComponent = state!.pages
-			.find((page) => page.id === pageId)
-			?.components.find((component) => component.id === componentId);
-
-		if (!stateComponent) {
-			throw new Error('Could not establish the state component!');
-		}
-
 		const keys: string[] = [];
 
 		for (const folder of structure) {
@@ -111,7 +99,7 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 			}
 		}
 
-		if (!hasChanged(keys, stateComponent.content, localFields)) {
+		if (!hasChanged(keys, state!.pages[pageId].components[componentId].content, localFields)) {
 			return;
 		}
 
@@ -127,7 +115,7 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 			type: Action.UPDATE_COMPONENT,
 			payload: {
 				pageId: pageId,
-				componentId: componentId,
+				id: componentId,
 				fields: {
 					...localFields
 				}
@@ -136,20 +124,12 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 	};
 
 	const updateStyleFields = () => {
-		const stateComponent = state!.pages
-			.find((page) => page.id === pageId)
-			?.components.find((component) => component.id === componentId);
-
-		if (!stateComponent) {
-			throw new Error('Could not establish the state component!');
-		}
-
 		// Saving to the global store
 		dispatch({
 			type: Action.UPDATE_STYLE,
 			payload: {
-				componentId: stateComponent.componentId,
-				properties: fields as IProperty
+				id: state!.pages[pageId].components[componentId].id,
+				fields: fields as IStyle
 			}
 		});
 	};
@@ -241,17 +221,9 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 	}, [active]);
 
 	const onDelete = () => {
-		const stateComponent = state!.pages
-			.find((page) => page.id === pageId)
-			?.components.find((component) => component.id === componentId);
-
-		if (!stateComponent) {
-			throw new Error('Could not establish the state component!');
-		}
-
 		dispatch({
 			type: Action.DELETE_COMPONENT,
-			payload: { pageId, id: componentId, componentId: stateComponent!.componentId }
+			payload: { pageId, id: componentId, componentId: state!.pages[pageId].components[componentId].id }
 		});
 
 		onDismiss();

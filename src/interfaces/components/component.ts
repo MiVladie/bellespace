@@ -1,5 +1,5 @@
 export interface IComponent {
-	id: number;
+	id: string;
 	name: string;
 	src?: string;
 }

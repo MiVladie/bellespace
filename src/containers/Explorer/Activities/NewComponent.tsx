@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 
 import { Action } from 'context/actions/website';
+import { IComponent } from 'interfaces/website';
 import { IAction, IBar } from 'interfaces/hierarchy';
 import { WebsiteContext } from 'context/providers/website';
 import { getComponentsByCategory, getComponentById, getCategoryById } from 'library';
@@ -10,22 +11,21 @@ import Hierarchy from 'containers/Explorer/Hierarchy/Hierarchy';
 import Components from 'containers/Components/Components';
 
 import classes from '../Explorer.module.scss';
-import { IComponent, IStyle } from 'interfaces/website';
 
 interface IActions {
-	selected: number | null;
+	selected: string | null;
 	onSubmit: () => void;
 	onDismiss: () => void;
 }
 
 interface IContent {
 	category: number;
-	selected: number | null;
-	setSelected: (id: number | null) => void;
+	selected: string | null;
+	setSelected: (id: string | null) => void;
 }
 
 interface Props {
-	pageId: number;
+	pageId: string;
 	onDismiss: () => void;
 }
 
@@ -61,7 +61,7 @@ const getActions = ({ selected, onSubmit, onDismiss }: IActions): IAction[] | nu
 };
 
 const NewComponent: React.FC<Props> = ({ pageId, onDismiss }) => {
-	const [selected, setSelected] = useState<number | null>(null);
+	const [selected, setSelected] = useState<string | null>(null);
 	const [active, setActive] = useState<number>(1);
 
 	const { dispatch } = useContext(WebsiteContext);
@@ -75,18 +75,22 @@ const NewComponent: React.FC<Props> = ({ pageId, onDismiss }) => {
 		const bulkCategory = getCategoryById(active);
 
 		const component: IComponent = {
-			id: Math.random(),
-			componentId: bulkComponent.id,
+			id: bulkComponent.id,
 			name: `${bulkCategory.label} (${bulkComponent.name})`,
 			content: bulkComponent.defaultContent || {}
 		};
 
-		const style: IStyle = {
-			componentId: bulkComponent.id,
-			properties: bulkComponent.defaultStyle
-		};
-
-		dispatch({ type: Action.ADD_COMPONENT, payload: { pageId, component, style } });
+		dispatch({
+			type: Action.ADD_COMPONENT,
+			payload: {
+				pageId,
+				id: Math.random().toString(),
+				component,
+				style: {
+					[bulkComponent.id]: bulkComponent.defaultStyle
+				}
+			}
+		});
 
 		onDismiss();
 	};

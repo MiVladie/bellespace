@@ -9,7 +9,7 @@ import Loader from 'containers/Loader/Loader';
 import classes from './Preview.module.scss';
 
 const Preview: React.FC = () => {
-	const [active, setActive] = useState<number>();
+	const [active, setActive] = useState<string>();
 
 	const [content, setContent] = useState<JSX.Element[]>();
 	const [loading, setLoading] = useState<boolean>(true);
@@ -22,7 +22,7 @@ const Preview: React.FC = () => {
 			return;
 		}
 
-		const activePage = stateActivity.activePage || stateWebsite!.pages[0].id;
+		const activePage = stateActivity.activePage || Object.keys(stateWebsite!.pages)[0];
 
 		if (activePage != null && active !== activePage) {
 			setActive(activePage);
@@ -39,21 +39,21 @@ const Preview: React.FC = () => {
 		renderComponents(active);
 	}, [stateWebsite?.pages, stateWebsite?.styles]);
 
-	const renderComponents = async (active: number, load?: boolean) => {
+	const renderComponents = async (active: string, load?: boolean) => {
 		if (load) {
 			setLoading(true);
 		}
 
-		const newContent = stateWebsite!.pages
-			.find((page) => page.id === active)!
-			.components.map((component) => {
-				const bulkComponent = getComponentById(component.componentId);
+		const components = stateWebsite!.pages[active].components;
 
-				const content = component.content;
-				const styles = stateWebsite!.styles.find((style) => style.componentId === component.componentId)!;
+		const newContent = Object.keys(components).map((key) => {
+			const bulkComponent = getComponentById(components[key].id);
 
-				return <bulkComponent.default {...content} styles={styles.properties} key={component.id} />;
-			});
+			const content = components[key].content;
+			const styles = stateWebsite!.styles[components[key].id];
+
+			return <bulkComponent.default {...content} styles={styles} key={components[key].id} />;
+		});
 
 		setContent(newContent);
 

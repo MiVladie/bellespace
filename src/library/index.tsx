@@ -15,7 +15,7 @@ export const getComponentsByCategory = (id: number): IPreview[] => {
 	return COMPONENTS.filter((component) => component.categoryId === id);
 };
 
-export const getComponentById = (id: number) => {
+export const getComponentById = (id: string) => {
 	const component = COMPONENTS.find((component) => component.id === id);
 
 	if (!component) {

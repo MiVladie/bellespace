@@ -40,9 +40,8 @@ const Project: React.FC = () => {
 			id: 1,
 			name: '🌼 Ashk Aesthetics 🌸',
 			category: 6,
-			pages: [
-				{
-					id: 1,
+			pages: {
+				'1': {
 					name: 'Home',
 					route: '',
 					options: {
@@ -51,22 +50,18 @@ const Project: React.FC = () => {
 						disableDeletion: true,
 						position: 'top'
 					},
-					components: [
-						{
-							id: 1,
-							componentId: 8,
+					components: {
+						'1': {
+							id: '8',
 							name: 'Banner (Full Width)',
 							content: FullWidth.defaultContent
 						}
-					]
+					}
 				}
-			],
-			styles: [
-				{
-					componentId: 8,
-					properties: FullWidth.defaultStyles
-				}
-			]
+			},
+			styles: {
+				'8': FullWidth.defaultStyles
+			}
 		};
 
 		dispatchWebsite({ type: WebsiteAction.SET_WEBSITE, payload: website });

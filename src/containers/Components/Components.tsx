@@ -9,8 +9,8 @@ import classes from './Components.module.scss';
 interface Props {
 	className?: string;
 	data: IComponent[];
-	onSelect: (id: number | null) => void;
-	selected: number | null;
+	onSelect: (id: string | null) => void;
+	selected: string | null;
 }
 
 const Components: React.FC<Props> = ({ className, data, onSelect, selected }) => (

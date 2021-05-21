@@ -7,14 +7,10 @@ import { WebsiteContext } from 'context/providers/website';
 import { IFolder } from 'interfaces/components/folder';
 import { identifyErrors } from 'util/validation';
 import { AddRounded } from '@material-ui/icons';
-import { IPage } from 'interfaces/website';
+import { IPage, IPages } from 'interfaces/website';
 
 import Hierarchy from 'containers/Explorer/Hierarchy/Hierarchy';
 import Folders from 'containers/Folders/Folders';
-
-interface IContent {
-	pages: IPage[];
-}
 
 interface IActions {
 	errors: TError<IForm>;
@@ -66,9 +62,9 @@ const NewPage: React.FC<Props> = ({ onDismiss }) => {
 
 	const { state, dispatch } = useContext(WebsiteContext);
 
-	const getContent = ({ pages }: IContent): IFolder[] => {
-		const takenNames = pages.map((page) => page.name);
-		const takenRoutes = pages.map((page) => page.route);
+	const getContent = (pages: IPages): IFolder[] => {
+		const takenNames = Object.keys(pages).map((key) => pages[key].name);
+		const takenRoutes = Object.keys(pages).map((key) => pages[key].route);
 
 		return [
 			{
@@ -129,7 +125,7 @@ const NewPage: React.FC<Props> = ({ onDismiss }) => {
 	const onSubmit = () => {
 		const validatableFields = [];
 
-		const folders = getContent({ pages: state!.pages });
+		const folders = getContent(state!.pages);
 
 		for (const folder of folders) {
 			for (const field of folder.fields) {
@@ -152,14 +148,13 @@ const NewPage: React.FC<Props> = ({ onDismiss }) => {
 		}
 
 		const page: IPage = {
-			id: Math.random(),
 			name: fields.name,
 			route: fields.route,
 			description: fields.description,
-			components: []
+			components: {}
 		};
 
-		dispatch({ type: Action.ADD_PAGE, payload: { page } });
+		dispatch({ type: Action.ADD_PAGE, payload: { id: Math.random().toString(), page } });
 
 		onDismiss();
 	};
@@ -170,7 +165,7 @@ const NewPage: React.FC<Props> = ({ onDismiss }) => {
 			activeBar={active}
 			content={
 				<Folders
-					data={getContent({ pages: state!.pages })}
+					data={getContent(state!.pages)}
 					onValues={setFields}
 					onErrors={setErrors}
 					values={fields}

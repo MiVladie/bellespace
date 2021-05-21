@@ -4,8 +4,8 @@ import { IActivity } from 'interfaces/activity';
 import { Action } from 'context/actions/activity';
 
 export type ActionType =
-	| { type: Action.SET_ACTIVE_PAGE; payload: { activePage: number } }
-	| { type: Action.SET_ACTIVE_COMPONENT; payload: { activeComponent: number } }
+	| { type: Action.SET_ACTIVE_PAGE; payload: { activePage: string } }
+	| { type: Action.SET_ACTIVE_COMPONENT; payload: { activeComponent: string } }
 	| { type: Action.SET_NEW_PAGE; payload: { newPage: boolean } }
 	| { type: Action.SET_NEW_COMPONENT; payload: { newComponent: boolean } }
 	| { type: Action.DELETE_ACTIVE_PAGE }

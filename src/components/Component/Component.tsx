@@ -3,14 +3,14 @@ import React from 'react';
 import classes from './Component.module.scss';
 
 interface IComponent {
-	id: number;
+	id: string;
 	name: string;
 	src?: string;
 }
 
 interface Props extends IComponent {
 	selected?: boolean;
-	onSelect: (id: number) => void;
+	onSelect: (id: string) => void;
 }
 
 const Component: React.FC<Props> = ({ id, name, src, selected, onSelect }) => (

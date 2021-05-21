@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 
-import { IPage, IPageOptions } from 'interfaces/website';
+import { IPage, IPageOptions, IPages } from 'interfaces/website';
 import { IAction, IBar } from 'interfaces/hierarchy';
 import { TError } from 'interfaces/validaton';
 import { Action } from 'context/actions/website';
@@ -21,8 +21,7 @@ interface IHeading {
 
 interface IContent {
 	bar: number;
-	pageId: number;
-	pages: IPage[];
+	pages: IPages;
 	setFields: (e: IForm) => void;
 	setErrors: (e: TError<IForm>) => void;
 	fields: IForm;
@@ -48,7 +47,7 @@ interface IForm {
 }
 
 interface Props {
-	pageId: number;
+	pageId: string;
 	onDismiss: () => void;
 }
 
@@ -72,18 +71,9 @@ const getBars = ({ onClick, options }: IBars): IBar[] => {
 	return bars;
 };
 
-const getContent = ({
-	bar,
-	pageId,
-	pages,
-	setFields,
-	setErrors,
-	fields,
-	errors,
-	options
-}: IContent): React.ReactNode => {
-	const takenNames = pages.filter((page) => page.id !== pageId).map((page) => page.name);
-	const takenRoutes = pages.filter((page) => page.id !== pageId).map((page) => page.route);
+const getContent = ({ bar, pages, setFields, setErrors, fields, errors, options }: IContent): React.ReactNode => {
+	const takenNames = Object.keys(pages).map((key) => pages[key].name);
+	const takenRoutes = Object.keys(pages).map((key) => pages[key].route);
 
 	const modifyData: IFolder[] = [
 		{
@@ -224,28 +214,20 @@ const ModifyPage: React.FC<Props> = ({ pageId, onDismiss }) => {
 	}, [fields]);
 
 	const initializeContent = () => {
-		const activePage: IPage = state!.pages.find((page) => page.id === pageId)!;
-
-		if (!activePage) {
-			throw new Error('Could not identify an active page!');
-		}
-
 		const newFields: IForm = {
-			name: activePage.name,
-			route: activePage.route,
-			description: activePage.description
+			name: state!.pages[pageId].name,
+			route: state!.pages[pageId].route,
+			description: state!.pages[pageId].description
 		};
 
 		setFields(newFields);
-		setPage(activePage);
+		setPage(state!.pages[pageId]);
 		setErrors({});
 		setActive(1);
 	};
 
 	const updateFields = () => {
-		const activePage: IPage = state!.pages.find((page) => page.id === pageId)!;
-
-		if (!hasChanged(['name', 'route', 'description'], activePage, fields)) {
+		if (!hasChanged(['name', 'route', 'description'], state!.pages[pageId], fields)) {
 			return;
 		}
 
@@ -263,14 +245,14 @@ const ModifyPage: React.FC<Props> = ({ pageId, onDismiss }) => {
 		dispatch({
 			type: Action.UPDATE_PAGE,
 			payload: {
-				pageId: pageId,
-				...data
+				id: pageId,
+				content: data
 			}
 		});
 	};
 
 	const deletePage = () => {
-		dispatch({ type: Action.DELETE_PAGE, payload: { pageId: pageId } });
+		dispatch({ type: Action.DELETE_PAGE, payload: { id: pageId } });
 
 		onDismiss();
 	};
@@ -281,7 +263,6 @@ const ModifyPage: React.FC<Props> = ({ pageId, onDismiss }) => {
 			activeBar={active}
 			content={getContent({
 				bar: active,
-				pageId: pageId,
 				pages: state!.pages,
 				setFields,
 				setErrors,

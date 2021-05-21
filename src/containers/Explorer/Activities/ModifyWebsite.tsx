@@ -2,17 +2,17 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import { IBar } from 'interfaces/hierarchy';
 import { TError } from 'interfaces/validaton';
-import { WEBSITE_CATEGORIES } from 'constants/website';
 import { Action } from 'context/actions/website';
 import { IFolder } from 'interfaces/components/folder';
+import { WEBSITE_CATEGORIES } from 'constants/website';
 import { WebsiteContext } from 'context/providers/website';
 import { SettingsRounded } from '@material-ui/icons';
+import { hasChanged } from 'util/validation';
 
 import useDidUpdateEffect from 'hooks/userDidUpdateEffect';
 
 import Hierarchy from 'containers/Explorer/Hierarchy/Hierarchy';
 import Folders from 'containers/Folders/Folders';
-import { hasChanged } from 'util/validation';
 
 interface IContent {
 	setFields: (e: IForm) => void;

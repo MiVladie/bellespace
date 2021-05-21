@@ -1,6 +1,6 @@
 export interface IActivity {
-	activePage: number | null;
-	activeComponent: number | null;
+	activePage: string | null;
+	activeComponent: string | null;
 	newPage: boolean;
 	newComponent: boolean;
 }

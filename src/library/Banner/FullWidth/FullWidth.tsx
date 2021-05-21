@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom';
+import { IStyle } from 'interfaces/website';
 import { IFolder } from 'interfaces/components/folder';
 import { FONT_FAMILIES } from 'constants/style';
-import { IProperty } from 'interfaces/website';
 
 import classes from './FullWidth.module.scss';
 
@@ -105,7 +105,7 @@ export const Content: IFolder[] = [
 	}
 ];
 
-export const defaultStyles: IProperty = {
+export const defaultStyles: IStyle = {
 	title: {
 		fontFamily: 1,
 		fontSize: 4.5,
@@ -360,7 +360,7 @@ export const Styles: IFolder[] = [
 	}
 ];
 
-export interface IStyles {
+export interface IComponentStyles {
 	title: {
 		fontFamily: number;
 		fontSize: number;
@@ -404,7 +404,7 @@ export interface IContent {
 	linkRightTo?: string;
 	linkRightText?: string;
 	scrollTo?: string;
-	styles?: IStyles;
+	styles?: IStyle;
 }
 
 const FullWidth: React.FC<IContent> = ({
@@ -428,7 +428,7 @@ const FullWidth: React.FC<IContent> = ({
 		}
 	};
 
-	const getStyles = (key: keyof IStyles) => {
+	const getStyles = (key: keyof IComponentStyles) => {
 		if (!styles || !(key in styles)) {
 			return {};
 		}

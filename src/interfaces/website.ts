@@ -3,17 +3,20 @@ export interface IStructure {
 	name: string;
 	category: number;
 	description?: string;
-	pages: IPage[];
-	styles: IStyle[];
+	pages: IPages;
+	styles: IStyles;
+}
+
+export interface IPages {
+	[key: string]: IPage;
 }
 
 export interface IPage {
-	id: number;
 	name: string;
 	route: string;
 	description?: string;
 	options?: IPageOptions;
-	components: IComponent[];
+	components: IComponents;
 }
 
 export interface IPageOptions {
@@ -23,9 +26,12 @@ export interface IPageOptions {
 	position?: 'top' | 'bottom';
 }
 
+export interface IComponents {
+	[key: string]: IComponent;
+}
+
 export interface IComponent {
-	id: number;
-	componentId: number;
+	id: string;
 	name: string;
 	content: IContent;
 }
@@ -34,12 +40,11 @@ export interface IContent {
 	[key: string]: any;
 }
 
-export interface IStyle {
-	componentId: number;
-	properties: IProperty;
+export interface IStyles {
+	[key: string]: IStyle;
 }
 
-export interface IProperty {
+export interface IStyle {
 	[key: string]: {
 		[key: string]: string | number;
 	};
