@@ -61,10 +61,6 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 
 		const stateStyles = state!.styles[bulkComponent.id];
 
-		console.log(state!.styles);
-		console.log(bulkComponent.id);
-		console.log(stateStyles);
-
 		if (!stateStyles) {
 			throw new Error('Could not establish the default styles!');
 		}
