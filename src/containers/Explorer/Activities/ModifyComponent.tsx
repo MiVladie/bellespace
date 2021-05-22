@@ -7,6 +7,7 @@ import { IAction, IBar } from 'interfaces/hierarchy';
 import { IFolder } from 'interfaces/components/folder';
 import { WebsiteContext } from 'context/providers/website';
 import { DeleteRounded, FormatPaintRounded, TextFieldsRounded } from '@material-ui/icons';
+import { establishDebounce, presetDebounce } from 'util/performance';
 import { hasChanged } from 'util/validation';
 
 import Folders from 'containers/Folders/Folders';
@@ -31,7 +32,9 @@ interface Props {
 }
 
 const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
-	const [debouncedFields, fields, setFields] = useDebounce<IField>({}, 0);
+	const [debounce, setDebounce] = useState<number>(0);
+
+	const [debouncedFields, fields, setFields] = useDebounce<IField>({}, debounce);
 	const [errors, setErrors] = useState<IError>({});
 
 	const [structure, setStructure] = useState<IFolder[]>([]);
@@ -42,6 +45,12 @@ const NewComponent: React.FC<Props> = ({ pageId, componentId, onDismiss }) => {
 
 	useEffect(() => {
 		initializeContent();
+
+		if (active === 2) {
+			setDebounce(presetDebounce);
+		} else {
+			setDebounce(0);
+		}
 	}, [active, componentId]);
 
 	useDidUpdateEffect(() => {
