@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/bellespace/static/css/main.9639b932.chunk.css",
-    "main.js": "/bellespace/static/js/main.421063a0.chunk.js",
-    "main.js.map": "/bellespace/static/js/main.421063a0.chunk.js.map",
+    "main.js": "/bellespace/static/js/main.2f32ac4f.chunk.js",
+    "main.js.map": "/bellespace/static/js/main.2f32ac4f.chunk.js.map",
     "runtime-main.js": "/bellespace/static/js/runtime-main.39c655dc.js",
     "runtime-main.js.map": "/bellespace/static/js/runtime-main.39c655dc.js.map",
     "static/css/2.d59c41ec.chunk.css": "/bellespace/static/css/2.d59c41ec.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.d59c41ec.chunk.css",
     "static/js/2.c1af6855.chunk.js",
     "static/css/main.9639b932.chunk.css",
-    "static/js/main.421063a0.chunk.js"
+    "static/js/main.2f32ac4f.chunk.js"
   ]
 }
