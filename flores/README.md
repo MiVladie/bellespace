@@ -1,8 +1,6 @@
 # :cherry_blossom: About
 
-Bellespace is a website constructor that allows you to build a website using provided styled components.
-
-Live preview: https://mivladie.github.io/bellespace/
+The client side code of Bellespace made in ReactJS & Typescript.
 
 # :memo: Table of Contents
 
