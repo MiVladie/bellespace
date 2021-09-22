@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ISlider } from 'interfaces/components/slider';
-import { HelpOutline } from '@material-ui/icons';
+import { HelpOutline } from '@mui/icons-material';
 
 import Dragger from 'rc-slider';
 import Tooltip from 'components/ui/Tooltip/Tooltip';

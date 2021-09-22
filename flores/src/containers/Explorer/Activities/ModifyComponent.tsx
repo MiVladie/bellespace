@@ -6,7 +6,7 @@ import { Action } from 'context/actions/website';
 import { IAction, IBar } from 'interfaces/hierarchy';
 import { IFolder } from 'interfaces/components/folder';
 import { WebsiteContext } from 'context/providers/website';
-import { DeleteRounded, FormatPaintRounded, TextFieldsRounded } from '@material-ui/icons';
+import { DeleteRounded, FormatPaintRounded, TextFieldsRounded } from '@mui/icons-material';
 import { establishDebounce, presetDebounce } from 'util/performance';
 import { hasChanged } from 'util/validation';
 

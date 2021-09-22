@@ -6,7 +6,7 @@ import { TError } from 'interfaces/validaton';
 import { Action } from 'context/actions/website';
 import { IFolder } from 'interfaces/components/folder';
 import { WebsiteContext } from 'context/providers/website';
-import { DeleteRounded, SettingsRounded } from '@material-ui/icons';
+import { DeleteRounded, SettingsRounded } from '@mui/icons-material';
 import { hasChanged } from 'util/validation';
 
 import Hierarchy from 'containers/Explorer/Hierarchy/Hierarchy';

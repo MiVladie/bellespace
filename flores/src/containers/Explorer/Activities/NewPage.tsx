@@ -6,7 +6,7 @@ import { IAction, IBar } from 'interfaces/hierarchy';
 import { WebsiteContext } from 'context/providers/website';
 import { IFolder } from 'interfaces/components/folder';
 import { identifyErrors } from 'util/validation';
-import { AddRounded } from '@material-ui/icons';
+import { AddRounded } from '@mui/icons-material';
 import { IPage, IPages } from 'interfaces/website';
 
 import Hierarchy from 'containers/Explorer/Hierarchy/Hierarchy';

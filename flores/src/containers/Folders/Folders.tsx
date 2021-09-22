@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { AddRounded, RemoveRounded } from '@material-ui/icons';
+import { AddRounded, RemoveRounded } from '@mui/icons-material';
 import { IFolder, TField } from 'interfaces/components/folder';
 import { IErrorable, IFillable } from 'interfaces/validaton';
 import { containsErrors } from 'util/validation';

@@ -76,7 +76,7 @@ const Projects: React.FC = () => {
 			setLibrary(libraryData);
 
 			setLoading(false);
-		} catch (error) {
+		} catch (error: any) {
 			setError(error);
 
 			setLoading(false);

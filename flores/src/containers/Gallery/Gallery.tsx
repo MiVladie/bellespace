@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { IProject } from 'interfaces/components/project';
-import { AddRounded } from '@material-ui/icons';
+import { AddRounded } from '@mui/icons-material';
 
 import Project from 'components/Project/Project';
 import Skeleton from 'components/Project/Skeleton';

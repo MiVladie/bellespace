@@ -6,7 +6,7 @@ import { WebsiteContext } from 'context/providers/website';
 import { Action as ActivityAction } from 'context/actions/activity';
 
 import { WEBSITE_CATEGORIES } from 'constants/website';
-import { AddRounded } from '@material-ui/icons';
+import { AddRounded } from '@mui/icons-material';
 
 import Accordion from 'components/ui/Accordion/Accordion';
 import Sidebar from 'hoc/Sidebar/Sidebar';

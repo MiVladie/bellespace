@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 
-import { ExpandMoreRounded, HelpOutline } from '@material-ui/icons';
+import { ExpandMoreRounded, HelpOutline } from '@mui/icons-material';
 import { IDropdown } from 'interfaces/components/dropdown';
 
 import Accordion from '../Accordion/Accordion';

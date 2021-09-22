@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { IInput } from 'interfaces/components/input';
-import { HelpOutline } from '@material-ui/icons';
+import { HelpOutline } from '@mui/icons-material';
 import { clamp, roundToStep } from 'util/math';
 
 import Tooltip from '../Tooltip/Tooltip';

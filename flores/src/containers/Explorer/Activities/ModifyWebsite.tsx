@@ -6,7 +6,7 @@ import { Action } from 'context/actions/website';
 import { IFolder } from 'interfaces/components/folder';
 import { WEBSITE_CATEGORIES } from 'constants/website';
 import { WebsiteContext } from 'context/providers/website';
-import { SettingsRounded } from '@material-ui/icons';
+import { SettingsRounded } from '@mui/icons-material';
 import { hasChanged } from 'util/validation';
 
 import useDidUpdateEffect from 'hooks/userDidUpdateEffect';

@@ -10,7 +10,7 @@ import {
 	NearMeRounded,
 	PaymentRounded,
 	WebRounded
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import * as FullWidth from 'library/Banner/FullWidth/FullWidth';
 
 interface IItem {
